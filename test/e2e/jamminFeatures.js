@@ -1,13 +1,25 @@
 describe('Jammin', function() {
+  var title, pageHeader, statusLabel;
 
   beforeAll(function() {
     browser.get('http://localhost:8080');
     title = browser.getTitle();
     pageHeader = element(by.className('page-header')).getText();
+    statusLabel = element(by.binding('statusLabel')).getText();
   });
 
   it('has a title', function() {
     expect(title).toEqual('Jammin');
     expect(pageHeader).toEqual('Jammin');
+  });
+
+   it('registers a connection', function() {
+    browser.get('http://localhost:8080');
+    expect(statusLabel).toEqual('connected');
+  });
+
+  it('registers a second connection', function() {
+    browser.get('http://localhost:8080');
+    expect(statusLabel).toEqual('connected');
   });
 });
