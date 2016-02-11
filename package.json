@@ -4,6 +4,7 @@
   "description": "Final project at Makers",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": ""
   },
   "repository": {
