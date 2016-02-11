@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "karma start test/karma.conf.js",
+    "test": "npm run update-webdriver && grunt test",
+    "update-webdriver": "./node_modules/protractor/bin/webdriver-manager update --standalone --chrome",
     "e2e": "protractor test/e2e/conf.js"
   },
   "repository": {
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
     "grunt-express-server": "^0.5.1",
     "grunt-karma": "^0.12.1",
     "grunt-protractor-runner": "^3.0.0",
