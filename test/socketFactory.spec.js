@@ -6,27 +6,16 @@ describe('factory: SocketFactory', function() {
     socketFactory = SocketFactory;
   }));
 
-  //var Server = require('socket.io');
-  //beforeEach(function(done) {
-  //  var that = this;
-  //  this.io = Server(8080);
-  //  this.io.on('connection', function (socket) {
-  //    that.activeSocket = socket;
-  //    done();
-  //  });
-  //});
+
+  function fakeSockets() {}
+  fakeSockets.prototype.on = function(msg, cb) {
+    cb();
+  }
 
   it('connects to server and calls-back result', function() {
-    socketFactory.setup(function(result) {
+    socketFactory.setup(function(result, fakeSockets) {
       expect(result).toEqual("connected")
     });
   });
 
-  //afterEach(function (done) {
-  //  this.io.close();
-  //  this.activeSocket.on('disconnect', function () {
-  //    done();
-  //  });
-  //});
-
-});
+ });
