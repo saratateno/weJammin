@@ -1,0 +1,19 @@
+{
+  "name": "wejammin",
+  "version": "1.0.0",
+  "description": "Final project at Makers",
+  "main": "app.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/saratateno/weJammin.git"
+  },
+  "author": "Daniela Galeote, Charlie Person, Sara Tateno, Angus Whitehead",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saratateno/weJammin/issues"
+  },
+  "homepage": "https://github.com/saratateno/weJammin#readme"
+}
