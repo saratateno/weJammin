@@ -3,10 +3,9 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-app.set('port', (process.env.PORT || 8080));
 app.use(express.static(__dirname));
 
-http.listen(app.get('port'), function() {
+http.listen(8080, function() {
   console.log('Node app is running on port' + app.get('port'));
 });
 
