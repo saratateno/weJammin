@@ -6,16 +6,20 @@ describe('factory: SocketFactory', function() {
     socketFactory = SocketFactory;
   }));
 
-
-  function fakeSockets() {}
-  fakeSockets.prototype.on = function(msg, cb) {
-    cb();
+  function fakeSockets() {
+    return {
+      on: function(msg, callback) {
+        callback();
+      }
+    };
   }
 
   it('connects to server and calls-back result', function() {
-    socketFactory.setup(function(result, fakeSockets) {
-      expect(result).toEqual("connected")
-    });
-  });
+    var setupResult;
+    socketFactory.setup(function(result) {
+      setupResult = result;
+    }, fakeSockets);
 
+    expect(setupResult).toEqual("connected")
+  });
  });
