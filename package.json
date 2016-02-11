@@ -5,7 +5,6 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "postinstall": "bower install",
     "test": "karma start test/karma.conf.js",
     "e2e":"protractor test/e2e/conf.js",
     "postinstall":"bower install"
