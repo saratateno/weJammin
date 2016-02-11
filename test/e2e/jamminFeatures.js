@@ -1,9 +1,9 @@
 describe('Jammin', function() {
+  var title = browser.getTitle();
+  var pageHeader = element(by.className('page-header')).getText();
 
   beforeAll(function() {
     browser.get('http://localhost:8080');
-    title = browser.getTitle();
-    pageHeader = element(by.className('page-header')).getText();
   });
 
   it('has a title', function() {
