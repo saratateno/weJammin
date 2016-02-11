@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node app.js",
     "postinstall": "bower install",
-    "test": ""
+    "test": "karma start test/karma.conf.js",
+    "e2e":"protractor test/e2e/conf.js",
+    "wdio": "webdriver-manager start"
   },
   "repository": {
     "type": "git",
