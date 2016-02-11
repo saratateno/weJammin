@@ -15,5 +15,19 @@
   "bugs": {
     "url": "https://github.com/saratateno/weJammin/issues"
   },
-  "homepage": "https://github.com/saratateno/weJammin#readme"
+  "homepage": "https://github.com/saratateno/weJammin#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "socket.io": "^1.4.5"
+  },
+  "devDependencies": {
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.19",
+    "karma-jasmine": "^0.3.7",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-spec-reporter": "0.0.24",
+    "nodemon": "^1.8.1",
+    "phantomjs-prebuilt": "^2.1.4",
+    "protractor": "^3.1.1"
+  }
 }
