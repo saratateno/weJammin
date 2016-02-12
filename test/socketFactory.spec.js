@@ -22,4 +22,4 @@ describe('factory: SocketFactory', function() {
 
     expect(setupResult).toEqual("connected")
   });
- });
+});
