@@ -10,6 +10,11 @@ describe("Metronome", function() {
   // test that metronome starts upon opening the page
 
   it('has a metronome running', function() {
-    expect(metbutton.getText()).toEqual("On");
+    expect(metbutton.getText()).toEqual("on");
+  });
+
+  it('can turn a metronome off', function() {
+    element(by.css('[ng-click="JCtrl.toggleMetronome()"]')).click();
+    expect(metbutton.getText()).toEqual("off");
   });
 })
