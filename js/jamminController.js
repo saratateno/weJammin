@@ -1,5 +1,5 @@
-jammin.controller('JamminController', ['SocketFactory',
-    function(SocketFactory) {
+jammin.controller('JamminController', ['$scope', 'SocketFactory',
+    function($scope, SocketFactory) {
 
   var self = this;
 
