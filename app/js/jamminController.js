@@ -18,6 +18,10 @@ jammin.controller('JamminController', ['$scope', 'SocketFactory', 'MetronomeFact
       self.statusLabel = result;
       $scope.$digest();
     });
+
+    self.otherUsers = UserFactory.users.filter(function(user) {
+      return user.name !== self.nickname;
+    });
   }
 
   self.playSound = function(tone) {
