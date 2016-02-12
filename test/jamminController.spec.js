@@ -11,8 +11,7 @@ describe('JamminController', function() {
     expect(ctrl.statusLabel).toEqual('not connected');
   });
 
-
-  describe('when visiting the page', function() {
+  describe('when visiting jammin area', function() {
     beforeEach(function() {
       module(function ($provide) {
         fakeSockets = jasmine.createSpyObj('fakeSockets', ['setup']);
@@ -26,6 +25,10 @@ describe('JamminController', function() {
       var scope = $rootScope.$new();
       ctrl = $controller('JamminController', {$scope: scope});
     }));
+
+    beforeEach(function() {
+      ctrl.startJammin();
+    });
 
     it('sets up sockets', function() {
       expect(fakeSockets.setup).toHaveBeenCalled();
