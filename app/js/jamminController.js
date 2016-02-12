@@ -16,6 +16,8 @@ jammin.controller('JamminController', ['$scope', 'SocketFactory', 'MetronomeFact
 
     SocketFactory.setup(function(result) {
       self.statusLabel = result;
+      var user = UserFactory.createUser(self.nickname);
+      SocketFactory.emit('new user', user);
       $scope.$digest();
     }, UserFactory);
   }
@@ -26,8 +28,6 @@ jammin.controller('JamminController', ['$scope', 'SocketFactory', 'MetronomeFact
 
   self.checkNickname = function() {
     self.validNickname = true;
-    var user = UserFactory.createUser(self.nickname);
-    SocketFactory.emit('new user', user);
     self.startJammin();
   }
 }]);
