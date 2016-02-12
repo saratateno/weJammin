@@ -1,4 +1,6 @@
 describe('User Presence Features', function() {
+  var nameInput, enterButton, currentUser;
+
   beforeAll(function() {
     browser.get('http://localhost:8080');
     nameInput = element(by.id('playerNameInput'));
