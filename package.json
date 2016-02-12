@@ -20,6 +20,9 @@
     "url": "https://github.com/saratateno/weJammin/issues"
   },
   "homepage": "https://github.com/saratateno/weJammin#readme",
+  "engines": {
+    "node": "5.4.0"
+  },
   "dependencies": {
     "express": "^4.13.4",
     "socket.io": "^1.4.5",
