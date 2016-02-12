@@ -20,9 +20,21 @@
   <body ng-controller="JamminController as JCtrl">
     <h1 id="logo" class="page-header">Jammin</h1>
 
-    <p id="statusLabel">{{ JCtrl.statusLabel }}</p>
-    <p>Metronome is <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span></p>
-    <button class="btn" ng-click = "JCtrl.toggleMetronome()">Toggle Metronome</button>
+    <div id="jamminAreaWrapper" ng-show="JCtrl.validNickname">
+      <p id="currentUser">{{ JCtrl.nickname }}</p>
+      <p id="statusLabel">{{ JCtrl.statusLabel }}</p>
 
+      <p>Metronome is <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span></p>
+      <button class="btn" ng-click="JCtrl.toggleMetronome()">Toggle Metronome</button>
+    </div>
+
+    <div id="startMenuWrapper" ng-hide="JCtrl.validNickname">
+      <div id="startMenu">
+        <input type="text" tabindex="0" autofocus ng-model="JCtrl.nickname"
+          placeholder="Enter your name here" id="playerNameInput" />
+        <br />
+        <button id="enterButton" ng-click=JCtrl.checkNickname()>Enter</button>
+      </div>
+    </div>
   </body>
 </html>

@@ -3,19 +3,25 @@ jammin.controller('JamminController', ['$scope', 'SocketFactory', 'MetronomeFact
 
   var self = this;
 
+  self.validNickname = false;
   self.statusLabel = 'not connected';
   self.metronomeStatus = 'off';
 
-  SocketFactory.setup(function(result) {
-    self.statusLabel = result;
-    $scope.$digest();
-  });
-
-
-  self.toggleMetronome = function(){
+  self.toggleMetronome = function() {
     self.metronomeStatus = MetronomeFactory.toggleMetronome(self.metronomeStatus);
   };
 
-  self.toggleMetronome();
-  
+  self.startJammin = function() {
+    self.toggleMetronome();
+
+    SocketFactory.setup(function(result) {
+      self.statusLabel = result;
+      $scope.$digest();
+    });
+  }
+
+  self.checkNickname = function() {
+    self.validNickname = true;
+    self.startJammin();
+  }
 }]);
