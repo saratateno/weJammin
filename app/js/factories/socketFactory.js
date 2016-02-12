@@ -1,16 +1,27 @@
 jammin.factory('SocketFactory', [function() {
   var socketFactory = {};
 
-  socketFactory.setup = function(callback, sockets) {
+  socketFactory.socket = { emit: function(){} };
+
+  socketFactory.setup = function(callback, userFactory, sockets) {
     //DI for mocking sockets in tests
     if (typeof(sockets) === 'undefined') {
-      var socket = io();
+      socketFactory.socket = io();
     } else {
-      var socket = sockets();
+      socketFactory.socket = sockets();
     }
-    socket.on('connect', function() {
+
+    socketFactory.socket.on('connect', function() {
       callback('connected');
     });
+
+    socketFactory.socket.on('update users', function(users) {
+      userFactory.users = users;
+    });
+  };
+
+  socketFactory.emit = function(msg, data) {
+    socketFactory.socket.emit(msg, data);
   };
 
   return socketFactory;

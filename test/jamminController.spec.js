@@ -20,7 +20,7 @@ describe('JamminController', function() {
   describe('when visiting jammin area', function() {
     beforeEach(function() {
       module(function ($provide) {
-        fakeSockets = jasmine.createSpyObj('fakeSockets', ['setup']);
+        fakeSockets = jasmine.createSpyObj('fakeSockets', ['setup', 'emit']);
         $provide.factory('SocketFactory', function() {
           return fakeSockets;
         })

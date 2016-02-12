@@ -3,6 +3,8 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+var users = [];
+
 app.set('port', (process.env.PORT || 8080));
 app.use(express.static(__dirname + '/app'));
 app.use(express.static(__dirname + '/bower_components'));
@@ -22,5 +24,10 @@ io.on('connection', function (socket) {
 
   socket.on('disconnect', function() {
     console.log('user disconnected');
+  });
+
+  socket.on('new user', function(user) {
+    users.push(user);
+    socket.emit('update users', users);
   });
 });

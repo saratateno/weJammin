@@ -17,11 +17,7 @@ jammin.controller('JamminController', ['$scope', 'SocketFactory', 'MetronomeFact
     SocketFactory.setup(function(result) {
       self.statusLabel = result;
       $scope.$digest();
-    });
-
-    self.otherUsers = UserFactory.users.filter(function(user) {
-      return user.name !== self.nickname;
-    });
+    }, UserFactory);
   }
 
   self.playSound = function(tone) {
@@ -30,7 +26,8 @@ jammin.controller('JamminController', ['$scope', 'SocketFactory', 'MetronomeFact
 
   self.checkNickname = function() {
     self.validNickname = true;
-    UserFactory.createUser(self.nickname);
+    var user = UserFactory.createUser(self.nickname);
+    SocketFactory.emit('new user', user);
     self.startJammin();
   }
 }]);

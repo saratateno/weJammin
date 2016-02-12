@@ -14,11 +14,17 @@ describe('factory: SocketFactory', function() {
     };
   }
 
+  function fakeUsers() {
+    return {
+      users: []
+    }
+  }
+
   it('connects to server and calls-back result', function() {
     var setupResult;
     socketFactory.setup(function(result) {
       setupResult = result;
-    }, fakeSockets);
+    }, fakeUsers, fakeSockets);
 
     expect(setupResult).toEqual("connected")
   });
