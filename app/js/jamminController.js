@@ -24,6 +24,10 @@ jammin.controller('JamminController', ['$scope', 'SocketFactory', 'MetronomeFact
     SoundFactory.playSound(tone);
   }
 
+  self.addColour = function(bkgrdcolor,key) {
+    angular.element(document.getElementById(key)).addClass(bkgrdcolor);
+  }
+
   self.checkNickname = function() {
     self.validNickname = true;
     self.startJammin();
