@@ -1,5 +1,5 @@
 describe('Jammin', function() {
-  var nameInput,  enterButton, title, pageHeader, statusLabel;
+  var nameInput, enterButton, title, pageHeader, statusLabel;
 
   beforeAll(function() {
     browser.get('http://localhost:8080');
