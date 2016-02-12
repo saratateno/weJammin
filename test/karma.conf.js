@@ -16,6 +16,7 @@ module.exports = function(config) {
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/jquery/dist/jquery.js',
+      'node_modules/tone/build/Tone.js',
       'node_modules/socket.io-client/socket.io.js',
       'js/**/*.js',
       'test/**/*.spec.js'
@@ -56,7 +57,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode

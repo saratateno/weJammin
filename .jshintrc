@@ -94,6 +94,7 @@
       "browser"       : true,
       "element"       : true,
       "by"            : true,
-      "jammin"        : true
+      "jammin"        : true,
+      "Tone"          : true
     }
 }

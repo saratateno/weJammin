@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "postinstall": "bower install",
     "test": "npm run update-webdriver && grunt test",
     "update-webdriver": "./node_modules/protractor/bin/webdriver-manager update --standalone --chrome",
     "e2e": "protractor test/e2e/conf.js"
@@ -21,7 +22,8 @@
   "homepage": "https://github.com/saratateno/weJammin#readme",
   "dependencies": {
     "express": "^4.13.4",
-    "socket.io": "^1.4.5"
+    "socket.io": "^1.4.5",
+    "tone": "^0.6.1"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
@@ -32,6 +34,7 @@
     "grunt-protractor-webdriver": "^0.2.5",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.19",
+    "karma-chrome-launcher": "^0.2.2",
     "karma-jasmine": "^0.3.7",
     "karma-phantomjs-launcher": "^1.0.0",
     "karma-spec-reporter": "0.0.24",
