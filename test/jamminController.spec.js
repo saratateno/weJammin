@@ -1,7 +1,7 @@
 describe('JamminController', function() {
   beforeEach(module('Jammin'));
 
-  it('initializes statusLabel as not connected', function() {
+  it('initializes default values', function() {
     var ctrl;
     inject(function($controller, $rootScope){
       var scope = $rootScope.$new();
@@ -9,7 +9,13 @@ describe('JamminController', function() {
     });
 
     expect(ctrl.statusLabel).toEqual('not connected');
+    expect(ctrl.otherUsers).toBeUndefined;
+    expect(ctrl.validNickname).toEqual(false);
+    expect(ctrl.nickname).toBeUndefined;
+    expect(ctrl.metronomeStatus).toEqual('off');
   });
+
+
 
   describe('when visiting jammin area', function() {
     beforeEach(function() {
