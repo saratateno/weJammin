@@ -1,6 +1,6 @@
 describe("Metronome", function() {
   var title
-  var metbutton = element(by.binding('metronome.status'))
+  var metbutton = element(by.binding('metronomeStatus'))
 
   beforeAll(function() {
     browser.get('http://localhost:8080');

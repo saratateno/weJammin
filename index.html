@@ -14,13 +14,15 @@
     <script src="js/app.js"></script>
     <script src="js/jamminController.js"></script>
     <script src="js/factories/socketFactory.js"></script>
-
+    <script src="js/factories/metronomeFactory.js"></script>
   </head>
 
   <body ng-controller="JamminController as JCtrl">
     <h1 id="logo" class="page-header">Jammin</h1>
 
     <p id="statusLabel">{{ JCtrl.statusLabel }}</p>
+    <p id="metronomeStatus">Metronome is {{ JCtrl.metronomeStatus }}</p>
+    <button class="btn" ng-click = "JCtrl.toggleMetronome()">Toggle Metronome</button>
 
   </body>
 </html>
