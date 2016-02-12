@@ -9,7 +9,7 @@ app.use(express.static(__dirname + '/bower_components'));
 app.use(express.static(__dirname + '/node_modules'));
 
 
-http.listen(port, function() {
+http.listen(process.env.PORT || port, function() {
   console.log('Node app is running on port' + port);
 });
 
