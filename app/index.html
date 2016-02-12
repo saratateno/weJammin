@@ -26,8 +26,8 @@
 
       <p>Metronome is <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span></p>
       <button class="btn" ng-click="JCtrl.toggleMetronome()">Toggle Metronome</button>
-      <br>
-      <ng-include src="'partials/keyboard.html'"></ng-include>
+
+        <ng-include src="'partials/keyboard.html'"></ng-include>
     </div>
 
     <div id="startMenuWrapper" ng-hide="JCtrl.validNickname">
