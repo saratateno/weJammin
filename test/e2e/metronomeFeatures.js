@@ -1,11 +1,11 @@
 describe("Metronome", function() {
   var title
   var metbutton = element(by.binding('metronomeStatus'))
+  var nameInput = element(by.id('playerNameInput'));
+  var enterButton = element(by.id('enterButton'));
 
   beforeAll(function() {
     browser.get('http://localhost:8080');
-    nameInput = element(by.id('playerNameInput'));
-    enterButton = element(by.id('enterButton'));
     nameInput.sendKeys('Joe B');
     enterButton.click();
 

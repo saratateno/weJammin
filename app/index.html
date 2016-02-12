@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>Jammin</title>
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="css/style.css" />
 
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="node_modules/socket.io-client/socket.io.js"></script>
-    <script src="node_modules/tone/build/Tone.js"></script>
+    <script src="jquery/dist/jquery.js"></script>
+    <script src="angular/angular.js"></script>
+    <script src="socket.io-client/socket.io.js"></script>
+    <script src="tone/build/Tone.js"></script>
 
     <script src="js/app.js"></script>
     <script src="js/jamminController.js"></script>
@@ -26,6 +26,8 @@
 
       <p>Metronome is <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span></p>
       <button class="btn" ng-click="JCtrl.toggleMetronome()">Toggle Metronome</button>
+
+        <ng-include src="'partials/keyboard.html'"></ng-include>
     </div>
 
     <div id="startMenuWrapper" ng-hide="JCtrl.validNickname">
@@ -36,5 +38,6 @@
         <button id="enterButton" ng-click=JCtrl.checkNickname()>Enter</button>
       </div>
     </div>
+
   </body>
 </html>
