@@ -1,5 +1,5 @@
-jammin.controller('JamminController', ['$scope', 'SocketFactory', 'MetronomeFactory',
-    function($scope, SocketFactory, MetronomeFactory) {
+jammin.controller('JamminController', ['$scope', 'SocketFactory', 'MetronomeFactory', 'SoundFactory',
+    function($scope, SocketFactory, MetronomeFactory, SoundFactory) {
 
   var self = this;
 
@@ -18,6 +18,10 @@ jammin.controller('JamminController', ['$scope', 'SocketFactory', 'MetronomeFact
       self.statusLabel = result;
       $scope.$digest();
     });
+  }
+
+  self.playSound = function(tone) {
+    SoundFactory.playSound(tone);
   }
 
   self.checkNickname = function() {
