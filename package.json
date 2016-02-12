@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "postinstall": "bower install",
-    "test": "karma start test/karma.conf.js",
+    "test": "npm run update-webdriver && grunt test",
+    "update-webdriver": "./node_modules/protractor/bin/webdriver-manager update --standalone --chrome",
     "e2e": "protractor test/e2e/conf.js"
   },
   "repository": {
@@ -25,6 +26,12 @@
     "tone": "^0.6.1"
   },
   "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-express-server": "^0.5.1",
+    "grunt-karma": "^0.12.1",
+    "grunt-protractor-runner": "^3.0.0",
+    "grunt-protractor-webdriver": "^0.2.5",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.19",
     "karma-chrome-launcher": "^0.2.2",
@@ -33,6 +40,8 @@
     "karma-spec-reporter": "0.0.24",
     "nodemon": "^1.8.1",
     "phantomjs-prebuilt": "^2.1.4",
-    "protractor": "^3.1.1"
+    "protractor": "^3.1.1",
+    "selenium-standalone": "^4.9.0",
+    "webdriver-manager": "^8.0.0"
   }
 }
