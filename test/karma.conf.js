@@ -18,7 +18,7 @@ module.exports = function(config) {
       'bower_components/jquery/dist/jquery.js',
       'node_modules/tone/build/Tone.js',
       'node_modules/socket.io-client/socket.io.js',
-      'js/**/*.js',
+      'app/js/**/*.js',
       'test/**/*.spec.js'
     ],
 
