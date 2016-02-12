@@ -4,7 +4,7 @@ jammin.factory('SocketFactory', [function() {
   socketFactory.setup = function(callback, sockets) {
     //DI for mocking sockets in tests
     if (typeof(sockets) === 'undefined') {
-      var socket = io('localhost:8080');
+      var socket = io();
     } else {
       var socket = sockets();
     }
