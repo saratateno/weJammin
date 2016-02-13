@@ -51,11 +51,54 @@
 	box-shadow: 0 -10px 2px 0px #838383 inset, 0 -60px 40px 10px #EEEEEE inset;
 }
 
-div.white:active,
-div.white.pressed {
+/*div.white:active,*/
+
+.bluewhitekey {
   border: 1px solid #343434;
 	background-image: -webkit-gradient(center bottom , #FFFFFF 90%, #CCCCCC 100%);
   background-color: blue;
+
+	-webkit-box-shadow: 0 -5px 20px -3px #272927 inset;
+
+	background-image: -moz-linear-gradient(center bottom , #FFFFFF 90%, #CCCCCC 100%);
+	-moz-box-shadow: 0 -5px 2px 0px #838383 inset,0 -3px 20px -3px #272927 inset;
+
+	background-image: -gradient(center bottom , #FFFFFF 90%, #CCCCCC 100%);
+	box-shadow: 0 -5px 20px -3px #272927 inset;
+}
+
+.redwhitekey {
+  border: 1px solid #343434;
+	background-image: -webkit-gradient(center bottom , #FFFFFF 90%, #CCCCCC 100%);
+  background-color: red;
+
+	-webkit-box-shadow: 0 -5px 20px -3px #272927 inset;
+
+	background-image: -moz-linear-gradient(center bottom , #FFFFFF 90%, #CCCCCC 100%);
+	-moz-box-shadow: 0 -5px 2px 0px #838383 inset,0 -3px 20px -3px #272927 inset;
+
+	background-image: -gradient(center bottom , #FFFFFF 90%, #CCCCCC 100%);
+	box-shadow: 0 -5px 20px -3px #272927 inset;
+}
+
+.orangewhitekey {
+  border: 1px solid #343434;
+	background-image: -webkit-gradient(center bottom , #FFFFFF 90%, #CCCCCC 100%);
+  background-color: orange;
+
+	-webkit-box-shadow: 0 -5px 20px -3px #272927 inset;
+
+	background-image: -moz-linear-gradient(center bottom , #FFFFFF 90%, #CCCCCC 100%);
+	-moz-box-shadow: 0 -5px 2px 0px #838383 inset,0 -3px 20px -3px #272927 inset;
+
+	background-image: -gradient(center bottom , #FFFFFF 90%, #CCCCCC 100%);
+	box-shadow: 0 -5px 20px -3px #272927 inset;
+}
+
+.greenwhitekey {
+  border: 1px solid #343434;
+	background-image: -webkit-gradient(center bottom , #FFFFFF 90%, #CCCCCC 100%);
+  background-color: green;
 
 	-webkit-box-shadow: 0 -5px 20px -3px #272927 inset;
 
@@ -85,8 +128,9 @@ div.white.pressed {
 	box-shadow: 0 -9px 10px 9px #303030 inset, 0 -15px #F7F7F7 inset;
 }
 
-div.black:active,
-div.black.pressed {
+/*div.black:active,*/
+
+.blueblackkey {
   border: 1px solid #CECECE;
   border-top: 1px solid #626262;
   background-color: blue;
@@ -94,6 +138,35 @@ div.black.pressed {
 	-webkit-box-shadow: 0 0 6px 7px #303030 inset, 0 -5px #F7F7F7 inset;
 	box-shadow: 0 0 6px 7px #303030 inset, 0 -5px #F7F7F7 inset;
 }
+
+.redblackkey {
+  border: 1px solid #CECECE;
+  border-top: 1px solid #626262;
+  background-color: red;
+	-moz-box-shadow: 0 0 6px 7px #303030 inset, 0 -5px #F7F7F7 inset;
+	-webkit-box-shadow: 0 0 6px 7px #303030 inset, 0 -5px #F7F7F7 inset;
+	box-shadow: 0 0 6px 7px #303030 inset, 0 -5px #F7F7F7 inset;
+}
+
+.greenblackkey {
+  border: 1px solid #CECECE;
+  border-top: 1px solid #626262;
+  background-color: green;
+	-moz-box-shadow: 0 0 6px 7px #303030 inset, 0 -5px #F7F7F7 inset;
+	-webkit-box-shadow: 0 0 6px 7px #303030 inset, 0 -5px #F7F7F7 inset;
+	box-shadow: 0 0 6px 7px #303030 inset, 0 -5px #F7F7F7 inset;
+}
+
+.orangeblackkey {
+  border: 1px solid #CECECE;
+  border-top: 1px solid #626262;
+  background-color: orange;
+	-moz-box-shadow: 0 0 6px 7px #303030 inset, 0 -5px #F7F7F7 inset;
+	-webkit-box-shadow: 0 0 6px 7px #303030 inset, 0 -5px #F7F7F7 inset;
+	box-shadow: 0 0 6px 7px #303030 inset, 0 -5px #F7F7F7 inset;
+}
+
+
 
 div.flats {
 
