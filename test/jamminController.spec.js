@@ -20,10 +20,6 @@ describe('JamminController', function() {
   describe('when visiting jammin area', function() {
     beforeEach(function() {
       module(function ($provide) {
-        fakeSockets = jasmine.createSpyObj('fakeSockets', ['setup', 'emit']);
-        $provide.factory('SocketFactory', function() {
-          return fakeSockets;
-        })
         fakeUsers = jasmine.createSpyObj('fakeUsers', ['createUser']);
         $provide.factory('UserFactory', function() {
             return fakeUsers;
@@ -31,8 +27,9 @@ describe('JamminController', function() {
       });
     });
 
-    beforeEach(inject(function($controller, $rootScope) {
+    beforeEach(inject(function($controller, $rootScope, _notify_) {
       var scope = $rootScope.$new();
+      fakeSockets = _notify_;
       ctrl = $controller('JamminController', {$scope: scope});
     }));
 
@@ -40,8 +37,8 @@ describe('JamminController', function() {
       ctrl.startJammin();
     });
 
-    it('sets up sockets', function() {
-      expect(fakeSockets.setup).toHaveBeenCalled();
+    it('updates UserFactory users and other users', function() {
+      fakeSockets.receive('update users', [{}] )
     });
   });
 

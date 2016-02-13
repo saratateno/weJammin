@@ -1,11 +1,12 @@
 jammin.factory('UserFactory', [function() {
   var userFactory = {};
+
   userFactory.users = [];
   userFactory.colors = ['red', 'green', 'orange', 'blue'];
 
   userFactory.createUser = function(name) {
-    var id = userFactory.users.length + 1;
-    var color = userFactory.colors[id - 1];
+    var id = userFactory.users.length + 1; //this should be improved...
+    var color = userFactory.colors[(id - 1) % 4];
     var user = {
       'id': id,
       'name': name,
@@ -15,9 +16,10 @@ jammin.factory('UserFactory', [function() {
     return user;
   };
 
-  userFactory.otherUsers = function() {
-    userFactory.users.filter(function(user) {
-      return user.name !== self.nickname;
+  userFactory.otherUsers = function(myName) {
+    return userFactory.users.filter(function(user) {
+      return user.name !== myName;
+      //names are not unique so check by ids
     });
   };
 
