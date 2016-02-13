@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
     express: {
       options: {
           port:8080,
@@ -23,6 +24,17 @@ module.exports = function(grunt) {
       run: {
       }
     },
+
+    coveralls: {
+      options: {
+        debug: true,
+        coverageDir: 'app',
+        dryRun: true,
+        force: true,
+        recursive: true
+      }
+    },
+
     protractor_webdriver: {
       start: {
         options: {
@@ -37,7 +49,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-protractor-runner');
   grunt.loadNpmTasks('grunt-protractor-webdriver');
+  grunt.loadNpmTasks('grunt-karma-coveralls');
 
+  grunt.registerTask('cover', ['coveralls']);
   grunt.registerTask('test', ['karma', 'e2e']);
   grunt.registerTask('unit', ['karma']);
   grunt.registerTask('e2e', ['express', 'protractor_webdriver', 'protractor']);
