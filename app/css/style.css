@@ -13,11 +13,13 @@
   background-color: #272927;
 }
 
-
-
+.input-group {
+  max-width: 330px;
+  margin: auto
+}
 
 #logo {
-  
+  text-align: center
 }
 
 #controls {

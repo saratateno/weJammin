@@ -32,11 +32,7 @@
 
 
         <div class="sidepanel" id="controls">
-          <p id="currentUser">{{ JCtrl.nickname }}</p>
-          <p id="otherUsers">{{ JCtrl.otherUsers }}</p>
-          <p id="statusLabel">{{ JCtrl.statusLabel }}</p>
-          <p>Metronome is <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span></p>
-          <div class="onoffswitch pull-right">
+          <div class="onoffswitch center-block">
             <input type="checkbox" name="onoffswitch"
                 class="onoffswitch-checkbox" id="myonoffswitch" checked
                 ng-click="JCtrl.toggleMetronome()">
@@ -45,6 +41,11 @@
                 <span class="onoffswitch-switch"></span>
             </label>
           </div>
+
+          <p id="currentUser">{{ JCtrl.nickname }}</p>
+          <p id="otherUsers">{{ JCtrl.otherUsers }}</p>
+          <p id="statusLabel">{{ JCtrl.statusLabel }}</p>
+          <p>Metronome is <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span></p>
         </div>
 
         <div class="sticky-keyboard">
@@ -54,12 +55,17 @@
 
     <div class="main container">
       <div id="startMenuWrapper" ng-hide="JCtrl.validNickname">
-        <div id="startMenu">
-          <input type="text" tabindex="0" autofocus ng-model="JCtrl.nickname"
-            placeholder="Enter your name here" id="playerNameInput" />
-          <br />
-          <button id="enterButton" ng-click=JCtrl.checkNickname()>Enter</button>
-        </div>
+        <form class="form-horizontal center-block" name="enter-name">
+         <div>
+            <div class="input-group" id="startMenu">
+              <input class="form-control" type="text" autofocus ng-model="JCtrl.nickname"
+                    placeholder="Enter your name here" id="playerNameInput" tabindex="0">
+              <span class="input-group-btn">
+                <button class="btn btn-success" id="enterButton" ng-click="JCtrl.checkNickname()">Enter</button>
+              </span>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </body>
