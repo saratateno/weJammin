@@ -45,12 +45,18 @@ io.on('connection', function(socket) {
 
 function getUser(socketId) {
   return users.filter(function(user) {
-    return user.socketId !== socketId;
+    return user.socketId === socketId;
   })[0];
 }
 
+function getOthers(socketId) {
+  return users.filter(function(user) {
+    return user.socketId !== socketId;
+  })
+}
+
 function removeUser(socketId, callback) {
-  users = [getUser(socketId)];
+  users = getOthers(socketId);
   if (callback) { callback(); }
 }
 
