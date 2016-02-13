@@ -37,11 +37,23 @@ io.on('connection', function(socket) {
     io.emit('update users', users);
     console.log(users);
   });
+
+  socket.on('transmit sound', function(tone) {
+    io.emit('play sound', tone, userColour(socket.id));
+  });
 });
 
-function removeUser(socketId, callback) {
-  users = users.filter(function(user) {
+function getUser(socketId) {
+  return users.filter(function(user) {
     return user.socketId !== socketId;
-  });
+  })[0];
+}
+
+function removeUser(socketId, callback) {
+  users = [getUser(socketId)];
   if (callback) { callback(); }
+}
+
+function userColour(socketId) {
+  return getUser(socketId).color;
 }
