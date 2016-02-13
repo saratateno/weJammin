@@ -32,6 +32,9 @@ jammin.controller('JamminController',
     var color = (isWhite ? 'white':'black')
     console.log('test1',bkgrdcolor, color);
     angular.element(document.getElementById(key)).addClass(bkgrdcolor + color + 'key');
+    setTimeout(function() {
+      document.getElementById(key).classList.remove(bkgrdcolor + color + 'key');
+    }, 500)
   }
 
   self.checkNickname = function() {
