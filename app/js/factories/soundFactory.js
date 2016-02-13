@@ -3,7 +3,7 @@ jammin.factory('SoundFactory', [function() {
   var synth = new Tone.SimpleSynth().toMaster();
 
   soundFactory.playSound = function(tone) {
-    synth.triggerAttackRelease(tone, "4n");
+    synth.triggerAttackRelease(tone, "8n");
   }
 
   return soundFactory;

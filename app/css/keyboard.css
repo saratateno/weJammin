@@ -55,6 +55,8 @@ div.white:active,
 div.white.pressed {
   border: 1px solid #343434;
 	background-image: -webkit-gradient(center bottom , #FFFFFF 90%, #CCCCCC 100%);
+  background-color: blue;
+
 	-webkit-box-shadow: 0 -5px 20px -3px #272927 inset;
 
 	background-image: -moz-linear-gradient(center bottom , #FFFFFF 90%, #CCCCCC 100%);
@@ -87,6 +89,7 @@ div.black:active,
 div.black.pressed {
   border: 1px solid #CECECE;
   border-top: 1px solid #626262;
+  background-color: blue;
 	-moz-box-shadow: 0 0 6px 7px #303030 inset, 0 -5px #F7F7F7 inset;
 	-webkit-box-shadow: 0 0 6px 7px #303030 inset, 0 -5px #F7F7F7 inset;
 	box-shadow: 0 0 6px 7px #303030 inset, 0 -5px #F7F7F7 inset;

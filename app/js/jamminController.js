@@ -24,8 +24,12 @@ jammin.controller('JamminController',
 
   SocketFactory.on('play sound', function(tone, color) {
     SoundFactory.playSound(tone);
-    addColour(color, tone);
+    //addColour(color, tone);
   });
+
+  self.addColour = function(bkgrdcolor,key) {
+    angular.element(document.getElementById(key)).addClass(bkgrdcolor);
+  }
 
   self.checkNickname = function() {
     self.validNickname = true;
@@ -43,6 +47,6 @@ jammin.controller('JamminController',
   };
 
   self.playSound = function(tone) {
-    SocketFactory.emit('transmit sound', tone, mySocketId);
+    SocketFactory.emit('transmit sound', tone);
   }
 }]);
