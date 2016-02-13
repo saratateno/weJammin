@@ -12,6 +12,10 @@ jammin.controller('JamminController',
     self.statusLabel = 'connected';
   });
 
+  SocketFactory.on('assign socket id', function(id) {
+    self.mySocketId = id;
+  });
+
   SocketFactory.on('update users', function(users) {
     UserFactory.users = users;
     self.otherUsers = UserFactory.otherUsers(self.nickname);
