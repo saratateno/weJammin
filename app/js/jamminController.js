@@ -22,6 +22,7 @@ jammin.controller('JamminController',
   });
 
   SocketFactory.on('play sound', function(tone, color) {
+    console.log('playing', tone, color);
     SoundFactory.playSound(tone);
     //addColour(color, tone);
   });
