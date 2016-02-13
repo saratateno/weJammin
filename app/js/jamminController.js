@@ -12,6 +12,10 @@ jammin.controller('JamminController',
     self.statusLabel = 'connected';
   });
 
+  SocketFactory.on('assign socket id', function(id) {
+    self.mySocketId = id;
+  });
+
   SocketFactory.on('update users', function(users) {
     UserFactory.users = users;
     self.otherUsers = UserFactory.otherUsers(self.nickname);
@@ -21,7 +25,7 @@ jammin.controller('JamminController',
   SocketFactory.on('play sound', function(tone, color) {
     SoundFactory.playSound(tone);
     addColour(color, tone);
-  }
+  });
 
   self.checkNickname = function() {
     self.validNickname = true;
@@ -39,6 +43,6 @@ jammin.controller('JamminController',
   };
 
   self.playSound = function(tone) {
-    socket.emit('transmit sound', tone, socket.id);
+    SocketFactory.emit('transmit sound', tone, mySocketId);
   }
 }]);

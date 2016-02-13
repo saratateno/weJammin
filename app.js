@@ -21,6 +21,7 @@ app.get('/', function(request, response) {
 
 io.on('connection', function(socket) {
   console.log('user connected');
+  socket.emit('assign socket id', socket.id)
   socket.emit('update users', users);
 
   socket.on('disconnect', function() {
