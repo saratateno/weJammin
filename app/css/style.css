@@ -1,7 +1,6 @@
-#controls {
+.sidepanel {
   position: fixed;
-  right: 0;
-  max-width: 150px;
+  width: 20%;
   background-color: #f1efef;
   height: 100%;
 }
@@ -11,4 +10,20 @@
   bottom: 0;
   width: 100%;
   height: 40%;
+  background-color: #272927;
+}
+
+
+
+
+#logo {
+  
+}
+
+#controls {
+  right: 0;
+}
+
+#drumkit {
+  left: 0;
 }

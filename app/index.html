@@ -5,6 +5,7 @@
     <title>Jammin</title>
     <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/controls.css" />
 
     <script src="jquery/dist/jquery.js"></script>
     <script src="socket.io-client/socket.io.js"></script>
@@ -23,15 +24,27 @@
 
   <body ng-controller="JamminController as JCtrl">
 
-      <h1 id="logo" class="page-header">Jammin</h1>
+      <h1 id="logo" class="page-header">We Jammin</h1>
 
       <div id="jamminAreaWrapper" ng-show="JCtrl.validNickname">
-        <div id="controls">
+        <div class="sidepanel" id="drumkit">
+        </div>
+
+
+        <div class="sidepanel" id="controls">
           <p id="currentUser">{{ JCtrl.nickname }}</p>
           <p id="otherUsers">{{ JCtrl.otherUsers }}</p>
           <p id="statusLabel">{{ JCtrl.statusLabel }}</p>
           <p>Metronome is <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span></p>
-          <button class="btn" ng-click="JCtrl.toggleMetronome()">Toggle Metronome</button>
+          <div class="onoffswitch pull-right">
+            <input type="checkbox" name="onoffswitch"
+                class="onoffswitch-checkbox" id="myonoffswitch" checked
+                ng-click="JCtrl.toggleMetronome()">
+            <label class="onoffswitch-label" for="myonoffswitch">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+            </label>
+          </div>
         </div>
 
         <div class="sticky-keyboard">
