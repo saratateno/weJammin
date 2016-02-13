@@ -1,14 +1,12 @@
 #piano {
     background-color: #272927;
     color: #000000;
-    left: 50%;
-    margin-left: -50%;
-    margin-bottom: 0;
-    position: absolute;
     text-align: center;
+    height: 100%;
+    width: 1340px;
     top: 350px;
-		width: 1350px;
 		padding: 10px 10px 13px;
+    overflow: hidden;
 }
 
 #pianoBody {
@@ -165,7 +163,6 @@
 	-webkit-box-shadow: 0 0 6px 7px #303030 inset, 0 -5px #F7F7F7 inset;
 	box-shadow: 0 0 6px 7px #303030 inset, 0 -5px #F7F7F7 inset;
 }
-
 
 
 div.flats {
