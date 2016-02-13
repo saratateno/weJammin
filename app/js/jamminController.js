@@ -1,5 +1,5 @@
-jammin.controller('JamminController', ['$scope', 'SocketFactory', 'MetronomeFactory', 'SoundFactory', 'UserFactory',
-    function($scope, SocketFactory, MetronomeFactory, SoundFactory, UserFactory) {
+jammin.controller('JamminController', ['SocketFactory', 'MetronomeFactory', 'SoundFactory', 'UserFactory',
+    function(SocketFactory, MetronomeFactory, SoundFactory, UserFactory) {
 
   var self = this;
 
@@ -7,30 +7,32 @@ jammin.controller('JamminController', ['$scope', 'SocketFactory', 'MetronomeFact
   self.statusLabel = 'not connected';
   self.metronomeStatus = 'off';
 
+  SocketFactory.on('connect', function() {
+    self.statusLabel = 'connected';
+  });
+
+  SocketFactory.on('update users', function(users) {
+    UserFactory.users = users;
+    self.otherUsers = UserFactory.otherUsers(self.nickname);
+    console.log(self.otherUsers);
+  });
+
+  self.checkNickname = function() {
+    self.validNickname = true;
+    self.startJammin();
+  }
+
+  self.startJammin = function() {
+    self.toggleMetronome();
+    var user = UserFactory.createUser(self.nickname);
+    SocketFactory.emit('new user', user);
+  }
+
   self.toggleMetronome = function() {
     self.metronomeStatus = MetronomeFactory.toggleMetronome(self.metronomeStatus);
   };
 
-  self.startJammin = function() {
-    self.toggleMetronome();
-
-    SocketFactory.setup(function(result) {
-      self.statusLabel = result;
-      $scope.$digest();
-    });
-
-    self.otherUsers = UserFactory.users.filter(function(user) {
-      return user.name !== self.nickname;
-    });
-  }
-
   self.playSound = function(tone) {
     SoundFactory.playSound(tone);
-  }
-
-  self.checkNickname = function() {
-    self.validNickname = true;
-    UserFactory.createUser(self.nickname);
-    self.startJammin();
   }
 }]);
