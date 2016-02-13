@@ -27,6 +27,10 @@ jammin.controller('JamminController',
     //addColour(color, tone);
   });
 
+  self.addColour = function(bkgrdcolor,key) {
+    angular.element(document.getElementById(key)).addClass(bkgrdcolor);
+  }
+
   self.checkNickname = function() {
     self.validNickname = true;
     self.startJammin();
