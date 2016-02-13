@@ -24,9 +24,10 @@ io.on('connection', function(socket) {
   socket.emit('update users', users);
 
   socket.on('disconnect', function() {
-    removeUser(socket.id);
-    io.emit('update users', users);
-    console.log('user disconnected');
+    removeUser(socket.id, function() {
+      io.emit('update users', users);
+      console.log('user disconnected');
+    });
   });
 
   socket.on('new user', function(user) {
@@ -37,8 +38,9 @@ io.on('connection', function(socket) {
   });
 });
 
-function removeUser(socketId) {
+function removeUser(socketId, callback) {
   users = users.filter(function(user) {
     return user.socketId !== socketId;
   });
+  if (callback) { callback(); }
 }
