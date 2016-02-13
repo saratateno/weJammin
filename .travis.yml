@@ -1,6 +1,7 @@
 script:
   - npm test --single-run
   - node_modules/.bin/protractor test/e2e/conf.js --browser=firefox
+  - grunt karma
 language: node_js
 node_js:
   - "0.10"
