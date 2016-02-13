@@ -55,4 +55,9 @@ jammin.controller('JamminController',
   self.playSound = function(tone) {
     SocketFactory.emit('transmit sound', tone);
   }
+
+  window.onbeforeunload = function() {
+    SocketFactory.emit('disconnect');
+    alert('disconnected');
+  }
 }]);
