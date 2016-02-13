@@ -16,6 +16,8 @@ module.exports = function(config) {
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/jquery/dist/jquery.js',
+      'bower_components/angular-socket-io/socket.js',
+      {pattern: "bower_components/angular-socket.io-mock.js", included: false},
       'node_modules/tone/build/Tone.js',
       'node_modules/socket.io-client/socket.io.js',
       'app/js/**/*.js',
