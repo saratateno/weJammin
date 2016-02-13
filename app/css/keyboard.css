@@ -1,11 +1,8 @@
 #piano {
     background-color: #272927;
     color: #000000;
-    left: 50%;
-    margin-left: -50%;
-    margin-bottom: 0;
-    position: absolute;
     text-align: center;
+    height: 325px;
     top: 350px;
 		width: 1350px;
 		padding: 10px 10px 13px;
@@ -167,7 +164,6 @@
 }
 
 
-
 div.flats {
 
 }
@@ -186,4 +182,11 @@ div.flats :nth-child(4) {
 }
 div.flats :nth-child(5) {
 	margin-left: 517px;
+}
+
+.sticky-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 325px;
 }

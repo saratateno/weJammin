@@ -22,28 +22,31 @@
   </head>
 
   <body ng-controller="JamminController as JCtrl">
-    <h1 id="logo" class="page-header">Jammin</h1>
+      <h1 id="logo" class="page-header">Jammin</h1>
 
-    <div id="jamminAreaWrapper" ng-show="JCtrl.validNickname">
-      <p id="currentUser">{{ JCtrl.nickname }}</p>
-      <p id="otherUsers">{{ JCtrl.otherUsers }}</p>
-      <p id="statusLabel">{{ JCtrl.statusLabel }}</p>
+      <div id="jamminAreaWrapper" ng-show="JCtrl.validNickname">
+        <p id="currentUser">{{ JCtrl.nickname }}</p>
+        <p id="otherUsers">{{ JCtrl.otherUsers }}</p>
+        <p id="statusLabel">{{ JCtrl.statusLabel }}</p>
 
-      <p>Metronome is <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span></p>
-      <button class="btn" ng-click="JCtrl.toggleMetronome()">Toggle Metronome</button>
+        <p>Metronome is <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span></p>
+        <button class="btn" ng-click="JCtrl.toggleMetronome()">Toggle Metronome</button>
 
-      <ng-include src="'partials/keyboard.html'"></ng-include>
+        <div class="sticky-footer">
+          <ng-include src="'partials/keyboard.html'"></ng-include>
+        </div>
+      </div>
 
-    </div>
+      </div>
 
-    </div>
-
-    <div id="startMenuWrapper" ng-hide="JCtrl.validNickname">
-      <div id="startMenu">
-        <input type="text" tabindex="0" autofocus ng-model="JCtrl.nickname"
-          placeholder="Enter your name here" id="playerNameInput" />
-        <br />
-        <button id="enterButton" ng-click=JCtrl.checkNickname()>Enter</button>
+    <div class="main container">
+      <div id="startMenuWrapper" ng-hide="JCtrl.validNickname">
+        <div id="startMenu">
+          <input type="text" tabindex="0" autofocus ng-model="JCtrl.nickname"
+            placeholder="Enter your name here" id="playerNameInput" />
+          <br />
+          <button id="enterButton" ng-click=JCtrl.checkNickname()>Enter</button>
+        </div>
       </div>
     </div>
   </body>
