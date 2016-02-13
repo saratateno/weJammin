@@ -19,17 +19,22 @@ jammin.controller('JamminController',
   SocketFactory.on('update users', function(users) {
     UserFactory.users = users;
     self.otherUsers = UserFactory.otherUsers(self.nickname);
-    console.log(self.otherUsers);
   });
 
   SocketFactory.on('play sound', function(tone, color) {
     console.log('playing', tone, color);
     SoundFactory.playSound(tone);
-    //addColour(color, tone);
+    self.addColor(color, tone);
   });
 
-  self.addColour = function(bkgrdcolor,key) {
-    angular.element(document.getElementById(key)).addClass(bkgrdcolor);
+  self.addColor = function(bkgrdcolor, key) {
+    var isWhite = (key.indexOf('#') === -1)
+    var color = (isWhite ? 'white':'black')
+    console.log('test1',bkgrdcolor, color);
+    angular.element(document.getElementById(key)).addClass(bkgrdcolor + color + 'key');
+    setTimeout(function() {
+      document.getElementById(key).classList.remove(bkgrdcolor + color + 'key');
+    }, 500)
   }
 
   self.checkNickname = function() {

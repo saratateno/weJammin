@@ -44,14 +44,19 @@ io.on('connection', function(socket) {
 });
 
 function getUser(socketId) {
-  var userArray =  users.filter(function(user) {
+  return users.filter(function(user) {
     return user.socketId === socketId;
+  })[0];
+}
+
+function getOthers(socketId) {
+  return users.filter(function(user) {
+    return user.socketId !== socketId;
   })
-  return userArray[0];
 }
 
 function removeUser(socketId, callback) {
-  users = [getUser(socketId)];
+  users = getOthers(socketId);
   if (callback) { callback(); }
 }
 
