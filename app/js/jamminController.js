@@ -19,7 +19,6 @@ jammin.controller('JamminController',
   SocketFactory.on('update users', function(users) {
     UserFactory.users = users;
     self.otherUsers = UserFactory.otherUsers(self.nickname);
-    console.log(self.otherUsers);
   });
 
   SocketFactory.on('play sound', function(tone, color) {
