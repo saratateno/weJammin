@@ -32,7 +32,12 @@
       <p>Metronome is <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span></p>
       <button class="btn" ng-click="JCtrl.toggleMetronome()">Toggle Metronome</button>
 
-        <ng-include src="'partials/keyboard.html'"></ng-include>
+      <ng-include src="'partials/keyboard.html'"></ng-include>
+
+      <button ng-click="JCtrl.addColour('pink','test')"></button>
+      <div id="test" height='100' width='100'>
+    </div>
+
     </div>
 
     <div id="startMenuWrapper" ng-hide="JCtrl.validNickname">
@@ -43,9 +48,5 @@
         <button id="enterButton" ng-click=JCtrl.checkNickname()>Enter</button>
       </div>
     </div>
-    <button ng-click="JCtrl.addColour('pink','test')"></button>
-    <div id="test" height='100' width='100'>
-    </div>
-
   </body>
 </html>
