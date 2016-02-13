@@ -20,7 +20,7 @@ describe('JamminController', function() {
   describe('when visiting jammin area', function() {
     beforeEach(function() {
       module(function ($provide) {
-        fakeUsers = jasmine.createSpyObj('fakeUsers', ['createUser']);
+        fakeUsers = jasmine.createSpyObj('fakeUsers', ['createUser', 'otherUsers']);
         $provide.factory('UserFactory', function() {
             return fakeUsers;
         });
@@ -37,8 +37,28 @@ describe('JamminController', function() {
       ctrl.startJammin();
     });
 
-    it('updates UserFactory users and other users', function() {
-      fakeSockets.receive('update users', [{}] )
+    var fakeUsersObj = [
+      { 'id': 1,
+        'name': 'Joe B',
+        'socketId': '123'
+      },
+      { 'id': 2,
+        'name': 'Wendy',
+        'socketId': 'ABC'
+      }
+    ];
+    var fakeOtherUsersObj = [
+      { 'id': 2,
+        'name': 'Wendy',
+        'socketId': 'ABC'
+      }
+    ];
+
+    it('updates UserFactory users and ctrl.otherUsers', function() {
+      ctrl.nickname = 'Joe B'
+      fakeSockets.receive('update users', [fakeUsersObj]);
+      expect(fakeUsers.otherUsers).toHaveBeenCalled();
+      expect(ctrl.otherUsers).toEqual(fakeOtherUsersObj);
     });
   });
 
