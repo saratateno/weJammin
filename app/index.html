@@ -22,21 +22,21 @@
   </head>
 
   <body ng-controller="JamminController as JCtrl">
+
       <h1 id="logo" class="page-header">Jammin</h1>
 
       <div id="jamminAreaWrapper" ng-show="JCtrl.validNickname">
-        <p id="currentUser">{{ JCtrl.nickname }}</p>
-        <p id="otherUsers">{{ JCtrl.otherUsers }}</p>
-        <p id="statusLabel">{{ JCtrl.statusLabel }}</p>
+        <div id="controls">
+          <p id="currentUser">{{ JCtrl.nickname }}</p>
+          <p id="otherUsers">{{ JCtrl.otherUsers }}</p>
+          <p id="statusLabel">{{ JCtrl.statusLabel }}</p>
+          <p>Metronome is <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span></p>
+          <button class="btn" ng-click="JCtrl.toggleMetronome()">Toggle Metronome</button>
+        </div>
 
-        <p>Metronome is <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span></p>
-        <button class="btn" ng-click="JCtrl.toggleMetronome()">Toggle Metronome</button>
-
-        <div class="sticky-footer">
+        <div class="sticky-keyboard">
           <ng-include src="'partials/keyboard.html'"></ng-include>
         </div>
-      </div>
-
       </div>
 
     <div class="main container">
