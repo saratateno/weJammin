@@ -12,14 +12,13 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'bower_components/jquery/dist/jquery.js',
       'bower_components/angular/angular.js',
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-mocks/angular-mocks.js',
-      'bower_components/jquery/dist/jquery.js',
-      'bower_components/angular-socket-io/socket.js',
-      {pattern: "bower_components/angular-socket.io-mock.js", included: false},
-      'node_modules/tone/build/Tone.js',
       'node_modules/socket.io-client/socket.io.js',
+      'bower_components/angular-socket.io-mock/angular-socket.io-mock.js',
+      'node_modules/tone/build/Tone.js',
       'app/js/**/*.js',
       'test/**/*.spec.js'
     ],

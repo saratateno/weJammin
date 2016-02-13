@@ -27,9 +27,9 @@ describe('JamminController', function() {
       });
     });
 
-    beforeEach(inject(function($controller, $rootScope, _notify_) {
+    beforeEach(inject(function($controller, $rootScope, socketFactory) {
       var scope = $rootScope.$new();
-      fakeSockets = _notify_;
+      fakeSockets = socketFactory();
       ctrl = $controller('JamminController', {$scope: scope});
     }));
 

@@ -1,4 +1,5 @@
-jammin.controller('JamminController', ['SocketFactory', 'MetronomeFactory', 'SoundFactory', 'UserFactory',
+jammin.controller('JamminController',
+    ['SocketFactory', 'MetronomeFactory', 'SoundFactory', 'UserFactory',
     function(SocketFactory, MetronomeFactory, SoundFactory, UserFactory) {
 
   var self = this;
