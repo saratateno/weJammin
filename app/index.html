@@ -19,10 +19,11 @@
   <script src="js/factories/metronomeFactory.js"></script>
   <script src="js/factories/soundFactory.js"></script>
   <script src="js/factories/userFactory.js"></script>
+  <script src="js/factories/keyboardFactory.js"></script>
 
 </head>
 
-<body ng-controller="JamminController as JCtrl">
+<body ng-controller="JamminController as JCtrl" ng-keypress="JCtrl.keypress($event)" tabindex="0">
   <div class="container-fluid">
     <div class="row">
       <h1 id="logo" class="page-header">We Jammin</h1>
