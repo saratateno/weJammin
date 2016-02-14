@@ -3,16 +3,23 @@
     color: #000000;
     text-align: center;
     height: 100%;
-    width: 1340px;
+    width: 100%;
+    max-width: 100%;
     top: 350px;
 		padding: 10px 10px 13px;
     overflow: hidden;
+
 }
 
 #pianoBody {
-	width: 100%;
-	position: relative;
-	float: left;
+  	width: 100%;
+    max-width: 100%;
+  	position: relative;
+    margin-left: auto;
+    margin-right: auto;
+  	float: left;
+    vertical-align: middle;
+
 }
 
 #littleRedLine {
