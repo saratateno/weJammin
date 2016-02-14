@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var userHelpers = require('./serverHelpers/userHelpers.js');
 
 var users = [];
 
@@ -11,7 +12,7 @@ app.use(express.static(__dirname + '/bower_components'));
 
 
 http.listen(app.get('port'), function() {
-  console.log('Node app is running on port' + app.get('port'));
+  console.log('Node app is running on port ' + app.get('port'));
 });
 
 app.get('/', function(request, response) {
@@ -24,7 +25,8 @@ io.on('connection', function(socket) {
   socket.emit('update users', users);
 
   socket.on('disconnect', function() {
-    removeUser(socket.id, function() {
+    userHelpers.removeUser(users, socket.id, function(newUsers) {
+      users = newUsers;
       io.emit('update users', users);
       console.log('user disconnected');
     });
@@ -38,27 +40,6 @@ io.on('connection', function(socket) {
   });
 
   socket.on('transmit sound', function(tone) {
-    io.emit('play sound', tone, userColour(socket.id));
+    io.emit('play sound', tone, userHelpers.userColor(users, socket.id));
   });
 });
-
-function getUser(socketId) {
-  return users.filter(function(user) {
-    return user.socketId === socketId;
-  })[0];
-}
-
-function getOthers(socketId) {
-  return users.filter(function(user) {
-    return user.socketId !== socketId;
-  })
-}
-
-function removeUser(socketId, callback) {
-  users = getOthers(socketId);
-  if (callback) { callback(); }
-}
-
-function userColour(socketId) {
-  return getUser(socketId).color;
-}
