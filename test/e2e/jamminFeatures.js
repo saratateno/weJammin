@@ -15,7 +15,7 @@ describe('Jammin', function() {
 
   it('has a title', function() {
     expect(title).toEqual('Jammin');
-    expect(pageHeader).toEqual('Jammin');
+    expect(pageHeader).toEqual('We Jammin');
   });
 
    it('registers a connection', function() {

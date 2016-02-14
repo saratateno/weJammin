@@ -9,7 +9,7 @@ describe("Metronome", function() {
     enterButton.click();
 
     metStatus = element(by.binding('metronomeStatus'));
-    metButton = element(by.css('[ng-click="JCtrl.toggleMetronome()"]'));
+    metButton = element(by.id('metButton'));
   });
 
   it('has a metronome running', function() {
