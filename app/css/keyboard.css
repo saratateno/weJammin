@@ -1,6 +1,6 @@
 #piano {
-    background-color: #272927;
-    color: #000000;
+    /*background-color: #272927;*/
+    /*color: #000000;*/
     text-align: center;
     height: 100%;
     width: 100%;
@@ -8,6 +8,7 @@
     top: 350px;
 		padding: 10px 10px 13px;
     overflow: hidden;
+
 
 }
 
@@ -39,8 +40,8 @@
 
 .white {
 	float: left;
-	width: 88px;
-	height: 300px;
+	width: 59px;
+	height: 232px;
   background-color: #F4F4F4;
   border: 1px solid #626262;
   position: relative;
@@ -54,6 +55,25 @@
 
 	background-image: -gradient(center bottom , #FFFFFF 90%, #CCCCCC 100%);
 	box-shadow: 0 -10px 2px 0px #838383 inset, 0 -60px 40px 10px #EEEEEE inset;
+}
+
+.black {
+	float: left;
+	width: 29px;
+	height: 113px;
+  background-color: #000000;
+  border-bottom: 2px solid #000;
+  border-left: 2px solid #000;
+  border-right: 2px solid #000;
+  position: absolute;
+  top: 6px;
+  z-index: 100;
+	-moz-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
+	border-top: 0px;
+	-moz-box-shadow: 0 -9px 10px 9px #303030 inset, 0 -15px #F7F7F7 inset;
+	-webkit-box-shadow: 0 -9px 10px 9px #303030 inset, 0 -15px #F7F7F7 inset;
+	box-shadow: 0 -9px 10px 9px #303030 inset, 0 -15px #F7F7F7 inset;
 }
 
 /*div.white:active,*/
@@ -114,24 +134,7 @@
 	box-shadow: 0 -5px 20px -3px #272927 inset;
 }
 
-.black {
-	float: left;
-	width: 44px;
-	height: 170px;
-  background-color: #000000;
-  border-bottom: 2px solid #000;
-  border-left: 2px solid #000;
-  border-right: 2px solid #000;
-  position: absolute;
-  top: 6px;
-  z-index: 100;
-	-moz-border-radius: 0 0 5px 5px;
-	border-radius: 0 0 5px 5px;
-	border-top: 0px;
-	-moz-box-shadow: 0 -9px 10px 9px #303030 inset, 0 -15px #F7F7F7 inset;
-	-webkit-box-shadow: 0 -9px 10px 9px #303030 inset, 0 -15px #F7F7F7 inset;
-	box-shadow: 0 -9px 10px 9px #303030 inset, 0 -15px #F7F7F7 inset;
-}
+
 
 /*div.black:active,*/
 
@@ -177,17 +180,17 @@ div.flats {
 }
 
 div.flats :nth-child(1) {
-	margin-left: 67px;
+	margin-left: 45px;
 }
 div.flats :nth-child(2) {
-	margin-left: 157px;
+	margin-left: 105px;
 }
 div.flats :nth-child(3) {
-	margin-left: 338px;
+	margin-left: 225px;
 }
 div.flats :nth-child(4) {
-	margin-left: 428px;
+	margin-left: 285px;
 }
 div.flats :nth-child(5) {
-	margin-left: 517px;
+	margin-left: 345px;
 }
