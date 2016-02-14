@@ -43,7 +43,7 @@ jammin.controller('JamminController',
   }
 
   self.startJammin = function() {
-    self.toggleMetronome();
+    // self.toggleMetronome();
     var user = UserFactory.createUser(self.nickname);
     SocketFactory.emit('new user', user);
   }
