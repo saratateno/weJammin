@@ -2,8 +2,7 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-
-var users = [];
+var userHelpers = require('helpers/userHelpers.js');
 
 app.set('port', (process.env.PORT || 8080));
 app.use(express.static(__dirname + '/app'));
@@ -22,44 +21,23 @@ app.get('/', function(request, response) {
 io.on('connection', function(socket) {
   console.log('user connected');
   socket.emit('assign socket id', socket.id)
-  socket.emit('update users', users);
+  socket.emit('update users', userHelpers.users);
 
   socket.on('disconnect', function() {
-    removeUser(socket.id, function() {
-      io.emit('update users', users);
+    userHelpers.removeUser(socket.id, function() {
+      io.emit('update users', userHelpers.users);
       console.log('user disconnected');
     });
   });
 
   socket.on('new user', function(user) {
     user.socketId = socket.id;
-    users.push(user);
-    io.emit('update users', users);
-    console.log(users);
+    userHelpers.users.push(user);
+    io.emit('update users', userHelpers.users);
+    console.log(userHelpers.users);
   });
 
   socket.on('transmit sound', function(tone) {
-    io.emit('play sound', tone, userColour(socket.id));
+    io.emit('play sound', tone, userHelpers.userColor(socket.id));
   });
 });
-
-function getUser(socketId) {
-  return users.filter(function(user) {
-    return user.socketId === socketId;
-  })[0];
-}
-
-function getOthers(socketId) {
-  return users.filter(function(user) {
-    return user.socketId !== socketId;
-  })
-}
-
-function removeUser(socketId, callback) {
-  users = getOthers(socketId);
-  if (callback) { callback(); }
-}
-
-function userColour(socketId) {
-  return getUser(socketId).color;
-}

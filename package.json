@@ -4,7 +4,7 @@
   "description": "Final project at Makers",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node server/app.js",
     "postinstall": "bower install",
     "test": "npm run update-webdriver && grunt test",
     "update-webdriver": "./node_modules/protractor/bin/webdriver-manager update --standalone --chrome",
@@ -30,6 +30,7 @@
     "tone": "^0.6.1"
   },
   "devDependencies": {
+    "browserify": "^13.0.0",
     "coveralls": "^2.11.6",
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
@@ -40,6 +41,7 @@
     "grunt-protractor-webdriver": "^0.2.5",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.19",
+    "karma-browserify": "^5.0.1",
     "karma-chrome-launcher": "^0.2.2",
     "karma-jasmine": "^0.3.7",
     "karma-phantomjs-launcher": "^1.0.0",
@@ -48,6 +50,7 @@
     "phantomjs-prebuilt": "^2.1.4",
     "protractor": "^3.1.1",
     "selenium-standalone": "^4.9.0",
+    "watchify": "^3.7.0",
     "webdriver-manager": "^8.0.0"
   }
 }

@@ -7,7 +7,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'browserify'],
 
 
     // list of files / patterns to load in the browser
@@ -19,6 +19,7 @@ module.exports = function(config) {
       'node_modules/socket.io-client/socket.io.js',
       'bower_components/angular-socket.io-mock/angular-socket.io-mock.js',
       'node_modules/tone/build/Tone.js',
+      'server/serverUserHelpers.js',
       'app/js/**/*.js',
       'test/**/*.spec.js'
     ],
@@ -31,10 +32,12 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-       'app/js/**/*.js': ["coverage"]
+      'app/js/**/*.js': ["coverage"],
+      'test/serverUserHelpers.spec.js': [ 'browserify' ]
     },
 
-      // web server port
+
+    // web server port
     port: 9876,
 
 
@@ -55,14 +58,17 @@ module.exports = function(config) {
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['Chrome'],
 
+
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: true,
+
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['spec', 'coverage'],
+
 
     coverageReporter: {
       type : "html",
