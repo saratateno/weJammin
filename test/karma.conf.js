@@ -16,9 +16,9 @@ module.exports = function(config) {
       'bower_components/angular/angular.js',
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-mocks/angular-mocks.js',
-      'node_modules/socket.io-client/socket.io.js',
+      'bower_components/socket.io-client/socket.io.js',
       'bower_components/angular-socket.io-mock/angular-socket.io-mock.js',
-      'node_modules/tone/build/Tone.js',
+      'bower_components/tone/build/Tone.js',
       'app/js/**/*.js',
       'test/**/*.spec.js'
     ],
@@ -66,9 +66,9 @@ module.exports = function(config) {
     reporters: ['spec', 'coverage'],
 
     coverageReporter: {
-       type : "html","lcov"
+       type : "html",
        dir : "test/coverage/"
     }
 
-      });
-    };
+  });
+};

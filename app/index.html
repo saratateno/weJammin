@@ -1,50 +1,75 @@
 <!doctype html>
 <html lang="en" ng-app="Jammin">
-  <head>
-    <meta charset="utf-8">
-    <title>Jammin</title>
-    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="css/style.css" />
+<head>
+  <meta charset="utf-8">
+  <title>Jammin</title>
+  <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/controls.css" />
 
-    <script src="jquery/dist/jquery.js"></script>
-    <script src="socket.io-client/socket.io.js"></script>
-    <script src="angular/angular.js"></script>
-    <script src="angular-socket-io/socket.js"></script>
-    <script src="tone/build/Tone.js"></script>
+  <script src="jquery/dist/jquery.js"></script>
+  <script src="socket.io-client/socket.io.js"></script>
+  <script src="angular/angular.js"></script>
+  <script src="angular-socket-io/socket.js"></script>
+  <script src="tone/build/Tone.js"></script>
 
-    <script src="js/app.js"></script>
-    <script src="js/jamminController.js"></script>
-    <script src="js/factories/socketFactory.js"></script>
-    <script src="js/factories/metronomeFactory.js"></script>
-    <script src="js/factories/soundFactory.js"></script>
-    <script src="js/factories/userFactory.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/jamminController.js"></script>
+  <script src="js/factories/socketFactory.js"></script>
+  <script src="js/factories/metronomeFactory.js"></script>
+  <script src="js/factories/soundFactory.js"></script>
+  <script src="js/factories/userFactory.js"></script>
+  <script src="js/factories/keyboardFactory.js"></script>
 
-  </head>
+</head>
 
-  <body ng-controller="JamminController as JCtrl">
-    <h1 id="logo" class="page-header">Jammin</h1>
-
-    <div id="jamminAreaWrapper" ng-show="JCtrl.validNickname">
-      <p id="currentUser">{{ JCtrl.nickname }}</p>
-      <p id="otherUsers">{{ JCtrl.otherUsers }}</p>
-      <p id="statusLabel">{{ JCtrl.statusLabel }}</p>
-
-      <p>Metronome is <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span></p>
-      <button class="btn" ng-click="JCtrl.toggleMetronome()">Toggle Metronome</button>
-
-      <ng-include src="'partials/keyboard.html'"></ng-include>
-
+<body ng-controller="JamminController as JCtrl">
+  <div class="container-fluid">
+    <div class="row">
+      <h1 id="logo" class="page-header">We Jammin</h1>
     </div>
 
-    </div>
+    <div class="row" id="content-area">
+      <div id="jamminAreaWrapper" ng-show="JCtrl.validNickname">
+        <div class="col-md-3 sidepanel" id="drumkit">
+        </div>
 
-    <div id="startMenuWrapper" ng-hide="JCtrl.validNickname">
-      <div id="startMenu">
-        <input type="text" tabindex="0" autofocus ng-model="JCtrl.nickname"
-          placeholder="Enter your name here" id="playerNameInput" />
-        <br />
-        <button id="enterButton" ng-click=JCtrl.checkNickname()>Enter</button>
+        <div class="col-md-3 sidepanel" id="controls">
+          <div class="onoffswitch center-block" id="metButton">
+            <input type="checkbox" name="onoffswitch"
+            class="onoffswitch-checkbox" id="myonoffswitch" checked
+            ng-click="JCtrl.toggleMetronome()">
+            <label class="onoffswitch-label" for="myonoffswitch">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+            </label>
+          </div>
+
+          <p id="currentUser">{{ JCtrl.nickname }}</p>
+          <p id="otherUsers">{{ JCtrl.otherUsers }}</p>
+          <p id="statusLabel">{{ JCtrl.statusLabel }}</p>
+          <p>Metronome is <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span></p>
+        </div>
+
+        <div class="col-md-6" id="central-area">
+          <div class="sticky-keyboard" ng-keypress="JCtrl.keypress($event)" tabindex="0">
+            <ng-include src="'partials/keyboard.html'"></ng-include>
+          </div>
+        </div>
+      </div>
+
+      <div id="startMenuWrapper" ng-hide="JCtrl.validNickname">
+        <form class="form-horizontal center-block" name="enter-name">
+          <div class="input-group" id="startMenu">
+            <input class="form-control" type="text" autofocus ng-model="JCtrl.nickname"
+            placeholder="Enter your name here" id="playerNameInput" tabindex="0">
+            <span class="input-group-btn">
+              <button class="btn btn-success" id="enterButton" ng-click="JCtrl.checkNickname()">Enter</button>
+            </span>
+          </div>
+        </form>
       </div>
     </div>
-  </body>
+  </div>
+</body>
 </html>
