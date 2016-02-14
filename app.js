@@ -33,6 +33,7 @@ io.on('connection', function(socket) {
   });
 
   socket.on('new user', function(user) {
+    console.log('newuser',users);
     user.socketId = socket.id;
     users.push(user);
     io.emit('update users', users);
@@ -40,6 +41,7 @@ io.on('connection', function(socket) {
   });
 
   socket.on('transmit sound', function(tone) {
+    console.log('test', tone, users);
     io.emit('play sound', tone, userHelpers.userColor(users, socket.id));
   });
 });
