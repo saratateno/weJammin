@@ -23,7 +23,7 @@
 
 </head>
 
-<body ng-controller="JamminController as JCtrl" ng-keypress="JCtrl.keypress($event)" tabindex="0">
+<body ng-controller="JamminController as JCtrl">
   <div class="container-fluid">
     <div class="row">
       <h1 id="logo" class="page-header">We Jammin</h1>
@@ -52,7 +52,7 @@
         </div>
 
         <div class="col-md-6" id="central-area">
-          <div class="sticky-keyboard">
+          <div class="sticky-keyboard" ng-keypress="JCtrl.keypress($event)" tabindex="0">
             <ng-include src="'partials/keyboard.html'"></ng-include>
           </div>
         </div>
