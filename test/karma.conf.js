@@ -34,11 +34,7 @@ module.exports = function(config) {
        'app/js/**/*.js': ["coverage"]
     },
 
-    // test results reporter to use
-    // possible values: 'dots', 'progress'
-    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-
-    // web server port
+      // web server port
     port: 9876,
 
 
@@ -52,7 +48,7 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
+    autoWatch: false,
 
 
     // start these browsers
@@ -63,12 +59,15 @@ module.exports = function(config) {
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: true,
 
+    // test results reporter to use
+    // possible values: 'dots', 'progress'
+    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['spec', 'coverage'],
 
     coverageReporter: {
-       type : "html","lcov"
-       dir : "test/coverage/"
+      type : "html",
+      dir : "test/coverage/"
     }
 
-      });
-    };
+  });
+};
