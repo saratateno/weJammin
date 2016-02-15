@@ -23,6 +23,21 @@ jammin.factory('DrumFactory', [function() {
   var bass = new Tone.PulseOscillator("A2", 0.4).chain(bassFilter, bassEnvelope);
   bass.start();
 
+  var aaaEnvelope = new Tone.AmplitudeEnvelope({
+    "sustain": 0,
+    "frequency": 14000,
+  }).toMaster();
+  var aaaFilter = new Tone.Filter({
+    "baseFrequency": 4000,
+    "attack": 0.01,
+    "decay": 0.03,
+    "octaves": -2.5,
+    "exponent": 4,
+    "Q": 1
+  });
+  var aaa = new Tone.PulseOscillator("G1", 0.4).chain(aaaFilter, aaaEnvelope);
+  aaa.start();
+
   var kickEnvelope = new Tone.AmplitudeEnvelope({
 		    "attack": 0.01,
 		    "decay": 0.2,
@@ -40,36 +55,15 @@ jammin.factory('DrumFactory', [function() {
 		}).connect(kick.frequency);
     kick.start();
 
-    var lowPass = new Tone.Filter({
-    		    "frequency": 14000,
-    		}).toMaster();
-    		// we can make our own hi hats with
-    		// the noise synth and a sharp filter envelope
-    		var openHiHat = new Tone.NoiseSynth({
-    			"volume" : -10,
-    		    "filter": {
-    		        "Q": 1
-    		    },
-    		    "envelope": {
-    		        "attack": 0.01,
-    		        "decay": 0.3
-    		    },
-    		    "filterEnvelope": {
-    		        "attack": 0.01,
-    		        "decay": 0.03,
-    		        "baseFrequency": 4000,
-    		        "octaves": -2.5,
-    		        "exponent": 4,
-    		    }
-    		}).connect(lowPass.frequency);
-        // openHiHat.start();
+
+
 
   drumFactory.playDrum = function(drumName) {
     if (drumName === 'bleep') { bleepEnvelope.triggerAttackRelease("2n"); }
     else if (drumName === 'bass') { bassEnvelope.triggerAttackRelease(); }
     else if (drumName === 'kick') { kickEnvelope.triggerAttackRelease("2n"); }
-    else if (drumName === 'openHiHat') { openHiHat.triggerAttackRelease("2n"); }
-
+    else if (drumName === 'aaa') { aaaEnvelope.triggerAttackRelease(); }
+    else if (drumName === 'closedHiHat') { closedHiHat.triggerAttackRelease("8n"); }
   }
 
   return drumFactory;
