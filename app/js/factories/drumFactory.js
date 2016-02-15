@@ -63,8 +63,12 @@ jammin.factory('DrumFactory', [function() {
     urls: ['wav/snare.wav']
   })
 
-  var kicko = new Howl ({
-    urls: ['wav/kicko.wav']
+  var sexydrum = new Howl ({
+    urls: ['wav/deepdrum.mp3']
+  })
+
+  var cantouch = new Howl ({
+    urls: ['wav/cantouch.wav']
   })
 
   drumFactory.playDrum = function(drumName) {
@@ -75,6 +79,9 @@ jammin.factory('DrumFactory', [function() {
     else if (drumName === 'hihat') { hihat.play(); }
     else if (drumName === 'kicko') { kicko.play(); }
     else if (drumName === 'snare') { snare.play(); }
+    else if (drumName === 'sexydrum') { sexydrum.play(); }
+    else if (drumName === 'cantouch') { cantouch.play(); }
+
 
   }
 
