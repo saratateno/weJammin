@@ -55,15 +55,27 @@ jammin.factory('DrumFactory', [function() {
 		}).connect(kick.frequency);
     kick.start();
 
+  var hihat = new Howl ({
+    urls: ['wav/hihat.wav']
+  })
 
+  var snare = new Howl ({
+    urls: ['wav/snare.wav']
+  })
 
+  var kicko = new Howl ({
+    urls: ['wav/kicko.wav']
+  })
 
   drumFactory.playDrum = function(drumName) {
     if (drumName === 'bleep') { bleepEnvelope.triggerAttackRelease("2n"); }
     else if (drumName === 'bass') { bassEnvelope.triggerAttackRelease(); }
     else if (drumName === 'kick') { kickEnvelope.triggerAttackRelease("2n"); }
     else if (drumName === 'aaa') { aaaEnvelope.triggerAttackRelease(); }
-    else if (drumName === 'closedHiHat') { closedHiHat.triggerAttackRelease("8n"); }
+    else if (drumName === 'hihat') { hihat.play(); }
+    else if (drumName === 'kicko') { kicko.play(); }
+    else if (drumName === 'snare') { snare.play(); }
+
   }
 
   return drumFactory;
