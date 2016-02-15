@@ -7,8 +7,9 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/controls.css" />
 
-  <script src="jquery/dist/jquery.js"></script>
   <script src="socket.io-client/socket.io.js"></script>
+  <script src="jquery/dist/jquery.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
   <script src="angular/angular.js"></script>
   <script src="angular-socket-io/socket.js"></script>
   <script src="tone/build/Tone.js"></script>
@@ -20,14 +21,39 @@
   <script src="js/factories/soundFactory.js"></script>
   <script src="js/factories/userFactory.js"></script>
   <script src="js/factories/keyboardFactory.js"></script>
+  <script>
+
+    $( document ).ready(function() {
+      var socket = io();
+      console.log( "ready!" );
+      $('#chatForm').submit(function(){
+        socket.emit('chat message', $('#m').val());
+        console.log('working?')
+        $('#m').val('');
+        return false;
+      });
+      socket.on('chatback', function(msg){
+        $('#messages').append($('<li>').text(msg));
+      });
+    });
+  </script>
 
 </head>
 
 <body ng-controller="JamminController as JCtrl">
+  <!-- CHAT -->
+    <ul id="messages"></ul>
+    <form action="" id='chatForm'>
+      <input id="m" autocomplete="off" /><input type='submit' value='Send'>
+    </form>
+  </div>
+  <!-- CHAT-END -->
+
   <div class="container-fluid">
     <div class="row">
       <h1 id="logo" class="page-header">We Jammin</h1>
     </div>
+    <div>
 
     <div class="row" id="content-area">
       <div id="jamminAreaWrapper" ng-show="JCtrl.validNickname">

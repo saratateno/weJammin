@@ -24,6 +24,13 @@ io.on('connection', function(socket) {
   socket.emit('assign socket id', socket.id)
   socket.emit('update users', users);
 
+  socket.on('chat message', function(msg){
+    console.log('message: ' + msg);
+    io.emit('chatback', msg);
+  });
+
+
+
   socket.on('disconnect', function() {
     userHelpers.removeUser(users, socket.id, function(newUsers) {
       users = newUsers;
@@ -31,6 +38,8 @@ io.on('connection', function(socket) {
       console.log('user disconnected');
     });
   });
+
+
 
   socket.on('new user', function(user) {
     console.log('newuser',users);
