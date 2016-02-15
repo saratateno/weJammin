@@ -1,6 +1,6 @@
 jammin.controller('JamminController',
-    ['SocketFactory', 'MetronomeFactory', 'SoundFactory', 'UserFactory', 'KeyboardFactory',
-    function(SocketFactory, MetronomeFactory, SoundFactory, UserFactory, KeyboardFactory) {
+    ['SocketFactory', 'MetronomeFactory', 'SoundFactory', 'UserFactory', 'KeyboardFactory', 'DrumFactory',
+    function(SocketFactory, MetronomeFactory, SoundFactory, UserFactory, KeyboardFactory, DrumFactory) {
 
   var self = this;
 
@@ -66,5 +66,9 @@ jammin.controller('JamminController',
     KeyboardFactory.keypress(keyEvent, function(action) {
       eval(action);
     });
+  }
+
+  self.playDrum = function(drumName) {
+    DrumFactory.playDrum(drumName);
   }
 }]);
