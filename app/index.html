@@ -19,6 +19,7 @@
   <script src="js/factories/metronomeFactory.js"></script>
   <script src="js/factories/soundFactory.js"></script>
   <script src="js/factories/userFactory.js"></script>
+  <script src="js/factories/keyboardFactory.js"></script>
 
 </head>
 
@@ -51,7 +52,7 @@
         </div>
 
         <div class="col-md-6" id="central-area">
-          <div class="sticky-keyboard">
+          <div class="sticky-keyboard" ng-keypress="JCtrl.keypress($event)" tabindex="0">
             <ng-include src="'partials/keyboard.html'"></ng-include>
           </div>
         </div>

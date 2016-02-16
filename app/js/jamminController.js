@@ -1,6 +1,6 @@
 jammin.controller('JamminController',
-    ['SocketFactory', 'MetronomeFactory', 'SoundFactory', 'UserFactory',
-    function(SocketFactory, MetronomeFactory, SoundFactory, UserFactory) {
+    ['SocketFactory', 'MetronomeFactory', 'SoundFactory', 'UserFactory', 'KeyboardFactory',
+    function(SocketFactory, MetronomeFactory, SoundFactory, UserFactory, KeyboardFactory) {
 
   var self = this;
 
@@ -45,6 +45,7 @@ jammin.controller('JamminController',
   self.startJammin = function() {
     self.toggleMetronome();
     var user = UserFactory.createUser(self.nickname);
+    console.log('user',user);
     SocketFactory.emit('new user', user);
   }
 
@@ -59,5 +60,11 @@ jammin.controller('JamminController',
   window.onbeforeunload = function() {
     SocketFactory.emit('disconnect');
     alert('disconnected');
+  }
+
+  self.keypress = function(keyEvent) {
+    KeyboardFactory.keypress(keyEvent, function(action) {
+      eval(action);
+    });
   }
 }]);
