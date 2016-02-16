@@ -21,8 +21,6 @@ app.get('/', function(request, response) {
 
 io.on('connection', function(socket) {
   console.log('user connected');
-  socket.emit('assign socket id', socket.id)
-  socket.emit('update users', users);
 
   socket.on('disconnect', function() {
     userHelpers.removeUser(users, socket.id, function(newUsers) {
@@ -34,7 +32,14 @@ io.on('connection', function(socket) {
 
   socket.on('new user', function(user) {
     console.log('newuser',users);
+    socket.emit('assign socket id', socket.id)
     user.socketId = socket.id;
+    if (users.length === 0) {
+      socket.emit('start transport');
+      user.masterUser = true;
+    } else {
+      user.masterUser = false;
+    }
     users.push(user);
     io.emit('update users', users);
     console.log(users);
@@ -45,9 +50,10 @@ io.on('connection', function(socket) {
     io.emit('play sound', tone, userHelpers.userColor(users, socket.id));
   });
 
-  //sound = ['bass', '0:0:1']
-  socket.on('record sound', function(sound) {
-    userHelpers.getUser(socket.id).record.sound[0].push(sound[1]);
+  //soundMap = ['bass', '0:0:1']
+  socket.on('record sound', function(soundMap) {
+    //recording = {'bass': ['0:0:1', '0:0:2'] }
+    userHelpers.getUser(socket.id).recording.soundMap[0].push(soundMap[1]);
   });
 
   socket.on('sync', function() {

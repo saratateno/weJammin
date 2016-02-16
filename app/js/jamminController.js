@@ -1,12 +1,15 @@
 jammin.controller('JamminController',
-    ['SocketFactory', 'MetronomeFactory', 'SoundFactory', 'UserFactory', 'KeyboardFactory', 'DrumFactory', 'VocalFactory',
-    function(SocketFactory, MetronomeFactory, SoundFactory, UserFactory, KeyboardFactory, DrumFactory, VocalFactory) {
+    ['SocketFactory', 'MetronomeFactory', 'SoundFactory', 'UserFactory',
+    'KeyboardFactory', 'DrumFactory', 'VocalFactory', 'TransportFactory',
+    function(SocketFactory, MetronomeFactory, SoundFactory, UserFactory,
+      KeyboardFactory, DrumFactory, VocalFactory, TransportFactory) {
 
   var self = this;
 
   self.validNickname = false;
   self.statusLabel = 'not connected';
   self.metronomeStatus = 'off';
+
 
   SocketFactory.on('connect', function() {
     self.statusLabel = 'connected';
@@ -19,6 +22,12 @@ jammin.controller('JamminController',
   SocketFactory.on('update users', function(users) {
     UserFactory.users = users;
     self.otherUsers = UserFactory.otherUsers(self.nickname);
+  });
+
+  SocketFactory.on('start transport', function() {
+    TransportFactory.stopTransport();
+    TransportFactory.updateParts(users, DrumFactory.getDrums());
+    TransportFactory.startTransport();
   });
 
   SocketFactory.on('play sound', function(tone, color) {
@@ -69,6 +78,7 @@ jammin.controller('JamminController',
   }
 
   self.playDrum = function(drumName) {
+    socket.emit('record sound', [drumName, TransportFactory.getPosition()]);
     DrumFactory.playDrum(drumName);
   }
 
