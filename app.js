@@ -23,21 +23,22 @@ io.on('connection', function(socket) {
   console.log('user connected');
 
   socket.on('disconnect', function() {
-    if (userHelpers.getUser(users, socket.id).master === true && users.length > 1) {
-      userHelpers.getOthers(users, socket.id)[0].master = true;
-      console.log("current users ", users);
+    if (users.length > 1) {
+      if (userHelpers.getUser(users, socket.id).master === true) {
+        userHelpers.getOthers(users, socket.id)[0].master = true;
+        console.log('disconnected: ', userHelpers.getUser(users, socket.id));
+      }
     }
     userHelpers.removeUser(users, socket.id, function(remainingUsers) {
       users = remainingUsers;
-      console.log("remaining ", users);
       io.emit('user departed', socket.id);
       io.emit('update users', users);
-      console.log('user disconnected');
+      console.log("remaining users:", users);
     });
   });
 
   socket.on('new user', function(user) {
-    console.log('newuser',users);
+    console.log('newuser:', user);
     socket.emit('assign socket id', socket.id);
     user.socketId = socket.id;
     user.recording = {};
@@ -50,11 +51,10 @@ io.on('connection', function(socket) {
     }
     users.push(user);
     io.emit('update users', users);
-    console.log(users);
   });
 
   socket.on('transmit sound', function(tone) {
-    console.log('transmit sound:', tone, users);
+    console.log('transmit sound:', tone);
     io.emit('play sound', tone, userHelpers.userColor(users, socket.id));
   });
 
@@ -71,7 +71,7 @@ io.on('connection', function(socket) {
   });
 
   socket.on('sync', function() {
-    console.log('starting transport!!!!!!!!!!')
+    console.log('syncing transport!')
     io.emit('update users', users);
     io.emit('start transport');
   });
