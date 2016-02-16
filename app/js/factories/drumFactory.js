@@ -45,7 +45,7 @@ jammin.factory('DrumFactory', [function() {
 		    "release": 0
 		}).toMaster();
 		var kick = new Tone.Oscillator("A2").connect(kickEnvelope);
-		kickSnapEnv = new Tone.FrequencyEnvelope({
+		var kickSnapEnv = new Tone.FrequencyEnvelope({
 		    "attack": 0.005,
 		    "decay": 0.01,
 		    "sustain": 0,

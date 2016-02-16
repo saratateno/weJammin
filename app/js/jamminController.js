@@ -10,18 +10,18 @@ jammin.controller('JamminController',
   self.statusLabel = 'not connected';
   self.metronomeStatus = 'off';
 
-  self.setupSockets = function(callback) {
-    SocketFactory.on('connect', function() {
-      self.statusLabel = 'connected';
-    });
+  SocketFactory.on('connect', function() {
+    self.statusLabel = 'connected';
+  });
 
+  self.setupSockets = function(callback) {
     SocketFactory.on('assign socket id', function(id) {
       self.mySocketId = id;
     });
 
     SocketFactory.on('update users', function(users) {
       UserFactory.users = users;
-      self.otherUsers = UserFactory.otherUsers(self.nickname);
+      self.otherUsers = UserFactory.otherUsers(self.mySocketId);
       if (UserFactory.isMaster(self.mySocketId)) {
         TransportFactory.unmutePart(TransportFactory.syncTransport);
       } else {
@@ -31,7 +31,7 @@ jammin.controller('JamminController',
 
     SocketFactory.on('connect users', function(users) {
       UserFactory.users = users;
-      self.otherUsers = UserFactory.otherUsers(self.nickname);
+      self.otherUsers = UserFactory.otherUsers(self.mySocketId);
     });
 
     SocketFactory.on('start transport', function() {
@@ -46,12 +46,16 @@ jammin.controller('JamminController',
       self.addColor(color, tone);
     });
 
+    SocketFactory.on('user departed', function(socketId) {
+      UserFactory.users = UserFactory.otherUsers(socketId);
+    });
+
     callback();
   };
 
   self.addColor = function(bkgrdcolor, key) {
-    var isWhite = (key.indexOf('#') === -1)
-    var color = (isWhite ? 'white':'black')
+    var isWhite = (key.indexOf('#') === -1);
+    var color = (isWhite ? 'white':'black');
     console.log('test1',bkgrdcolor, color);
     angular.element(document.getElementById(key)).addClass(bkgrdcolor + color + 'key');
     setTimeout(function() {

@@ -11,7 +11,7 @@ jammin.factory('TransportFactory', ['SocketFactory', 'DrumFactory',
 
   transportFactory.stopTransport = function() {
     Tone.Transport.stop();
-  }
+  };
 
   transportFactory.startTransport = function() {
     Tone.Transport.start();
@@ -49,7 +49,7 @@ jammin.factory('TransportFactory', ['SocketFactory', 'DrumFactory',
       metronome.mute = true;
       return 'off';
     }
-  }
+  };
 
 //Syncing
   transportFactory.syncTransport = new Tone.Part(function(time){
@@ -59,10 +59,10 @@ jammin.factory('TransportFactory', ['SocketFactory', 'DrumFactory',
 //recording
   transportFactory.getPosition = function() {
     return Tone.Transport.position;
-  }
+  };
 
 //playing user recordings
-  //{ "metronome": [MetPart], "userid": [BassPart, KickPart] }
+  //userParts = { "userid": [BassPart, KickPart], "anotheruserid": [BassPart] }
   transportFactory.userParts = {};
 
   //pass instruments as in {'bass': Howler.soundthing, 'kick', Howler.soundthing}
@@ -70,24 +70,18 @@ jammin.factory('TransportFactory', ['SocketFactory', 'DrumFactory',
     //remove old parts
     for (var userId in transportFactory.userParts) {
       if (transportFactory.userParts.hasOwnProperty(userId)) {
+        console.log(transportFactory.userParts);
         transportFactory.userParts[userId].forEach(function(part) {
-          part.dispose();
+          part.removeAll();
         });
       }
     }
-
-   // 
-   // //create new parts
-   // users.forEach(function(user) {
-   //   // record = { "bass": ["0:0:4", "0:0:8"], "kick": ["0:0:4"]}
-   //   // instParts = [Part, Part]
-   //   var instrumentParts = transportFactory.getRecordParts(user.recording);
-   //   console.log('inst parts:', instrumentParts)
-   //   transportFactory.userParts[user.socketId] = instrumentParts;
-   // });
+   // create new parts
     if (users.length > 0) {
-      var parts = transportFactory.getRecordParts(users[0].recording);
-      transportFactory.userParts[users[0].socketId] = parts;
+      users.forEach(function(user) {
+        var parts = transportFactory.getRecordParts(user.recording);
+        transportFactory.userParts[user.socketId] = parts;
+      });
     }
   };
 
@@ -112,7 +106,7 @@ jammin.factory('TransportFactory', ['SocketFactory', 'DrumFactory',
     transportFactory.userParts[userId].forEach(function(part) {
       part.mute = false;
     });
-  }
+  };
 
   transportFactory.mutePart = function(part) {
     part.mute = true;
@@ -141,7 +135,6 @@ jammin.factory('TransportFactory', ['SocketFactory', 'DrumFactory',
       }, times).start(0);
     }
   };
-
 
   return transportFactory;
 }]);
