@@ -72,7 +72,7 @@ jammin.factory('TransportFactory', ['SocketFactory', 'DrumFactory',
       if (transportFactory.userParts.hasOwnProperty(userId)) {
         console.log(transportFactory.userParts);
         transportFactory.userParts[userId].forEach(function(part) {
-          part.dispose();
+          part.removeAll();
         });
       }
     }

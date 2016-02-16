@@ -23,16 +23,22 @@ io.on('connection', function(socket) {
   console.log('user connected');
 
   socket.on('disconnect', function() {
-    userHelpers.removeUser(users, socket.id, function(newUsers) {
-      users = newUsers;
+    if (userHelpers.getUser(users, socket.id).master === true && users.length > 1) {
+      userHelpers.getOthers(users, socket.id)[0].master = true;
+      console.log("current users ", users);
+    }
+    userHelpers.removeUser(users, socket.id, function(remainingUsers) {
+      users = remainingUsers;
+      console.log("remaining ", users);
       io.emit('user departed', socket.id);
+      io.emit('update users', users);
       console.log('user disconnected');
     });
   });
 
   socket.on('new user', function(user) {
     console.log('newuser',users);
-    socket.emit('assign socket id', socket.id)
+    socket.emit('assign socket id', socket.id);
     user.socketId = socket.id;
     user.recording = {};
     io.emit('connect users', users);

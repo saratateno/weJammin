@@ -21,7 +21,7 @@ jammin.controller('JamminController',
 
     SocketFactory.on('update users', function(users) {
       UserFactory.users = users;
-      self.otherUsers = UserFactory.otherUsers(self.nickname);
+      self.otherUsers = UserFactory.otherUsers(self.mySocketId);
       if (UserFactory.isMaster(self.mySocketId)) {
         TransportFactory.unmutePart(TransportFactory.syncTransport);
       } else {
@@ -54,8 +54,8 @@ jammin.controller('JamminController',
   };
 
   self.addColor = function(bkgrdcolor, key) {
-    var isWhite = (key.indexOf('#') === -1)
-    var color = (isWhite ? 'white':'black')
+    var isWhite = (key.indexOf('#') === -1);
+    var color = (isWhite ? 'white':'black');
     console.log('test1',bkgrdcolor, color);
     angular.element(document.getElementById(key)).addClass(bkgrdcolor + color + 'key');
     setTimeout(function() {
