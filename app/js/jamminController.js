@@ -27,6 +27,7 @@ jammin.controller('JamminController',
       } else {
         TransportFactory.mutePart(TransportFactory.syncTransport);
       }
+      console.log(UserFactory.users);
     });
 
     SocketFactory.on('start transport', function() {
@@ -88,7 +89,8 @@ jammin.controller('JamminController',
   }
 
   self.playDrum = function(drumName) {
-    io.emit('record sound', [drumName, TransportFactory.getPosition()]);
+    SocketFactory.emit('record sound', [drumName, TransportFactory.getPosition()]);
+    console.log([drumName, TransportFactory.getPosition()]);
     DrumFactory.playDrum(drumName);
   }
 

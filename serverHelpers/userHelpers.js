@@ -1,6 +1,7 @@
 module.exports = {
   removeUser: removeUser,
-  userColor: userColor
+  userColor: userColor,
+  getUser: getUser
 }
 
 function getUser(users, socketId) {

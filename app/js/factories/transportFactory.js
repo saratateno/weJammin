@@ -1,6 +1,8 @@
 jammin.factory('TransportFactory', ['SocketFactory', function(SocketFactory) {
   var transportFactory = {};
 
+//transport set up
+
   Tone.Transport.loopStart = 0;
   Tone.Transport.loopEnd = "2:0";
   Tone.Transport.loop = true;
@@ -14,9 +16,7 @@ jammin.factory('TransportFactory', ['SocketFactory', function(SocketFactory) {
     Tone.Transport.start();
   };
 
-  //{ "metronome": [MetPart], "userid": [BassPart, KickPart] }
-  transportFactory.userParts = {};
-
+//metronome setup
   var kickEnvelope = new Tone.AmplitudeEnvelope({
       "attack": 0.01,
       "decay": 0.2,
@@ -55,6 +55,15 @@ jammin.factory('TransportFactory', ['SocketFactory', function(SocketFactory) {
     SocketFactory.emit('sync');
     console.log('sending sync message');
   }, ["0"]).start(0);
+
+//recording
+  transportFactory.getPosition = function() {
+    return Tone.Transport.position;
+  }
+
+//playing user recordings
+  //{ "metronome": [MetPart], "userid": [BassPart, KickPart] }
+  transportFactory.userParts = {};
 
   //pass instruments as in {'bass': Howler.soundthing, 'kick', Howler.soundthing}
   transportFactory.updateParts = function(users, instruments) {

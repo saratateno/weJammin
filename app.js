@@ -34,6 +34,7 @@ io.on('connection', function(socket) {
     console.log('newuser',users);
     socket.emit('assign socket id', socket.id)
     user.socketId = socket.id;
+    user.recording = {};
     if (users.length === 0) {
       socket.emit('start transport');
       user.master = true;
@@ -53,7 +54,13 @@ io.on('connection', function(socket) {
   //soundMap = ['bass', '0:0:1']
   socket.on('record sound', function(soundMap) {
     //recording = {'bass': ['0:0:1', '0:0:2'] }
-    userHelpers.getUser(socket.id).recording.soundMap[0].push(soundMap[1]);
+    var userRecording = userHelpers.getUser(users, socket.id).recording;
+    if (userRecording[soundMap[0]] === undefined) {
+      userHelpers.getUser(users, socket.id).recording[soundMap[0]] = new Array(soundMap[1]);
+    } else {
+      userHelpers.getUser(users, socket.id).recording[soundMap[0]].push(soundMap[1]);
+    }
+    console.log(users);
   });
 
   socket.on('sync', function() {
