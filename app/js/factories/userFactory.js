@@ -23,7 +23,11 @@ jammin.factory('UserFactory', [function() {
   };
 
   userFactory.isMaster = function(socketId) {
-    return (userFactory._getUser(socketId).master === true);
+    if (userFactory._getUser(socketId).master) {
+      return (userFactory._getUser(socketId).master === true);
+    } else {
+      return false;
+    }
   };
 
   userFactory._getUser = function(socketId) {
