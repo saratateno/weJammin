@@ -1,7 +1,7 @@
 jammin.controller('JamminController',
-    ['SocketFactory', 'MetronomeFactory', 'SoundFactory', 'UserFactory',
+    ['SocketFactory', 'SoundFactory', 'UserFactory',
     'KeyboardFactory', 'DrumFactory', 'VocalFactory', 'TransportFactory',
-    function(SocketFactory, MetronomeFactory, SoundFactory, UserFactory,
+    function(SocketFactory, SoundFactory, UserFactory,
       KeyboardFactory, DrumFactory, VocalFactory, TransportFactory) {
 
   var self = this;
@@ -26,7 +26,7 @@ jammin.controller('JamminController',
 
   SocketFactory.on('start transport', function() {
     TransportFactory.stopTransport();
-    TransportFactory.updateParts(users, DrumFactory.getDrums());
+    //TransportFactory.updateParts(UserFactory.users, DrumFactory.getDrums());
     TransportFactory.startTransport();
   });
 
@@ -59,7 +59,7 @@ jammin.controller('JamminController',
   }
 
   self.toggleMetronome = function() {
-    self.metronomeStatus = MetronomeFactory.toggleMetronome(self.metronomeStatus);
+    self.metronomeStatus = TransportFactory.toggleMetronome(self.metronomeStatus);
   };
 
   self.playSound = function(tone) {
