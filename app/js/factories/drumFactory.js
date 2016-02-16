@@ -55,21 +55,17 @@ jammin.factory('DrumFactory', [function() {
 		}).connect(kick.frequency);
     kick.start();
 
-  var hihat = new Howl ({
-    urls: ['wav/hihat.wav']
-  })
+      var hihat = new Howl ({
+        urls: ['wav/hihat.wav']
+      })
 
-  var snare = new Howl ({
-    urls: ['wav/snare.wav']
-  })
+      var snare = new Howl ({
+        urls: ['wav/snare.wav']
+      })
 
-  var sexydrum = new Howl ({
-    urls: ['wav/deepdrum.mp3']
-  })
-
-  var cantouch = new Howl ({
-    urls: ['wav/cantouch.wav']
-  })
+      var sexydrum = new Howl ({
+        urls: ['wav/deepdrum.mp3']
+      })
 
   drumFactory.playDrum = function(drumName) {
     if (drumName === 'bleep') { bleepEnvelope.triggerAttackRelease("2n"); }
@@ -80,7 +76,6 @@ jammin.factory('DrumFactory', [function() {
     else if (drumName === 'kicko') { kicko.play(); }
     else if (drumName === 'snare') { snare.play(); }
     else if (drumName === 'sexydrum') { sexydrum.play(); }
-    else if (drumName === 'cantouch') { cantouch.play(); }
 
 
   }

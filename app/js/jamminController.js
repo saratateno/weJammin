@@ -1,6 +1,6 @@
 jammin.controller('JamminController',
-    ['SocketFactory', 'MetronomeFactory', 'SoundFactory', 'UserFactory', 'KeyboardFactory', 'DrumFactory',
-    function(SocketFactory, MetronomeFactory, SoundFactory, UserFactory, KeyboardFactory, DrumFactory) {
+    ['SocketFactory', 'MetronomeFactory', 'SoundFactory', 'UserFactory', 'KeyboardFactory', 'DrumFactory', 'VocalFactory',
+    function(SocketFactory, MetronomeFactory, SoundFactory, UserFactory, KeyboardFactory, DrumFactory, VocalFactory) {
 
   var self = this;
 
@@ -71,4 +71,9 @@ jammin.controller('JamminController',
   self.playDrum = function(drumName) {
     DrumFactory.playDrum(drumName);
   }
+
+  self.playVocal = function(vocalName) {
+    VocalFactory.playVocal(vocalName);
+  }
+
 }]);
