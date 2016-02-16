@@ -18,13 +18,10 @@ describe('Jammin', function() {
     expect(pageHeader).toEqual('We Jammin');
   });
 
-   it('registers a connection', function() {
+  it('registers a connection', function() {
     browser.get('http://localhost:8080');
-    expect(statusLabel).toEqual('connected');
-  });
-
-  it('registers a second connection', function() {
-    browser.get('http://localhost:8080');
+    nameInput.sendKeys('Joe B');
+    enterButton.click();
     expect(statusLabel).toEqual('connected');
   });
 });
