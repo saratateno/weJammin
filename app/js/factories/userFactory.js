@@ -11,28 +11,27 @@ jammin.factory('UserFactory', [function() {
       'id': id,
       'name': name,
       'color': color
-    }
-    userFactory.users.push(user)
+    };
+    userFactory.users.push(user);
     return user;
   };
 
-  userFactory.otherUsers = function(myName) {
+  userFactory.otherUsers = function(socketId) {
     return userFactory.users.filter(function(user) {
-      return user.name !== myName;
-      //names are not unique so check by ids
+      return user.socketId !== socketId;
     });
   };
 
   userFactory.isMaster = function(socketId) {
     return (userFactory._getUser(socketId).master === true);
-  }
+  };
 
   userFactory._getUser = function(socketId) {
     var me = userFactory.users.filter(function(user) {
       return user.socketId === socketId;
     });
     return me[0];
-  }
+  };
 
   return userFactory;
 }]);

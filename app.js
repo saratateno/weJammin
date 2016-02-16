@@ -25,7 +25,7 @@ io.on('connection', function(socket) {
   socket.on('disconnect', function() {
     userHelpers.removeUser(users, socket.id, function(newUsers) {
       users = newUsers;
-      io.emit('update users', users);
+      io.emit('user departed', socket.id);
       console.log('user disconnected');
     });
   });

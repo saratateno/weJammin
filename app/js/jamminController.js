@@ -31,7 +31,7 @@ jammin.controller('JamminController',
 
     SocketFactory.on('connect users', function(users) {
       UserFactory.users = users;
-      self.otherUsers = UserFactory.otherUsers(self.nickname);
+      self.otherUsers = UserFactory.otherUsers(self.mySocketId);
     });
 
     SocketFactory.on('start transport', function() {
@@ -44,6 +44,10 @@ jammin.controller('JamminController',
       console.log('playing', tone, color);
       SoundFactory.playSound(tone);
       self.addColor(color, tone);
+    });
+
+    SocketFactory.on('user departed', function(socketId) {
+      UserFactory.users = UserFactory.otherUsers(socketId);
     });
 
     callback();
