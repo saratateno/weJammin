@@ -41,7 +41,18 @@ io.on('connection', function(socket) {
   });
 
   socket.on('transmit sound', function(tone) {
-    console.log('test', tone, users);
+    console.log('transmit sound:', tone, users);
     io.emit('play sound', tone, userHelpers.userColor(users, socket.id));
+  });
+
+  //sound = ['bass', '0:0:1']
+  socket.on('record sound'), function(sound) {
+    getUser(socket.id)['record'][sound[0]].push(sound[1]);
+  }
+
+  socket.on('sync', function() {
+    console.log('starting transport!!!!!!!!!!')
+    io.emit('update users', users);
+    io.emit('start transport');
   });
 });
