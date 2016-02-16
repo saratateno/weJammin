@@ -58,13 +58,9 @@ jammin.factory('DrumFactory', [function() {
     else if (drumName === 'kick') { kickEnvelope.triggerAttackRelease("2n"); }
     else if (drumName === 'hihat') { hihat.play(); }
     else if (drumName === 'snare') { snare.play(); }
-<<<<<<< HEAD
-    else if (drumName === 'sexydrum') { sexydrum.play(); }
-=======
     else if (drumName === 'drum') { drum.play(); }
 
 
->>>>>>> 901fe03c24d740f8f377be6f0cae6c8a19d48435
   }
 
   return drumFactory;
