@@ -1,7 +1,9 @@
 module.exports = {
   removeUser: removeUser,
-  userColor: userColor
-}
+  userColor: userColor,
+  getUser: getUser,
+  getOthers: getOthers
+};
 
 function getUser(users, socketId) {
   return users.filter(function(user) {
@@ -12,11 +14,11 @@ function getUser(users, socketId) {
 function getOthers(users, socketId) {
   return users.filter(function(user) {
     return user.socketId !== socketId;
-  })
+  });
 }
 
 function removeUser(users, socketId, callback) {
-  newUsers = getOthers(users, socketId);
+  var newUsers = getOthers(users, socketId);
   if (callback) { callback(newUsers); }
 }
 
