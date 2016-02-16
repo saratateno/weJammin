@@ -1,4 +1,4 @@
-jammin.factory('TransportFactory', [function() {
+jammin.factory('TransportFactory', ['SocketFactory', function(SocketFactory) {
   var transportFactory = {};
 
   Tone.Transport.loopStart = 0;
@@ -50,7 +50,11 @@ jammin.factory('TransportFactory', [function() {
     }
   }
 
-
+//Syncing
+  transportFactory.syncTransport = new Tone.Part(function(time){
+    SocketFactory.emit('sync');
+    console.log('sending sync message');
+  }, ["0"]).start(0);
 
   //pass instruments as in {'bass': Howler.soundthing, 'kick', Howler.soundthing}
   transportFactory.updateParts = function(users, instruments) {
@@ -95,6 +99,14 @@ jammin.factory('TransportFactory', [function() {
       part.mute = false;
     });
   }
+
+  transportFactory.mutePart = function(part) {
+    part.mute = true;
+  };
+
+  transportFactory.unmutePart = function(part) {
+    part.mute = false;
+  };
 
   transportFactory.removeUserPart = function(userId) {
     transportFactory.userParts[userId] = [];

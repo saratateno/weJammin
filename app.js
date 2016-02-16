@@ -36,9 +36,9 @@ io.on('connection', function(socket) {
     user.socketId = socket.id;
     if (users.length === 0) {
       socket.emit('start transport');
-      user.masterUser = true;
+      user.master = true;
     } else {
-      user.masterUser = false;
+      user.master = false;
     }
     users.push(user);
     io.emit('update users', users);
