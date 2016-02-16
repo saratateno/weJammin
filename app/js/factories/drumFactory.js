@@ -76,8 +76,6 @@ jammin.factory('DrumFactory', [function() {
     else if (drumName === 'kicko') { kicko.play(); }
     else if (drumName === 'snare') { snare.play(); }
     else if (drumName === 'sexydrum') { sexydrum.play(); }
-
-
   }
 
   return drumFactory;

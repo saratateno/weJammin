@@ -30,9 +30,14 @@ jammin.controller('JamminController',
       console.log(UserFactory.users);
     });
 
+    SocketFactory.on('connect users', function(users) {
+      UserFactory.users = users;
+      self.otherUsers = UserFactory.otherUsers(self.nickname);
+    });
+
     SocketFactory.on('start transport', function() {
       TransportFactory.stopTransport();
-      //TransportFactory.updateParts(UserFactory.users, DrumFactory.getDrums());
+      TransportFactory.updateParts(UserFactory.users);
       TransportFactory.startTransport();
     });
 

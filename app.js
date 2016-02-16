@@ -35,6 +35,7 @@ io.on('connection', function(socket) {
     socket.emit('assign socket id', socket.id)
     user.socketId = socket.id;
     user.recording = {};
+    io.emit('connect users', users);
     if (users.length === 0) {
       socket.emit('start transport');
       user.master = true;

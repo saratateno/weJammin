@@ -1,4 +1,5 @@
-jammin.factory('TransportFactory', ['SocketFactory', function(SocketFactory) {
+jammin.factory('TransportFactory', ['SocketFactory', 'DrumFactory',
+  function(SocketFactory, DrumFactory) {
   var transportFactory = {};
 
 //transport set up
@@ -66,7 +67,8 @@ jammin.factory('TransportFactory', ['SocketFactory', function(SocketFactory) {
   transportFactory.userParts = {};
 
   //pass instruments as in {'bass': Howler.soundthing, 'kick', Howler.soundthing}
-  transportFactory.updateParts = function(users, instruments) {
+  transportFactory.updateParts = function(users) {
+    console.log('users: ', users)
     //remove old parts
     for (var userId in transportFactory.userParts) {
       if (!transportFactory.userParts.hasOwnProperty(userId)) {
@@ -75,26 +77,40 @@ jammin.factory('TransportFactory', ['SocketFactory', function(SocketFactory) {
         });
       }
     }
-    //create new parts
-    users.forEach(function(user) {
-      // record = { "bass": ["0:0:4", "0:0:8"], "kick": ["0:0:4"]
-      // instParts = [Part, Part]
-      var instrumentParts = transportFactory.getRecordParts(user.record, instruments);
-      transportFactory.parts[user.socketId] = instrumentParts;
-    });
+   // 
+   // //create new parts
+   // users.forEach(function(user) {
+   //   // record = { "bass": ["0:0:4", "0:0:8"], "kick": ["0:0:4"]}
+   //   // instParts = [Part, Part]
+   //   var instrumentParts = transportFactory.getRecordParts(user.recording);
+   //   console.log('inst parts:', instrumentParts)
+   //   transportFactory.userParts[user.socketId] = instrumentParts;
+   // });
+    if (users.length > 0) {
+      transportFactory.getRecordParts(users[0].recording);
+    }
+    console.log('updted parts: ', transportFactory.userParts);
   };
 
-  transportFactory.getRecordParts = function(record, instruments) {
-    var parts = [];
-    for (var instrument in record) {
-      if(!record.hasOwnProperty(instrument)) {
-        var part = new Tone.Part(function(time){
-          instruments[instrument].play();
-        }, record[instrument]).start(0);
-        parts.push(part);
-      }
+  transportFactory.getRecordParts = function(recording) {
+    if (recording['bleep'] !== undefined) {
+      var bleepTimes = recording['bleep'];
+    } else {
+      var bleepTimes = [];
     }
-    return parts;
+    return new Tone.Part(function(time) {
+      DrumFactory.playDrum('bleep');
+    }, bleepTimes).start(0);
+  //  var parts = [];
+  //  for (var instrument in recording) {
+  //    if (!recording.hasOwnProperty(instrument)) {
+  //      var part = new Tone.Part(function(time){
+  //        DrumFactory.playDrum(instrument);
+  //      }, recording[instrument]).start(0);
+  //      parts.push(part);
+  //    }
+  //  }
+  //  return parts;
   }
 
   transportFactory.muteUser = function(userId) {
