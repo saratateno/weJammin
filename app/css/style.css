@@ -1,16 +1,52 @@
-.sidepanel {
-  position: fixed;
-  width: 20%;
-  background-color: #f1efef;
-  height: 100%;
+@font-face {
+font-family: KaushanScript-Regular;
+src: url("KaushanScript-Regular.otf") format("opentype");
 }
 
+h1 {
+  font-size: 8em;
+  font-family: KaushanScript-Regular;
+}
+
+h4 {
+  font-family: KaushanScript-Regular;
+}
+
+body, html {
+  height: 100%;
+  background-image: url("http://www.wallpaperf1.co/wp-content/uploads/2016/01/BEACH-BACKGROUNDS-HD-WALF1074.jpg");
+  background-color: #69D2E7;
+  color: #FA6900;
+}
+
+.onoffswitch {
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.btn {
+  color: white;
+  background-color: #F38630;
+  margin: 2px;
+}
+
+.page-header {
+  border: 0;
+}
+
+.sidepanel {
+  padding-top: 40px;
+  background-color: #69D2E7;
+  height: 100%;
+  text-align: center;
+  /*border-radius: 75%;*/
+  /*margin-top: 100px;*/
+}
+
+
+
+
 .sticky-keyboard {
-  margin-left: 8%;
-  position: fixed;
-  bottom: 0;
-  width: 80%;
-  /*height: 40%;*/
   background-color: #272927;
 }
 
@@ -19,14 +55,23 @@
   margin: auto
 }
 
+li {
+  text-align: left;
+}
+
+#jamminAreaWrapper, #content-area, .container-fluid {
+  height: 100%;
+}
+
 #logo {
   text-align: center
 }
 
 #controls {
-  right: 0;
+  /*right: 0;*/
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 #drumkit {
-  left: 0;
+  background-color: rgba(255, 255, 255, 0.2);
 }
