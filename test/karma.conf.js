@@ -19,6 +19,7 @@ module.exports = function(config) {
       'bower_components/socket.io-client/socket.io.js',
       'bower_components/angular-socket.io-mock/angular-socket.io-mock.js',
       'bower_components/tone/build/Tone.js',
+      'bower_components/howler.js/howler.js',
       'app/js/**/*.js',
       'test/**/*.spec.js'
     ],

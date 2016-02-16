@@ -18,7 +18,7 @@ describe('JamminController', function() {
 
   // SOCKETS
 
-  var scope, fakeSockets, fakeUsers, fakeMetronome;
+  var scope, fakeSockets, fakeUsers, fakeTransport;
 
   describe('when visiting jammin area', function() {
     beforeEach(function() {
@@ -27,9 +27,9 @@ describe('JamminController', function() {
         $provide.factory('UserFactory', function() {
           return fakeUsers;
         });
-        fakeMetronome = jasmine.createSpyObj('fakeMetronome', ['toggleMetronome']);
-        $provide.factory('MetronomeFactory', function() {
-          return fakeMetronome;
+        fakeTransport = jasmine.createSpyObj('fakeTransport', ['toggleMetronome']);
+        $provide.factory('TransportFactory', function() {
+          return fakeTransport;
         });
       });
     });
@@ -62,7 +62,7 @@ describe('JamminController', function() {
     });
 
     it('toggles the metronome upon entering', function() {
-      expect(fakeMetronome.toggleMetronome).toHaveBeenCalledWith('off');
+      expect(fakeTransport.toggleMetronome).toHaveBeenCalledWith('off');
     });
   });
 

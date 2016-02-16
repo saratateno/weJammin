@@ -10,11 +10,11 @@ jammin.controller('JamminController',
   self.statusLabel = 'not connected';
   self.metronomeStatus = 'off';
 
-  self.setupSockets = function(callback) {
-    SocketFactory.on('connect', function() {
-      self.statusLabel = 'connected';
-    });
+  SocketFactory.on('connect', function() {
+    self.statusLabel = 'connected';
+  });
 
+  self.setupSockets = function(callback) {
     SocketFactory.on('assign socket id', function(id) {
       self.mySocketId = id;
     });
