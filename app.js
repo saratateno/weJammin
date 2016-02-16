@@ -10,7 +10,6 @@ app.set('port', (process.env.PORT || 8080));
 app.use(express.static(__dirname + '/app'));
 app.use(express.static(__dirname + '/bower_components'));
 
-
 http.listen(app.get('port'), function() {
   console.log('Node app is running on port ' + app.get('port'));
 });
@@ -21,6 +20,11 @@ app.get('/', function(request, response) {
 
 io.on('connection', function(socket) {
   console.log('user connected');
+
+  socket.on('chat message', function(msg){
+    console.log('message: ' + msg);
+    io.emit('chatback', msg);
+  });
 
   socket.on('disconnect', function() {
     if (userHelpers.getUser(users, socket.id).master === true && users.length > 1) {

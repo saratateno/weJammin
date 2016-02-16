@@ -9,6 +9,8 @@
 
   <script src="jquery/dist/jquery.js"></script>
   <script src="socket.io-client/socket.io.js"></script>
+  <script src="jquery/dist/jquery.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
   <script src="angular/angular.js"></script>
   <script src="angular-socket-io/socket.js"></script>
   <script src="tone/build/Tone.js"></script>
@@ -23,6 +25,21 @@
   <script src="js/factories/keyboardFactory.js"></script>
   <script src="js/factories/drumFactory.js"></script>
   <script src="js/factories/vocalFactory.js"></script>
+  <script>
+  $( document ).ready(function() {
+    var socket = io();
+    console.log( "ready!" );
+    $('#chatForm').submit(function(){
+      socket.emit('chat message', $('#m').val());
+      console.log('working?')
+      $('#m').val('');
+      return false;
+    });
+    socket.on('chatback', function(msg){
+      $('#messages').append($('<li>').text(msg));
+    });
+  });
+  </script>
 
 </head>
 
@@ -32,24 +49,9 @@
       <h1 id="logo" class="page-header">We Jammin</h1>
     </div>
 
-    <div class="row" id="content-area">
-      <div id="jamminAreaWrapper" ng-show="JCtrl.validNickname">
+  <div class="row" id="content-area">
+    <div id="jamminAreaWrapper" ng-show="JCtrl.validNickname">
         <div class="col-md-3 sidepanel" id="drumkit">
-          <button ng-click="JCtrl.playDrum('bleep')">Bleep</button>
-          <button ng-click="JCtrl.playDrum('bass')">Bass</button>
-          <button ng-click="JCtrl.playDrum('kick')">Kick</button>
-          <button ng-click="JCtrl.playDrum('aaa')">aaa</button>
-          <button ng-click="JCtrl.playDrum('hihat')">hihat</button>
-          <button ng-click="JCtrl.playDrum('kicko')">kicko</button>
-          <button ng-click="JCtrl.playDrum('snare')">snare</button>
-          <button ng-click="JCtrl.playVocal('cantouch')">Touch</button>
-          <button ng-click="JCtrl.playVocal('pushat')">UHH</button>
-          <button class="myButton" ng-click="JCtrl.playDrum('sexydrum')">Sexy Drum</button>
-
-
-        </div>
-
-        <div class="col-md-3 sidepanel" id="controls">
           <div class="onoffswitch center-block" id="metButton">
             <input type="checkbox" name="onoffswitch"
             class="onoffswitch-checkbox" id="myonoffswitch" checked
@@ -59,17 +61,25 @@
               <span class="onoffswitch-switch"></span>
             </label>
           </div>
-
-          <p id="currentUser">{{ JCtrl.nickname }}</p>
-          <p id="otherUsers">{{ JCtrl.otherUsers }}</p>
-          <p id="statusLabel">{{ JCtrl.statusLabel }}</p>
-          <p>Metronome is <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span></p>
         </div>
 
-        <div class="col-md-6" id="central-area">
-          <div class="sticky-keyboard" ng-keypress="JCtrl.keypress($event)" tabindex="0">
+        <div class="col-md-6 container navbar navbar-fixed-bottom" id="central-area">
+          <div class="center-block sticky-keyboard" ng-keypress="JCtrl.keypress($event)">
             <ng-include src="'partials/keyboard.html'"></ng-include>
           </div>
+        </div>
+
+        <div class="col-md-3 sidepanel pull-right" id="controls">
+          <div>
+            <p id="currentUser">{{ JCtrl.nickname }}</p>
+            <p id="otherUsers">{{ JCtrl.otherUsers }}</p>
+            <p id="statusLabel">{{ JCtrl.statusLabel }}</p>
+            <p>Metronome is <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span></p>
+          </div>
+          <form action="" id='chatForm'>
+            <input id="m" autocomplete="off" /><input type='submit' value='Send'>
+            <ul id="messages"></ul>
+          </form>
         </div>
       </div>
 
