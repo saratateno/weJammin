@@ -27,7 +27,6 @@ jammin.controller('JamminController',
       } else {
         TransportFactory.mutePart(TransportFactory.syncTransport);
       }
-      console.log(UserFactory.users);
     });
 
     SocketFactory.on('connect users', function(users) {
