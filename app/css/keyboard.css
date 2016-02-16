@@ -15,10 +15,10 @@
 #pianoBody {
   	width: 100%;
     max-width: 100%;
-  	position: relative;
+  	/*position: relative;*/
     margin-left: auto;
     margin-right: auto;
-  	float: left;
+  	float: center;
     vertical-align: middle;
 
 }
@@ -27,7 +27,7 @@
     background-color: #9C0413;
     color: #000000;
     height: 5px;
-    position: absolute;
+    position: relative;
     top: 1px;
     width: 100%;
     z-index: 100;
@@ -35,12 +35,11 @@
 
 .octave {
 	position: relative;
-	float: left;
 }
 
 .white {
 	float: left;
-	width: 59px;
+	width: 10%;
 	height: 232px;
   background-color: #F4F4F4;
   border: 1px solid #626262;
@@ -58,15 +57,14 @@
 }
 
 .black {
-	float: left;
-	width: 29px;
-	height: 113px;
+	/*float: left;*/
+	width: 4%;
+	height: 118px;
   background-color: #000000;
   border-bottom: 2px solid #000;
   border-left: 2px solid #000;
   border-right: 2px solid #000;
   position: absolute;
-  top: 6px;
   z-index: 100;
 	-moz-border-radius: 0 0 5px 5px;
 	border-radius: 0 0 5px 5px;
@@ -180,17 +178,23 @@ div.flats {
 }
 
 div.flats :nth-child(1) {
-	margin-left: 45px;
+	margin-left: 7.6%;
 }
 div.flats :nth-child(2) {
-	margin-left: 105px;
+	margin-left: 17.7%;
 }
 div.flats :nth-child(3) {
-	margin-left: 225px;
+	margin-left: 37.9%;
 }
 div.flats :nth-child(4) {
-	margin-left: 285px;
+	margin-left: 48%;
 }
 div.flats :nth-child(5) {
-	margin-left: 345px;
+	margin-left: 58%;
+}
+div.flats :nth-child(6) {
+	margin-left: 78%;
+}
+div.flats :nth-child(7) {
+	margin-left: 88%;
 }

@@ -1,16 +1,50 @@
-.sidepanel {
-  position: fixed;
-  width: 20%;
-  background-color: #f1efef;
-  height: 100%;
+@font-face {
+font-family: KaushanScript-Regular;
+src: url("KaushanScript-Regular.otf") format("opentype");
 }
 
+h1 {
+  font-size: 8em;
+  font-family: KaushanScript-Regular;
+}
+
+h4 {
+  font-family: KaushanScript-Regular;
+}
+
+body, html {
+  height: 100%;
+  background-color: #69D2E7;
+  color: #FA6900;
+}
+
+.onoffswitch {
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.btn {
+  color: white;
+  background-color: #F38630;
+  margin: 2px;
+}
+
+.page-header {
+  border: 0;
+}
+
+.sidepanel {
+  padding-top: 40px;
+  background-color: #A7DBD8;
+  height: 100%;
+  text-align: center;
+  /*margin-top: 100px;*/
+}
+
+
+
+
 .sticky-keyboard {
-  margin-left: 8%;
-  position: fixed;
-  bottom: 0;
-  width: 80%;
-  /*height: 40%;*/
   background-color: #272927;
 }
 
@@ -19,14 +53,23 @@
   margin: auto
 }
 
+li {
+  text-align: left;
+}
+
+#jamminAreaWrapper, #content-area, .container-fluid {
+  height: 100%;
+}
+
 #logo {
   text-align: center
 }
 
 #controls {
-  right: 0;
+  /*right: 0;*/
+  background-color: #A7DBD8;
 }
 
 #drumkit {
-  left: 0;
+  background-color: #A7DBD8;
 }
