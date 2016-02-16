@@ -1,6 +1,8 @@
 jammin.controller('JamminController',
-    ['SocketFactory', 'MetronomeFactory', 'SoundFactory', 'UserFactory', 'KeyboardFactory', 'DrumFactory', 'VocalFactory',
-    function(SocketFactory, MetronomeFactory, SoundFactory, UserFactory, KeyboardFactory, DrumFactory, VocalFactory) {
+    ['SocketFactory', 'SoundFactory', 'UserFactory',
+    'KeyboardFactory', 'DrumFactory', 'VocalFactory', 'TransportFactory',
+    function(SocketFactory, SoundFactory, UserFactory,
+      KeyboardFactory, DrumFactory, VocalFactory, TransportFactory) {
 
   var self = this;
 
@@ -8,24 +10,44 @@ jammin.controller('JamminController',
   self.statusLabel = 'not connected';
   self.metronomeStatus = 'off';
 
-  SocketFactory.on('connect', function() {
-    self.statusLabel = 'connected';
-  });
+  self.setupSockets = function(callback) {
+    SocketFactory.on('connect', function() {
+      self.statusLabel = 'connected';
+    });
 
-  SocketFactory.on('assign socket id', function(id) {
-    self.mySocketId = id;
-  });
+    SocketFactory.on('assign socket id', function(id) {
+      self.mySocketId = id;
+    });
 
-  SocketFactory.on('update users', function(users) {
-    UserFactory.users = users;
-    self.otherUsers = UserFactory.otherUsers(self.nickname);
-  });
+    SocketFactory.on('update users', function(users) {
+      UserFactory.users = users;
+      self.otherUsers = UserFactory.otherUsers(self.nickname);
+      if (UserFactory.isMaster(self.mySocketId)) {
+        TransportFactory.unmutePart(TransportFactory.syncTransport);
+      } else {
+        TransportFactory.mutePart(TransportFactory.syncTransport);
+      }
+    });
 
-  SocketFactory.on('play sound', function(tone, color) {
-    console.log('playing', tone, color);
-    SoundFactory.playSound(tone);
-    self.addColor(color, tone);
-  });
+    SocketFactory.on('connect users', function(users) {
+      UserFactory.users = users;
+      self.otherUsers = UserFactory.otherUsers(self.nickname);
+    });
+
+    SocketFactory.on('start transport', function() {
+      TransportFactory.stopTransport();
+      TransportFactory.updateParts(UserFactory.users);
+      TransportFactory.startTransport();
+    });
+
+    SocketFactory.on('play sound', function(tone, color) {
+      console.log('playing', tone, color);
+      SoundFactory.playSound(tone);
+      self.addColor(color, tone);
+    });
+
+    callback();
+  };
 
   self.addColor = function(bkgrdcolor, key) {
     var isWhite = (key.indexOf('#') === -1)
@@ -43,14 +65,16 @@ jammin.controller('JamminController',
   }
 
   self.startJammin = function() {
-    self.toggleMetronome();
-    var user = UserFactory.createUser(self.nickname);
-    console.log('user',user);
-    SocketFactory.emit('new user', user);
+    self.setupSockets(function() {
+      self.toggleMetronome();
+      var user = UserFactory.createUser(self.nickname);
+      console.log('user',user);
+      SocketFactory.emit('new user', user);
+    });
   }
 
   self.toggleMetronome = function() {
-    self.metronomeStatus = MetronomeFactory.toggleMetronome(self.metronomeStatus);
+    self.metronomeStatus = TransportFactory.toggleMetronome(self.metronomeStatus);
   };
 
   self.playSound = function(tone) {
@@ -69,6 +93,8 @@ jammin.controller('JamminController',
   }
 
   self.playDrum = function(drumName) {
+    SocketFactory.emit('record sound', [drumName, TransportFactory.getPosition()]);
+    console.log([drumName, TransportFactory.getPosition()]);
     DrumFactory.playDrum(drumName);
   }
 

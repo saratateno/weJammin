@@ -23,5 +23,16 @@ jammin.factory('UserFactory', [function() {
     });
   };
 
+  userFactory.isMaster = function(socketId) {
+    return (userFactory._getUser(socketId).master === true);
+  }
+
+  userFactory._getUser = function(socketId) {
+    var me = userFactory.users.filter(function(user) {
+      return user.socketId === socketId;
+    });
+    return me[0];
+  }
+
   return userFactory;
 }]);
