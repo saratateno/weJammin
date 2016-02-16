@@ -10,7 +10,6 @@ app.set('port', (process.env.PORT || 8080));
 app.use(express.static(__dirname + '/app'));
 app.use(express.static(__dirname + '/bower_components'));
 
-
 http.listen(app.get('port'), function() {
   console.log('Node app is running on port ' + app.get('port'));
 });
@@ -29,8 +28,6 @@ io.on('connection', function(socket) {
     io.emit('chatback', msg);
   });
 
-
-
   socket.on('disconnect', function() {
     userHelpers.removeUser(users, socket.id, function(newUsers) {
       users = newUsers;
@@ -38,8 +35,6 @@ io.on('connection', function(socket) {
       console.log('user disconnected');
     });
   });
-
-
 
   socket.on('new user', function(user) {
     console.log('newuser',users);
