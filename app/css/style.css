@@ -35,9 +35,10 @@ body, html {
 
 .sidepanel {
   padding-top: 40px;
-  background-color: #A7DBD8;
+  background-color: #69D2E7;
   height: 100%;
   text-align: center;
+  /*border-radius: 75%;*/
   /*margin-top: 100px;*/
 }
 
@@ -67,9 +68,9 @@ li {
 
 #controls {
   /*right: 0;*/
-  background-color: #A7DBD8;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 #drumkit {
-  background-color: #A7DBD8;
+  background-color: rgba(255, 255, 255, 0.2);
 }
