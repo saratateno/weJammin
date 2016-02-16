@@ -46,9 +46,9 @@ io.on('connection', function(socket) {
   });
 
   //sound = ['bass', '0:0:1']
-  socket.on('record sound'), function(sound) {
-    getUser(socket.id)['record'][sound[0]].push(sound[1]);
-  }
+  socket.on('record sound', function(sound) {
+    userHelpers.getUser(socket.id).record.sound[0].push(sound[1]);
+  });
 
   socket.on('sync', function() {
     console.log('starting transport!!!!!!!!!!')
