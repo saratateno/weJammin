@@ -121,19 +121,9 @@ jammin.factory('TransportFactory', ['SocketFactory', 'DrumFactory',
   };
 
   transportFactory.constructPart = function(instrument, times) {
-    if (instrument === 'bleep') {
-      return new Tone.Part(function(time) {
-        DrumFactory.playDrum('bleep');
-      }, times).start(0);
-    } else if (instrument === 'snare') {
-      return new Tone.Part(function(time) {
-        DrumFactory.playDrum('snare');
-      }, times).start(0);
-    } else if (instrument === 'bass') {
-      return new Tone.Part(function(time) {
-        DrumFactory.playDrum('bass');
-      }, times).start(0);
-    }
+    return new Tone.Part(function(time) {
+      DrumFactory.playDrum(instrument);
+    }, times).start(0);
   };
 
   return transportFactory;

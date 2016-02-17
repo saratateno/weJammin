@@ -33,6 +33,27 @@ jammin.factory('KeyboardFactory', [function() {
     else if (key === 47 ) {
       callback("self.playSound('E4')");
     }
+    else if (key === 97 ) {
+      callback("self.playSound('C#3')");
+    }
+    else if (key === 115 ) {
+      callback("self.playSound('D#3')");
+    }
+    else if (key === 100 ) {
+      callback("self.playSound('F#3')");
+    }
+    else if (key === 102 ) {
+      callback("self.playSound('G#3')");
+    }
+    else if (key === 103 ) {
+      callback("self.playSound('A#3')");
+    }
+    else if (key === 104 ) {
+      callback("self.playSound('C#4')");
+    }
+    else if (key === 106 ) {
+      callback("self.playSound('D#4')");
+    }
     else {
       callback('console.log(keyEvent.which)');
     }
