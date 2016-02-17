@@ -52,6 +52,14 @@ jammin.factory('DrumFactory', [function() {
       urls: ['wav/deepdrum.mp3']
     })
 
+    var cantouch = new Howl ({
+      urls: ['wav/cantouch.wav']
+    })
+
+    var pushat = new Howl ({
+      urls: ['wav/pushat_unh.mp3']
+    })
+
   drumFactory.playDrum = function(drumName) {
     if (drumName === 'bleep') { bleepEnvelope.triggerAttackRelease("2n"); }
     else if (drumName === 'bass') { bassEnvelope.triggerAttackRelease(); }
@@ -59,6 +67,9 @@ jammin.factory('DrumFactory', [function() {
     else if (drumName === 'hihat') { hihat.play(); }
     else if (drumName === 'snare') { snare.play(); }
     else if (drumName === 'drum') { drum.play(); }
+    else if (drumName === 'cantouch') { cantouch.play(); }
+    else if (drumName === 'pushat') { pushat.play(); }
+
   }
 
   return drumFactory;
