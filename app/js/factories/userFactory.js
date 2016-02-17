@@ -1,11 +1,10 @@
 jammin.factory('UserFactory', [function() {
   var userFactory = {};
-
   userFactory.users = [];
 
   userFactory.createUser = function(name) {
     var user = {
-      'name': name,
+      'name': name
     };
     userFactory.users.push(user);
     return user;
@@ -18,7 +17,7 @@ jammin.factory('UserFactory', [function() {
   };
 
   userFactory.isMaster = function(socketId) {
-    if (userFactory._getUser(socketId).master) {
+    if (userFactory._getUser(socketId)) {
       return (userFactory._getUser(socketId).master === true);
     } else {
       return false;
