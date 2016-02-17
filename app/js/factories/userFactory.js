@@ -30,31 +30,37 @@ jammin.factory('UserFactory', [function() {
     }
   };
 
-//Iteration over recording for each user
-function mapRecording(user){
-  var recordingMap = [];
-  for (var instrument in user.recording) {
-    if (user.recording.hasOwnProperty(instrument)) {
-      recordingMap.push(mapTimings(user.recording[instrument]));
-    }
-}
-  var flattenedArray = recordingMap.reduce(function(a,b) {
-    return a.concat(b);
-});
-  return flattenedArray;
-}
+  userFactory.writeToScore = function() {
+    userFactory.users.forEach(function(user) {
+      user.scoreMap = mapRecording(user);
+    })
+    console.log(userFactory.users);
+  }
 
-//Translates the array["0:0:1", "0:0:4"] to [1,4]
-function mapTimings(instrumentNotes){
-   var map=[]
-   instrumentNotes.forEach(function(position) {
-     pieces = position.split([":"]);
-     map.push(parseInt(pieces[2]));
-   })
-   return map;
-}
+  //Iteration over recording for a given user
+  function mapRecording(user){
+    var recordingMap = [];
+    for (var instrument in user.recording) {
+      if (user.recording.hasOwnProperty(instrument)) {
+        recordingMap.push(mapTimings(user.recording[instrument]));
+      }
+  }
+    var flattenedArray = recordingMap.reduce(function(a,b) {
+      return a.concat(b);
+  });
+    return flattenedArray;
+  }
 
-}
+  //Translates the array["0:0:1", "0:0:4"] to [1,4]
+  function mapTimings(instrumentNotes){
+     var map=[]
+     instrumentNotes.forEach(function(position) {
+       var pieces = position.split([":"]);
+       map.push(parseInt(pieces[2]));
+     })
+     return map;
+  }
+
   userFactory._getUser = function(socketId) {
     var me = userFactory.users.filter(function(user) {
       return user.socketId === socketId;
