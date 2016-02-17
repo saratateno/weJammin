@@ -5,7 +5,7 @@ jammin.controller('JamminController',
       KeyboardFactory, DrumFactory, TransportFactory) {
 
   var self = this;
-
+  self.localSettings = {};
   self.validNickname = false;
   self.statusLabel = 'not connected';
   self.metronomeStatus = 'off';
@@ -36,12 +36,19 @@ jammin.controller('JamminController',
 
     SocketFactory.on('update users', function(users) {
       UserFactory.users = users;
+      self.users = UserFactory.users;
       self.otherUsers = UserFactory.otherUsers(self.mySocketId);
       if (UserFactory.isMaster(self.mySocketId)) {
         TransportFactory.unmutePart(TransportFactory.syncTransport);
       } else {
         TransportFactory.mutePart(TransportFactory.syncTransport);
       }
+      UserFactory.users.forEach(function(user) {
+        if (self.localSettings[user.socketId] === undefined) {
+          self.localSettings[user.socketId] = { mute: false };
+        }
+      })
+      console.log("local mute after update: ", self.localSettings);
       UserFactory.writeToScore();
       self.updateVisData();
       console.log('users: ', UserFactory.users);
@@ -65,7 +72,7 @@ jammin.controller('JamminController',
 
     SocketFactory.on('start transport', function() {
       TransportFactory.stopTransport();
-      TransportFactory.updateParts(UserFactory.users);
+      TransportFactory.updateParts(UserFactory.users, self.localSettings);
       TransportFactory.startTransport();
     });
 
@@ -109,6 +116,17 @@ jammin.controller('JamminController',
   self.toggleMetronome = function() {
     self.metronomeStatus = TransportFactory.toggleMetronome(self.metronomeStatus);
   };
+
+  self.toggleMute = function(user) {
+    if (self.localSettings[user.socketId].mute === true) {
+      TransportFactory.unmuteUser(user.socketId);
+      self.localSettings[user.socketId].mute = false;
+    } else {
+      TransportFactory.muteUser(user.socketId);
+      self.localSettings[user.socketId].mute = true;
+    }
+    console.log("local mute: ", self.localSettings);
+  }
 
   self.playSound = function(tone) {
     SocketFactory.emit('transmit sound', tone);

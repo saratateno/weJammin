@@ -77,11 +77,11 @@ jammin.factory('TransportFactory', ['SocketFactory', 'DrumFactory', '$rootScope'
   transportFactory.userParts = {};
 
   //pass instruments as in {'bass': Howler.soundthing, 'kick', Howler.soundthing}
-  transportFactory.updateParts = function(users) {
+  transportFactory.updateParts = function(users, localSettings) {
     //remove old parts
     for (var userId in transportFactory.userParts) {
       if (transportFactory.userParts.hasOwnProperty(userId)) {
-        console.log(transportFactory.userParts);
+        console.log("user parts: ", transportFactory.userParts);
         transportFactory.userParts[userId].forEach(function(part) {
           if (part) {
             part.removeAll();
@@ -94,6 +94,9 @@ jammin.factory('TransportFactory', ['SocketFactory', 'DrumFactory', '$rootScope'
       users.forEach(function(user) {
         var parts = transportFactory.getRecordParts(user.recording);
         transportFactory.userParts[user.socketId] = parts;
+        if (localSettings[user.socketId].mute === true) {
+          transportFactory.muteUser(user.socketId)
+        }
       });
     }
   };
@@ -112,6 +115,7 @@ jammin.factory('TransportFactory', ['SocketFactory', 'DrumFactory', '$rootScope'
   transportFactory.muteUser = function(userId) {
     transportFactory.userParts[userId].forEach(function(part) {
       part.mute = true;
+      console.log("part: ", part)
     });
   };
 

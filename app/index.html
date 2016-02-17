@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/controls.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <script src="jquery/dist/jquery.js"></script>
     <script src="socket.io-client/socket.io.js"></script>
@@ -44,6 +45,12 @@
                   <span class="onoffswitch-inner"></span>
                   <span class="onoffswitch-switch"></span>
                 </label>
+              </div>
+              <div id="user-panel">
+                <p ng-repeat='user in JCtrl.users'>{{ user.name }}
+                  <i class="fa fa-volume-up fa-2x" ng-hide="JCtrl.localSettings[user.socketId].mute" ng-show="!JCtrl.localSettings[user.socketId].mute" ng-click="JCtrl.toggleMute(user)"></i>
+                  <i class="fa fa-volume-off fa-2x" ng-hide="!JCtrl.localSettings[user.socketId].mute" ng-show="JCtrl.localSettings[user.socketId].mute" ng-click="JCtrl.toggleMute(user)"></i>
+                </p>
               </div>
             </div>
 
