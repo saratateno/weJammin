@@ -50,6 +50,11 @@
 
 
         <div class="col-md-6 container navbar navbar-fixed-bottom" id="central-area">
+          <table>
+            <tr ng-repeat='user in JCtrl.visData'>
+              <td ng-repeat='box in user'>..</td>
+            </tr>
+          </table>
           <div class="center-block sticky-keyboard" ng-keypress="JCtrl.keypress($event)">
             <ng-include src="'partials/keyboard.html'"></ng-include>
           </div>
