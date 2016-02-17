@@ -30,6 +30,11 @@ jammin.factory('UserFactory', [function() {
     }
   };
 
+  // userFactory.convert
+  // userFactory.users.forEach(function(user) {
+  //
+  // }
+
   userFactory._getUser = function(socketId) {
     var me = userFactory.users.filter(function(user) {
       return user.socketId === socketId;
