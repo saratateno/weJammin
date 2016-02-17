@@ -7,7 +7,7 @@ module.exports = {
   chooseColor: chooseColor
 };
 
-var colors = ['blue', 'red', 'orange', 'green'];
+var colors = ['purple', 'red', 'orange', 'green'];
 
 function getUser(users, socketId) {
   return users.filter(function(user) {
