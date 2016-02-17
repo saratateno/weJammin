@@ -4,9 +4,9 @@ jammin.factory('TransportFactory', ['SocketFactory', 'DrumFactory', '$rootScope'
 
 //transport set up
   var BPM = 120;
-  var BEATS = 2
+  var BARS = 2;
   Tone.Transport.loopStart = 0;
-  Tone.Transport.loopEnd = BEATS + ":0";
+  Tone.Transport.loopEnd = BARS + ":0";
   Tone.Transport.loop = true;
   Tone.Transport.bpm.value = BPM;
 
@@ -20,7 +20,7 @@ jammin.factory('TransportFactory', ['SocketFactory', 'DrumFactory', '$rootScope'
 
 //scope ticker
   var ticks = []
-  var tickLimit = (BEATS * 16) - 1;
+  var tickLimit = (BARS * 16) - 1;
   for (var i = 0; i<=tickLimit; i++) {
     ticks.push('0:0:' + i)
   }

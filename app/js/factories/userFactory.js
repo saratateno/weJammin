@@ -26,11 +26,22 @@ jammin.factory('UserFactory', [function() {
 
   userFactory.writeToScore = function() {
     userFactory.users.forEach(function(user) {
-      user.scoreMap = userFactory._mapRecording(user);
+      var positions = userFactory._mapRecording(user);
+      user.scoreMap = userFactory._positionsToBools(positions);
     })
-    console.log(userFactory.users);
   }
 
+  userFactory._positionsToBools = function(arr) {
+    var result = [];
+    for (var i = 0; i<=31; i++) {
+      if (arr.indexOf(i) !== -1) {
+        result.push(true);
+      } else {
+        result.push(false);
+      }
+    }
+    return result;
+  }
   //Iteration over recording for a given user
   userFactory._mapRecording = function(user){
     var recordingMap = [];
