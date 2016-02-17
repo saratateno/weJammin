@@ -1,14 +1,15 @@
 jammin.controller('JamminController',
     ['SocketFactory', 'SoundFactory', 'UserFactory',
-    'KeyboardFactory', 'DrumFactory', 'VocalFactory', 'TransportFactory',
+    'KeyboardFactory', 'DrumFactory', 'TransportFactory',
     function(SocketFactory, SoundFactory, UserFactory,
-      KeyboardFactory, DrumFactory, VocalFactory, TransportFactory) {
+      KeyboardFactory, DrumFactory, TransportFactory) {
 
   var self = this;
 
   self.validNickname = false;
   self.statusLabel = 'not connected';
   self.metronomeStatus = 'off';
+  self.messages = [];
 
   SocketFactory.on('connect', function() {
     self.statusLabel = 'connected';
@@ -28,6 +29,17 @@ jammin.controller('JamminController',
         TransportFactory.mutePart(TransportFactory.syncTransport);
       }
     });
+
+    self.sendMessage = function(newMessage) {
+      newMessage = {user: self.nickname, content: self.newMessage};
+      SocketFactory.emit('store message', newMessage);
+    }
+
+    SocketFactory.on('update messages', function(newMessage) {
+      self.messages.push(newMessage);
+      self.newMessage = '';
+    });
+
 
     SocketFactory.on('connect users', function(users) {
       UserFactory.users = users;
@@ -100,10 +112,6 @@ jammin.controller('JamminController',
     SocketFactory.emit('record sound', [drumName, TransportFactory.getPosition()]);
     console.log([drumName, TransportFactory.getPosition()]);
     DrumFactory.playDrum(drumName);
-  }
-
-  self.playVocal = function(vocalName) {
-    VocalFactory.playVocal(vocalName);
   }
 
 }]);

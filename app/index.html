@@ -1,70 +1,55 @@
 <!doctype html>
 <html lang="en" ng-app="Jammin">
-<head>
-  <meta charset="utf-8">
-  <title>Jammin</title>
-  <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css" />
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/controls.css" />
+  <head>
+    <meta charset="utf-8">
+    <title>Jammin</title>
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/controls.css" />
 
-  <script src="jquery/dist/jquery.js"></script>
-  <script src="socket.io-client/socket.io.js"></script>
-  <script src="jquery/dist/jquery.js"></script>
-  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-  <script src="angular/angular.js"></script>
-  <script src="angular-socket-io/socket.js"></script>
-  <script src="tone/build/Tone.js"></script>
-  <script src="howler.js/howler.js"></script>
+    <script src="jquery/dist/jquery.js"></script>
+    <script src="socket.io-client/socket.io.js"></script>
+    <script src="jquery/dist/jquery.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="angular/angular.js"></script>
+    <script src="angular-socket-io/socket.js"></script>
+    <script src="tone/build/Tone.js"></script>
+    <script src="howler.js/howler.js"></script>
 
-  <script src="js/app.js"></script>
-  <script src="js/jamminController.js"></script>
-  <script src="js/factories/socketFactory.js"></script>
-  <script src="js/factories/transportFactory.js"></script>
-  <script src="js/factories/soundFactory.js"></script>
-  <script src="js/factories/userFactory.js"></script>
-  <script src="js/factories/keyboardFactory.js"></script>
-  <script src="js/factories/drumFactory.js"></script>
-  <script src="js/factories/vocalFactory.js"></script>
-  <script>
-  $( document ).ready(function() {
-    var socket = io();
-    console.log( "ready!" );
-    $('#chatForm').submit(function(){
-      socket.emit('chat message', $('#m').val());
-      console.log('working?')
-      $('#m').val('');
-      return false;
-    });
-    socket.on('chatback', function(msg){
-      $('#messages').append($('<li>').text(msg));
-    });
-  });
-  </script>
+    <script src="js/app.js"></script>
+    <script src="js/jamminController.js"></script>
+    <script src="js/factories/socketFactory.js"></script>
+    <script src="js/factories/transportFactory.js"></script>
+    <script src="js/factories/soundFactory.js"></script>
+    <script src="js/factories/userFactory.js"></script>
+    <script src="js/factories/keyboardFactory.js"></script>
+    <script src="js/factories/drumFactory.js"></script>
 
-</head>
+  </head>
 
-<body ng-controller="JamminController as JCtrl">
-  <div class="container-fluid">
-    <div class="row">
-      <h1 id="logo" class="page-header">We Jammin</h1>
-    </div>
+<body ng-controller="JamminController as JCtrl" ng-keypress="JCtrl.keypress($event)">
+    <div class="container-fluid">
+      <div class="row">
+        <h1 id="logo" class="page-header">We Jammin</h1>
+      </div>
 
-  <div class="row" id="content-area">
-    <div id="jamminAreaWrapper" ng-show="JCtrl.validNickname">
-        <div class="col-md-3 sidepanel" id="drumkit">
-          <div class="onoffswitch center-block" id="metButton">
-            <input type="checkbox" name="onoffswitch"
-            class="onoffswitch-checkbox" id="myonoffswitch" checked
-            ng-click="JCtrl.toggleMetronome()">
-            <label class="onoffswitch-label" for="myonoffswitch">
-              <span class="onoffswitch-inner"></span>
-              <span class="onoffswitch-switch"></span>
-            </label>
-          </div>
-        </div>
+      <div class="row" id="content-area">
+        <div id="jamminAreaWrapper" ng-show="JCtrl.validNickname">
+            <div class="col-md-3 sidepanel" id="drumkit">
+              <div class="onoffswitch center-block" id="metButton">
+                <input type="checkbox" name="onoffswitch"
+                class="onoffswitch-checkbox" id="myonoffswitch" checked
+                ng-click="JCtrl.toggleMetronome()">
+                <label class="onoffswitch-label" for="myonoffswitch">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+                </label>
+              </div>
+            </div>
+
 
         <div class="col-md-6 container navbar navbar-fixed-bottom" id="central-area">
-          <div class="center-block sticky-keyboard" ng-keypress="JCtrl.keypress($event)">
+          <div class="center-block sticky-keyboard">
             <ng-include src="'partials/keyboard.html'"></ng-include>
           </div>
         </div>
@@ -76,10 +61,22 @@
             <p id="statusLabel">{{ JCtrl.statusLabel }}</p>
             <p>Metronome is <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span></p>
           </div>
-          <form action="" id='chatForm'>
-            <input id="m" autocomplete="off" /><input type='submit' value='Send'>
-            <ul id="messages"></ul>
-          </form>
+          <!--  ANGULAR CHAT -->
+          <div id="chat-area">
+            <input type="text" required ng-max="50" ng-model="JCtrl.newMessage" focus="" />
+            <button class="btn btn-primary" ng-click="JCtrl.sendMessage(newMessage)">
+              Send
+            </button>
+            <ul class="list-group" id="messages">
+              <li ng-repeat="message in JCtrl.messages">
+                <p>{{message.user}}: {{message.content}}</p>
+              </li>
+            </ul>
+            <form name="messageForm">
+              <div class="form-group">
+              </div>
+            </form>
+          </div>
         </div>
       </div>
 
@@ -89,12 +86,11 @@
             <input class="form-control" type="text" autofocus ng-model="JCtrl.nickname"
             placeholder="Enter your name here" id="playerNameInput" tabindex="0">
             <span class="input-group-btn">
-              <button class="btn btn-success" id="enterButton" ng-click="JCtrl.checkNickname()">Enter</button>
+              <button class="btn 2btn-success" id="enterButton" ng-click="JCtrl.checkNickname()">Enter</button>
             </span>
           </div>
         </form>
       </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>

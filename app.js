@@ -5,6 +5,7 @@ var io = require('socket.io')(http);
 var userHelpers = require('./serverHelpers/userHelpers.js');
 
 var users = [];
+var messages = [];
 
 app.set('port', (process.env.PORT || 8080));
 app.use(express.static(__dirname + '/app'));
@@ -24,6 +25,13 @@ io.on('connection', function(socket) {
   socket.on('chat message', function(msg){
     console.log('message: ' + msg);
     io.emit('chatback', msg);
+  });
+
+  socket.on('store message', function(newMessage){
+    console.log(messages);
+    messages.push(newMessage);
+    console.log(messages);
+    io.emit('update messages', newMessage);
   });
 
   socket.on('disconnect', function() {

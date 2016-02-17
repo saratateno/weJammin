@@ -4,7 +4,7 @@ src: url("KaushanScript-Regular.otf") format("opentype");
 }
 
 h1 {
-  font-size: 8em;
+  font-size: 6em;
   font-family: KaushanScript-Regular;
 }
 
@@ -42,9 +42,6 @@ body, html {
   /*border-radius: 75%;*/
   /*margin-top: 100px;*/
 }
-
-
-
 
 .sticky-keyboard {
   background-color: #272927;
