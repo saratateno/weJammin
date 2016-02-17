@@ -23,9 +23,7 @@ io.on('connection', function(socket) {
   console.log('user connected');
 
   socket.on('store message', function(newMessage){
-    console.log(messages);
     messages.push(newMessage);
-    console.log(messages);
     io.emit('update messages', newMessage);
   });
 

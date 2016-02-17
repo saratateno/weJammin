@@ -1,11 +1,10 @@
 jammin.factory('UserFactory', [function() {
   var userFactory = {};
-
   userFactory.users = [];
 
   userFactory.createUser = function(name) {
     var user = {
-      'name': name,
+      'name': name
     };
     userFactory.users.push(user);
     return user;
@@ -18,7 +17,7 @@ jammin.factory('UserFactory', [function() {
   };
 
   userFactory.isMaster = function(socketId) {
-    if (userFactory._getUser(socketId).master) {
+    if (userFactory._getUser(socketId)) {
       return (userFactory._getUser(socketId).master === true);
     } else {
       return false;
@@ -66,10 +65,29 @@ jammin.factory('UserFactory', [function() {
   userFactory._mapTimings = function(instrumentNotes){
      var map=[]
      instrumentNotes.forEach(function(position) {
-       var pieces = position.split([":"]);
-       map.push(parseInt(pieces[2]));
+       map.push(userFactory._beatToInt(position));
      })
      return map;
+  }
+
+  userFactory._beatToInt = function(string) {
+    var pieces = string.split([":"]);
+    return parseInt(pieces[2]);
+  }
+
+  userFactory.fullBeatToInt = function(string) {
+    return userFactory._beatToInt(userFactory._snapToBeat(string));
+  }
+
+  userFactory._snapToBeat = function(transportPosition) {
+    var cleanPosition, pieces, lastNum, roundLastNum, sixteenths;
+    pieces = transportPosition.split([":"]);
+    lastNum = parseFloat(pieces[pieces.length - 1]);
+    roundLastNum = Math.round(lastNum);
+    sixteenths = (parseInt((pieces[0])) * 16) +
+      (parseInt(pieces[1]) * 4) + roundLastNum;
+    cleanPosition = "0:0:" + sixteenths;
+    return cleanPosition;
   }
 
   userFactory._getUser = function(socketId) {
