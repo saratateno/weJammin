@@ -52,6 +52,7 @@ io.on('connection', function(socket) {
   socket.on('new user', function(user) {
     console.log('newuser:', user);
     socket.emit('assign socket id', socket.id);
+    user.color = userHelpers.chooseColor();
     user.socketId = socket.id;
     user.recording = {};
     io.emit('connect users', users);
