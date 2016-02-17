@@ -70,15 +70,17 @@ io.on('connection', function(socket) {
     io.emit('play sound', tone, userHelpers.userColor(users, socket.id));
   });
 
-  //soundMap = ['bass', '0:0:1']
+  //soundMap = ['bass', '0:0:1.03234']
   socket.on('record sound', function(soundMap) {
     //recording = {'bass': ['0:0:1', '0:0:2'] }
+    var cleanPosition = userHelpers.snapToBeat(soundMap[1]);
     var userRecording = userHelpers.getUser(users, socket.id).recording;
     if (userRecording[soundMap[0]] === undefined) {
-      userHelpers.getUser(users, socket.id).recording[soundMap[0]] = new Array(soundMap[1]);
+      userHelpers.getUser(users, socket.id).recording[soundMap[0]] = new Array(cleanPosition);
     } else {
-      userHelpers.getUser(users, socket.id).recording[soundMap[0]].push(soundMap[1]);
+      userHelpers.getUser(users, socket.id).recording[soundMap[0]].push(cleanPosition);
     }
+    io.emit('update users', users);
     console.log(users);
   });
 

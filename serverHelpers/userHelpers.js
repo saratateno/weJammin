@@ -2,7 +2,8 @@ module.exports = {
   removeUser: removeUser,
   userColor: userColor,
   getUser: getUser,
-  getOthers: getOthers
+  getOthers: getOthers,
+  snapToBeat: snapToBeat
 };
 
 function getUser(users, socketId) {
@@ -24,4 +25,24 @@ function removeUser(users, socketId, callback) {
 
 function userColor(users, socketId) {
   return getUser(users,socketId).color;
+}
+
+function snapToBeat(transportPosition){
+  var cleanPosition, pieces, lastNum, roundLastNum, sixteenths;
+  pieces = transportPosition.split([":"]);
+  lastNum = parseFloat(pieces[pieces.length - 1]);
+  roundLastNum = Math.round(lastNum);
+  sixteenths = convertBarToSixteenth(pieces[0]) +
+                      convertQtrToSixteenth(pieces[1]) +
+                      roundLastNum;
+  cleanPosition = "0:0:" + sixteenths;
+  return cleanPosition;
+}
+
+function convertBarToSixteenth(numBars) {
+  return parseInt(numBars) * 16;
+}
+
+function convertQtrToSixteenth(numQtr) {
+  return parseInt(numQtr) * 4;
 }
