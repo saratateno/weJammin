@@ -69,7 +69,6 @@ jammin.factory('DrumFactory', [function() {
     else if (drumName === 'drum') { drum.play(); }
     else if (drumName === 'cantouch') { cantouch.play(); }
     else if (drumName === 'pushat') { pushat.play(); }
-
   }
 
   return drumFactory;

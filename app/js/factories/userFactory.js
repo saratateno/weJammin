@@ -29,11 +29,44 @@ jammin.factory('UserFactory', [function() {
       return false;
     }
   };
+//
+// function numArray(){
+//     var kickNotes, lastNum, map, pieces;
+//     map = [];
+//     var mock = ["0:0:12", "0:0:7", "0:0:4"]
+    // kickNotes = userFactory.users[0].recording.kick[0].split[":"]);
+//     mock.forEach(function(position) {
+//       console.log(position);
+//
+//       pieces = position.split([":"]);
+//       console.log(pieces);
+//
+//       map.push(parseInt(pieces[2]));
+//       console.log(map);
+//
+//     })
+//     return map;
+// }
 
-  // userFactory.convert
-  // userFactory.users.forEach(function(user) {
-  //
-  // }
+function numArray(){
+    var kickNotes, lastNum, map, pieces;
+    map = [];
+    var mock = ["0:0:12", "0:0:7", "0:0:4"]
+    mock.forEach(function(position) {
+      console.log(position);
+
+      pieces = position.split([":"]);
+      console.log(pieces);
+
+      map.push(parseInt(pieces[2]));
+      console.log(map);
+
+    })
+    return map;
+}
+
+
+
 
   userFactory._getUser = function(socketId) {
     var me = userFactory.users.filter(function(user) {
