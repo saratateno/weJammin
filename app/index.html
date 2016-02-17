@@ -24,7 +24,6 @@
     <script src="js/factories/userFactory.js"></script>
     <script src="js/factories/keyboardFactory.js"></script>
     <script src="js/factories/drumFactory.js"></script>
-
   </head>
 
 <body ng-controller="JamminController as JCtrl" ng-keypress="JCtrl.keypress($event)">
@@ -36,6 +35,7 @@
       <div class="row" id="content-area">
         <div id="jamminAreaWrapper" ng-show="JCtrl.validNickname">
             <div class="col-md-3 sidepanel" id="drumkit">
+              <p ng-bind="JCtrl.transportPosition()"></p>
               <div class="onoffswitch center-block" id="metButton">
                 <input type="checkbox" name="onoffswitch"
                 class="onoffswitch-checkbox" id="myonoffswitch" checked

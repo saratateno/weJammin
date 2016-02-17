@@ -1,13 +1,14 @@
-jammin.factory('TransportFactory', ['SocketFactory', 'DrumFactory',
-  function(SocketFactory, DrumFactory) {
+jammin.factory('TransportFactory', ['SocketFactory', 'DrumFactory', '$rootScope',
+  function(SocketFactory, DrumFactory, $rootScope) {
   var transportFactory = {};
 
 //transport set up
-
+  var BPM = 120;
+  var BEATS = 2
   Tone.Transport.loopStart = 0;
-  Tone.Transport.loopEnd = "2:0";
+  Tone.Transport.loopEnd = BEATS + ":0";
   Tone.Transport.loop = true;
-  Tone.Transport.bpm.value = 120;
+  Tone.Transport.bpm.value = BPM;
 
   transportFactory.stopTransport = function() {
     Tone.Transport.stop();
@@ -16,6 +17,16 @@ jammin.factory('TransportFactory', ['SocketFactory', 'DrumFactory',
   transportFactory.startTransport = function() {
     Tone.Transport.start();
   };
+
+//scope ticker
+  var ticks = []
+  var tickLimit = (BEATS * 16) - 1;
+  for (var i = 0; i<=tickLimit; i++) {
+    ticks.push('0:0:' + i)
+  }
+  var ticker = new Tone.Part(function(time) {
+    $rootScope.$apply();
+  }, ticks).start(0);
 
 //metronome setup
   var kickEnvelope = new Tone.AmplitudeEnvelope({
@@ -52,7 +63,7 @@ jammin.factory('TransportFactory', ['SocketFactory', 'DrumFactory',
   };
 
 //Syncing
-  transportFactory.syncTransport = new Tone.Part(function(time){
+  transportFactory.syncTransport = new Tone.Part(function(time) {
     SocketFactory.emit('sync');
   }, ["0"]).start(0);
 

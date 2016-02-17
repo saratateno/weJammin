@@ -17,6 +17,10 @@ jammin.controller('JamminController',
 [false, false, false, false, false, false, true, false, true, false, false, false, true, true, true, false, false, true, true, true, false, true, true, true, true, true, true, true, true, true, false, true],
 [false, false, false, false, false, false, true, false, true, false, false, false, true, true, true, false, false, true, true, true, false, true, true, true, true, true, true, true, true, true, false, true]];
 
+  self.transportPosition = function() {
+    return TransportFactory.getPosition();
+  }
+
   SocketFactory.on('connect', function() {
     self.statusLabel = 'connected';
   });
