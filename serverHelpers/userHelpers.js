@@ -3,8 +3,11 @@ module.exports = {
   userColor: userColor,
   getUser: getUser,
   getOthers: getOthers,
-  snapToBeat: snapToBeat
+  snapToBeat: snapToBeat,
+  chooseColor: chooseColor
 };
+
+var colors = ['purple', 'red', 'orange', 'green'];
 
 function getUser(users, socketId) {
   return users.filter(function(user) {
@@ -24,7 +27,24 @@ function removeUser(users, socketId, callback) {
 }
 
 function userColor(users, socketId) {
-  return getUser(users,socketId).color;
+  var user = getUser(users,socketId)
+  if (user) {
+    return user.color;
+  } else {
+    return 'red';
+  }
+}
+
+function chooseColor() {
+  rotateColors();
+  return colors[0];
+}
+
+function rotateColors() {
+  var first = colors[0];
+  var rest = colors.slice(1);
+  rest.push(first);
+  colors = rest;
 }
 
 function snapToBeat(transportPosition){
