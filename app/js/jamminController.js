@@ -10,6 +10,16 @@ jammin.controller('JamminController',
   self.statusLabel = 'not connected';
   self.metronomeStatus = 'off';
   self.messages = [];
+  self.colors = ['red', 'orange', 'green', 'blue'];
+  self.visData = [
+[false, false, false, false, false, false, true, false, true, false, false, false, true, true, true, false, false, true, true, true, false, true, true, true, true, true, true, true, true, true, false, true],
+[true, false, true, true, true, true, true, true, true, true, true, false, true, true, true, false, false, true, true, true, false, false, false, true, false, true, false, false, false, false, false, false],
+[false, false, false, false, false, false, true, false, true, false, false, false, true, true, true, false, false, true, true, true, false, true, true, true, true, true, true, true, true, true, false, true],
+[false, false, false, false, false, false, true, false, true, false, false, false, true, true, true, false, false, true, true, true, false, true, true, true, true, true, true, true, true, true, false, true]];
+
+  self.transportPosition = function() {
+    return TransportFactory.getPosition();
+  }
 
   SocketFactory.on('connect', function() {
     self.statusLabel = 'connected';
@@ -28,6 +38,7 @@ jammin.controller('JamminController',
       } else {
         TransportFactory.mutePart(TransportFactory.syncTransport);
       }
+      UserFactory.writeToScore();
     });
 
     self.sendMessage = function(newMessage) {

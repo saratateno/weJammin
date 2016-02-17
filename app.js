@@ -22,11 +22,6 @@ app.get('/', function(request, response) {
 io.on('connection', function(socket) {
   console.log('user connected');
 
-  socket.on('chat message', function(msg){
-    console.log('message: ' + msg);
-    io.emit('chatback', msg);
-  });
-
   socket.on('store message', function(newMessage){
     console.log(messages);
     messages.push(newMessage);
@@ -52,6 +47,7 @@ io.on('connection', function(socket) {
   socket.on('new user', function(user) {
     console.log('newuser:', user);
     socket.emit('assign socket id', socket.id);
+    user.color = userHelpers.chooseColor();
     user.socketId = socket.id;
     user.recording = {};
     io.emit('connect users', users);
@@ -70,15 +66,17 @@ io.on('connection', function(socket) {
     io.emit('play sound', tone, userHelpers.userColor(users, socket.id));
   });
 
-  //soundMap = ['bass', '0:0:1']
+  //soundMap = ['bass', '0:0:1.03234']
   socket.on('record sound', function(soundMap) {
     //recording = {'bass': ['0:0:1', '0:0:2'] }
+    var cleanPosition = userHelpers.snapToBeat(soundMap[1]);
     var userRecording = userHelpers.getUser(users, socket.id).recording;
     if (userRecording[soundMap[0]] === undefined) {
-      userHelpers.getUser(users, socket.id).recording[soundMap[0]] = new Array(soundMap[1]);
+      userHelpers.getUser(users, socket.id).recording[soundMap[0]] = new Array(cleanPosition);
     } else {
-      userHelpers.getUser(users, socket.id).recording[soundMap[0]].push(soundMap[1]);
+      userHelpers.getUser(users, socket.id).recording[soundMap[0]].push(cleanPosition);
     }
+    io.emit('update users', users);
     console.log(users);
   });
 
