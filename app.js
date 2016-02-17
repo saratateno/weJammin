@@ -27,7 +27,7 @@ io.on('connection', function(socket) {
   });
 
   socket.on('disconnect', function() {
-    if (users.length > 1) {
+    if (users.length > 1 && userHelpers.getUser(users, socket.id)) {
       if (userHelpers.getUser(users, socket.id).master === true) {
         userHelpers.getOthers(users, socket.id)[0].master = true;
         console.log('disconnected: ', userHelpers.getUser(users, socket.id));
