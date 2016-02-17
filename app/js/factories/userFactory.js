@@ -29,45 +29,32 @@ jammin.factory('UserFactory', [function() {
       return false;
     }
   };
-//
-// function numArray(){
-//     var kickNotes, lastNum, map, pieces;
-//     map = [];
-//     var mock = ["0:0:12", "0:0:7", "0:0:4"]
-    // kickNotes = userFactory.users[0].recording.kick[0].split[":"]);
-//     mock.forEach(function(position) {
-//       console.log(position);
-//
-//       pieces = position.split([":"]);
-//       console.log(pieces);
-//
-//       map.push(parseInt(pieces[2]));
-//       console.log(map);
-//
-//     })
-//     return map;
-// }
 
-function numArray(){
-    var kickNotes, lastNum, map, pieces;
-    map = [];
-    var mock = ["0:0:12", "0:0:7", "0:0:4"]
-    mock.forEach(function(position) {
-      console.log(position);
-
-      pieces = position.split([":"]);
-      console.log(pieces);
-
-      map.push(parseInt(pieces[2]));
-      console.log(map);
-
-    })
-    return map;
+//Iteration over recording for each user
+function mapRecording(user){
+  var recordingMap = [];
+  for (var instrument in user.recording) {
+    if (user.recording.hasOwnProperty(instrument)) {
+      recordingMap.push(mapTimings(user.recording[instrument]));
+    }
+}
+  var flattenedArray = recordingMap.reduce(function(a,b) {
+    return a.concat(b);
+});
+  return flattenedArray;
 }
 
+//Translates the array["0:0:1", "0:0:4"] to [1,4]
+function mapTimings(instrumentNotes){
+   var map=[]
+   instrumentNotes.forEach(function(position) {
+     pieces = position.split([":"]);
+     map.push(parseInt(pieces[2]));
+   })
+   return map;
+}
 
-
-
+}
   userFactory._getUser = function(socketId) {
     var me = userFactory.users.filter(function(user) {
       return user.socketId === socketId;
