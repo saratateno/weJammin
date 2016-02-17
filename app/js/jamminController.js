@@ -34,6 +34,7 @@ jammin.controller('JamminController',
       } else {
         TransportFactory.mutePart(TransportFactory.syncTransport);
       }
+      UserFactory.writeToScore();
     });
 
     self.sendMessage = function(newMessage) {
