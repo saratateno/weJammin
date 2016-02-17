@@ -60,6 +60,10 @@ jammin.factory('DrumFactory', [function() {
       urls: ['wav/pushat_unh.mp3']
     })
 
+    var jayz = new Howl ({
+      urls: ['wav/jayz_woo.mp3']
+    })
+
   drumFactory.playDrum = function(drumName) {
     if (drumName === 'bleep') { bleepEnvelope.triggerAttackRelease("2n"); }
     else if (drumName === 'bass') { bassEnvelope.triggerAttackRelease(); }
@@ -69,6 +73,7 @@ jammin.factory('DrumFactory', [function() {
     else if (drumName === 'drum') { drum.play(); }
     else if (drumName === 'cantouch') { cantouch.play(); }
     else if (drumName === 'pushat') { pushat.play(); }
+    else if (drumName === 'jayz') { jayz.play(); }
 
   }
 

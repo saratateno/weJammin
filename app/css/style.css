@@ -8,14 +8,62 @@ h1 {
   font-family: KaushanScript-Regular;
 }
 
+
+.true {
+  border-radius: 20%;
+  background-color: rgba(255,255,255,0.65);
+  color: rgba(255,255,255,0);
+}
+
+.false {
+  color: rgba(255,255,255,0);
+}
+
+.red-bar {
+  background-color: rgba(255,0,0,0.65);
+}
+
+.blue-bar {
+  background-color: purple;
+}
+
+.green-bar {
+  background-color: green;
+}
+
+.orange-bar {
+  background-color: orange;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0 1em;
+  width: 100%;
+}
+
+td {
+  overflow: hidden;
+  width: 3.125%;
+  border: 1px solid rgba(255,255,255,0);
+  padding-top: 3em;
+  padding-bottom: 3em;
+}
+
 h4 {
   font-family: KaushanScript-Regular;
 }
 
 body, html {
   height: 100%;
-  background-image: url("http://www.wallpaperf1.co/wp-content/uploads/2016/01/BEACH-BACKGROUNDS-HD-WALF1074.jpg");
-  background-color: #69D2E7;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 1) 100%), url("http://www.wallpaperf1.co/wp-content/uploads/2016/01/BEACH-BACKGROUNDS-HD-WALF1074.jpg") no-repeat;
   color: #FA6900;
 }
 
@@ -36,7 +84,7 @@ body, html {
 
 .sidepanel {
   padding-top: 40px;
-  background-color: #69D2E7;
+  /*background-color: #69D2E7;*/
   height: 100%;
   text-align: center;
   /*border-radius: 75%;*/
@@ -62,13 +110,4 @@ li {
 
 #logo {
   text-align: center
-}
-
-#controls {
-  /*right: 0;*/
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-#drumkit {
-  background-color: rgba(255, 255, 255, 0.2);
 }
