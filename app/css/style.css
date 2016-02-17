@@ -8,6 +8,51 @@ h1 {
   font-family: KaushanScript-Regular;
 }
 
+.true {
+  background-color: black;
+  color: rgba(255,255,255,0);
+}
+
+.false {
+  color: rgba(255,255,255,0);
+}
+
+.red {
+  background-color: rgba(255,0,0,0.65);
+}
+
+.blue {
+  background-color: blue;
+}
+
+.green {
+  background-color: green;
+}
+
+.orange {
+  background-color: orange;
+}
+
+tr.border_bottom td {
+  border-bottom: 20px solid rgba(255,255,255,0);
+  border-top: 20px solid rgba(255,255,255,0);
+  border-top: 20px solid rgba(255,255,255,0);
+  overflow: hidden;
+  margin: 5px;
+}
+
+table {
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0);
+}
+
+td {
+  overflow: hidden;
+  width: 3.125%;
+  border: 1px solid rgba(255,255,255,0);
+}
+
 h4 {
   font-family: KaushanScript-Regular;
 }
