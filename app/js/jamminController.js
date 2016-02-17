@@ -11,6 +11,10 @@ jammin.controller('JamminController',
   self.metronomeStatus = 'off';
   self.messages = [];
 
+  self.transportPosition = function() {
+    return TransportFactory.getPosition();
+  }
+
   SocketFactory.on('connect', function() {
     self.statusLabel = 'connected';
   });
