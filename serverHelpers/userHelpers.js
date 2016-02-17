@@ -24,7 +24,12 @@ function removeUser(users, socketId, callback) {
 }
 
 function userColor(users, socketId) {
-  return getUser(users,socketId).color;
+  var user = getUser(users,socketId)
+  if (user) {
+    return user.color;
+  } else {
+    return 'red';
+  }
 }
 
 function snapToBeat(transportPosition){
