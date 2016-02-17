@@ -11,11 +11,15 @@ jammin.controller('JamminController',
   self.metronomeStatus = 'off';
   self.messages = [];
   self.colors = ['red', 'orange', 'green', 'blue'];
-  self.visData = [
-[false, false, false, false, false, false, true, false, true, false, false, false, true, true, true, false, false, true, true, true, false, true, true, true, true, true, true, true, true, true, false, true],
-[true, false, true, true, true, true, true, true, true, true, true, false, true, true, true, false, false, true, true, true, false, false, false, true, false, true, false, false, false, false, false, false],
-[false, false, false, false, false, false, true, false, true, false, false, false, true, true, true, false, false, true, true, true, false, true, true, true, true, true, true, true, true, true, false, true],
-[false, false, false, false, false, false, true, false, true, false, false, false, true, true, true, false, false, true, true, true, false, true, true, true, true, true, true, true, true, true, false, true]];
+  self.visData;
+  
+  self.updateVisData = function() {
+    var scores = [];
+    UserFactory.users.forEach(function(user) {
+      scores.push(user.scoreMap);
+    });
+    self.visData = scores;
+  };
 
   self.transportPosition = function() {
     return TransportFactory.getPosition();
@@ -39,6 +43,8 @@ jammin.controller('JamminController',
         TransportFactory.mutePart(TransportFactory.syncTransport);
       }
       UserFactory.writeToScore();
+      self.updateVisData();
+      console.log('users: ', UserFactory.users);
     });
 
     self.sendMessage = function(newMessage) {
