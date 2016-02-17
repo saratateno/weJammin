@@ -8,6 +8,9 @@ h1 {
   font-family: KaushanScript-Regular;
 }
 
+.light {
+  background-color: white;
+}
 
 .true {
   border-radius: 20%;
