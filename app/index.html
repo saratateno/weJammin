@@ -57,8 +57,11 @@
 
         <div class="col-md-6 container" id="central-area">
           <table>
-            <tr ng-repeat='user in JCtrl.visData' class='{{JCtrl.colors[$index % 4]}}-bar'>
-              <td ng-repeat='box in user track by $index' class="{{$index}}"><div class='{{box}} space'>.</div></td>
+            <tr ng-repeat='user in JCtrl.visData' class='{{JCtrl.colors[$index]}}-bar'>
+              <td ng-repeat='box in user track by $index' class="{{$index}}"
+                ng-click="JCtrl.removeSound($index, $parent.$index)">
+                <div class='{{box}} space'>.</div>
+              </td>
             </tr>
           </table>
           <div class="col-md-6 container navbar navbar-fixed-bottom">
