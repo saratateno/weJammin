@@ -36,8 +36,8 @@
 
       <div class="row" id="content-area">
         <div id="jamminAreaWrapper" ng-show="JCtrl.validNickname">
+            <span ng-bind="JCtrl.transportPosition()" hidden></span>
             <div class="col-md-3 sidepanel" id="drumkit">
-              <p ng-bind="JCtrl.transportPosition()"></p>
               <div class="onoffswitch center-block" id="metButton">
                 <input type="checkbox" name="onoffswitch"
                 class="onoffswitch-checkbox" id="myonoffswitch" checked
@@ -48,9 +48,9 @@
                 </label>
               </div>
               <div id="user-panel">
-                <p ng-repeat='user in JCtrl.users'>{{ user.name }}
-                  <i class="fa fa-volume-up fa-2x" ng-hide="JCtrl.localSettings[user.socketId].mute" ng-show="!JCtrl.localSettings[user.socketId].mute" ng-click="JCtrl.toggleMute(user)"></i>
-                  <i class="fa fa-volume-off fa-2x" ng-hide="!JCtrl.localSettings[user.socketId].mute" ng-show="JCtrl.localSettings[user.socketId].mute" ng-click="JCtrl.toggleMute(user)"></i>
+                <p ng-repeat='user in JCtrl.users' class="user-info"><span class="user-name">{{ user.name }}</span>
+                  <i class="fa fa-volume-up fa-2x {{user.color}}-bar volume btn" ng-hide="JCtrl.localSettings[user.socketId].mute" ng-show="!JCtrl.localSettings[user.socketId].mute" ng-click="JCtrl.toggleMute(user)"></i>
+                  <i class="fa fa-volume-off fa-2x {{user.color}}-bar volume btn" ng-hide="!JCtrl.localSettings[user.socketId].mute" ng-show="JCtrl.localSettings[user.socketId].mute" ng-click="JCtrl.toggleMute(user)"></i>
                 </p>
               </div>
             </div>
@@ -97,14 +97,16 @@
         </div>
 
       <div id="startMenuWrapper" ng-hide="JCtrl.validNickname">
-        <form class="form-horizontal center-block" name="enter-name">
-          <div class="input-group" id="startMenu">
-            <input class="form-control" type="text" autofocus ng-model="JCtrl.nickname"
-            placeholder="Enter your name here" id="playerNameInput" tabindex="0">
-            <span class="input-group-btn">
-              <button class="btn 2btn-success" id="enterButton" ng-click="JCtrl.checkNickname()">Enter</button>
-            </span>
-          </div>
+        <form class="form-horizontal center-block" name="enter-name" ng-submit="JCtrl.checkNickname()">
+          <div>
+            <div class="input-group" id="startMenu">
+              <input class="form-control" type="text" autofocus ng-model="JCtrl.nickname"
+              placeholder="Enter your name here" id="playerNameInput" tabindex="0">
+              <span class="input-group-btn">
+                <button class="btn 2btn-success" id="enterButton" value="Enter">Enter</button>
+              </span>
+            </div>
+          <div>
         </form>
       </div>
     </div>
