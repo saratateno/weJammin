@@ -48,14 +48,14 @@ function rotateColors() {
 }
 
 function snapToBeat(transportPosition){
-  var cleanPosition, pieces, lastNum, roundLastNum, sixteenths;
-  pieces = transportPosition.split([":"]);
-  lastNum = parseFloat(pieces[pieces.length - 1]);
-  roundLastNum = Math.round(lastNum);
-  sixteenths = convertBarToSixteenth(pieces[0]) +
+  var pieces = transportPosition.split([":"]);
+  var lastNum = parseFloat(pieces[pieces.length - 1]);
+  var roundLastNum = Math.round(lastNum);
+  var sixteenths = convertBarToSixteenth(pieces[0]) +
                       convertQtrToSixteenth(pieces[1]) +
                       roundLastNum;
-  cleanPosition = "0:0:" + sixteenths;
+  if (sixteenths === 32) { sixteenths = 0; }
+  var cleanPosition = "0:0:" + sixteenths;
   return cleanPosition;
 }
 

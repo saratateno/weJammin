@@ -1,12 +1,13 @@
  <!doctype html>
 <html lang="en" ng-app="Jammin">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Jammin</title>
     <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/controls.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 
     <script src="jquery/dist/jquery.js"></script>
     <script src="socket.io-client/socket.io.js"></script>
@@ -27,7 +28,8 @@
     <script src="js/factories/drumFactory.js"></script>
   </head>
 
-<body ng-controller="JamminController as JCtrl" ng-keypress="JCtrl.keypress($event)">
+  <body ng-controller="JamminController as JCtrl"
+    ng-keypress="JCtrl.keypress($event)">
     <div class="container-fluid">
       <div class="row">
         <h1 id="logo" class="page-header">We Jammin</h1>
@@ -35,76 +37,88 @@
 
       <div class="row" id="content-area">
         <div id="jamminAreaWrapper" ng-show="JCtrl.validNickname">
-            <div class="col-md-3 sidepanel" id="drumkit">
-              <p ng-bind="JCtrl.transportPosition()"></p>
-              <div class="onoffswitch center-block" id="metButton">
-                <input type="checkbox" name="onoffswitch"
+          <div id=hidden hidden>
+            <span id="statusLabel">{{ JCtrl.statusLabel }}</span>
+            <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span>
+            <span ng-bind="JCtrl.transportPosition()"></span>
+          </div>
+
+          <div class="col-md-3 sidepanel" id="drumkit">
+            <div class="onoffswitch center-block" id="metButton">
+              <input type="checkbox" name="onoffswitch"
                 class="onoffswitch-checkbox" id="myonoffswitch" checked
                 ng-click="JCtrl.toggleMetronome()">
-                <label class="onoffswitch-label" for="myonoffswitch">
-                  <span class="onoffswitch-inner"></span>
-                  <span class="onoffswitch-switch"></span>
-                </label>
-              </div>
-              <div id="user-panel">
-                <p ng-repeat='user in JCtrl.users'>{{ user.name }}
-                  <i class="fa fa-volume-up fa-2x" ng-hide="JCtrl.localSettings[user.socketId].mute" ng-show="!JCtrl.localSettings[user.socketId].mute" ng-click="JCtrl.toggleMute(user)"></i>
-                  <i class="fa fa-volume-off fa-2x" ng-hide="!JCtrl.localSettings[user.socketId].mute" ng-show="JCtrl.localSettings[user.socketId].mute" ng-click="JCtrl.toggleMute(user)"></i>
-                </p>
-              </div>
+              <label class="onoffswitch-label" for="myonoffswitch">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+              </label>
             </div>
-
-
-        <div class="col-md-6 container" id="central-area">
-          <table>
-            <tr ng-repeat='user in JCtrl.visData' class='{{JCtrl.colors[$index]}}-bar'>
-              <td ng-repeat='box in user track by $index' class="{{$index}}"
-                ng-click="JCtrl.removeSound($index, $parent.$index)">
-                <div class='{{box}} space'>.</div>
-              </td>
-            </tr>
-          </table>
-          <div class="col-md-6 container navbar navbar-fixed-bottom">
-            <div class="center-block sticky-keyboard">
-              <ng-include src="'partials/keyboard.html'"></ng-include>
+            <div id="user-panel">
+              <p ng-repeat='user in JCtrl.users'>{{ user.name }}
+                <i class="fa fa-volume-up fa-2x"
+                  ng-hide="JCtrl.localSettings[user.socketId].mute"
+                  ng-show="!JCtrl.localSettings[user.socketId].mute"
+                  ng-click="JCtrl.toggleMute(user)"></i>
+                <i class="fa fa-volume-off fa-2x"
+                  ng-hide="!JCtrl.localSettings[user.socketId].mute"
+                  ng-show="JCtrl.localSettings[user.socketId].mute"
+                  ng-click="JCtrl.toggleMute(user)"></i>
+              </p>
             </div>
           </div>
-        </div>
 
-        <div class="col-md-3 sidepanel pull-right" id="controls">
-          <div>
-            <p id="currentUser">{{ JCtrl.nickname }}</p>
-            <p id="otherUsers">{{ JCtrl.otherUsers }}</p>
-            <p id="statusLabel">{{ JCtrl.statusLabel }}</p>
-            <p>Metronome is <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span></p>
-          </div>
-          <!--  ANGULAR CHAT -->
-          <div id="chat-area">
-            <form name="messageForm" ng-submit="JCtrl.sendMessage(newMessage)">
-              <div class="form-group">
-                <input type="text" required ng-max="50" ng-model="JCtrl.newMessage" focus="" />
-                <input type="submit" class="btn btn-primary" value="Send">
-                <ul class="list-group" id="messages">
-                  <li ng-repeat="message in JCtrl.messages">
-                    <p>{{message.user}}: {{message.content}}</p>
-                  </li>
-                </ul>
+
+          <div class="col-md-6 container" id="central-area">
+            <table>
+              <tr ng-repeat='user in JCtrl.visData'
+                class='{{JCtrl.colors[$index]}}-bar'>
+                <td ng-repeat='box in user track by $index' class="{{$index}}"
+                  ng-click="JCtrl.removeSound($index, $parent.$index)">
+                  <div class='{{box}} space'>.</div>
+                </td>
+              </tr>
+            </table>
+            <div class="col-md-6 container navbar navbar-fixed-bottom">
+              <div class="center-block sticky-keyboard">
+                <ng-include src="'partials/keyboard.html'"></ng-include>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
+
+          <div class="col-md-3 sidepanel pull-right" id="controls">
+            <div id="chat-area">
+              <form name="messageForm"
+                ng-submit="JCtrl.sendMessage(newMessage)">
+                <div class="form-group">
+                  <input type="text" required ng-max="50"
+                    ng-model="JCtrl.newMessage" focus="" />
+                  <input type="submit" class="btn btn-primary" value="Send">
+                </div>
+              </form>
+              <ul class="list-group" id="messages">
+                <li ng-repeat="message in JCtrl.messages">
+                  <p>{{message.user}}: {{message.content}}</p>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
 
-      <div id="startMenuWrapper" ng-hide="JCtrl.validNickname">
-        <form class="form-horizontal center-block" name="enter-name">
-          <div class="input-group" id="startMenu">
-            <input class="form-control" type="text" autofocus ng-model="JCtrl.nickname"
-            placeholder="Enter your name here" id="playerNameInput" tabindex="0">
-            <span class="input-group-btn">
-              <button class="btn 2btn-success" id="enterButton" ng-click="JCtrl.checkNickname()">Enter</button>
-            </span>
-          </div>
-        </form>
+        <div id="startMenuWrapper" ng-hide="JCtrl.validNickname">
+          <form class="form-horizontal center-block" name="enter-name"
+            ng-submit="JCtrl.checkNickname()">
+            <div class="input-group" id="startMenu">
+              <input class="form-control" type="text" autofocus
+                ng-model="JCtrl.nickname" placeholder="Enter your name here"
+                id="playerNameInput" tabindex="0">
+              <span class="input-group-btn">
+                <button class="btn 2btn-success" id="enterButton" value="Enter">
+                  Enter
+                </button>
+              </span>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </body>

@@ -11,25 +11,6 @@ jammin.controller('JamminController',
   self.metronomeStatus = 'off';
   self.messages = [];
 
-  self.updateVisData = function() {
-    var scores = [];
-    UserFactory.users.forEach(function(user) {
-      scores.push(user.scoreMap);
-    });
-    self.visData = scores;
-  };
-
-  self.updateColors = function() {
-    self.colors = UserFactory.userColors();
-  };
-
-  self.transportPosition = function() {
-    var currentPosition = UserFactory.fullBeatToInt(TransportFactory.getPosition());
-    angular.element(document.getElementsByClassName(currentPosition.toString())).addClass("light");
-    angular.element(document.getElementsByClassName((currentPosition - 1).toString())).removeClass("light");
-    return currentPosition;
-  }
-
   SocketFactory.on('connect', function() {
     self.statusLabel = 'connected';
   });
@@ -42,7 +23,6 @@ jammin.controller('JamminController',
     SocketFactory.on('update users', function(users) {
       UserFactory.users = users;
       self.users = UserFactory.users;
-      self.otherUsers = UserFactory.otherUsers(self.mySocketId);
       if (UserFactory.isMaster(self.mySocketId)) {
         TransportFactory.unmutePart(TransportFactory.syncTransport);
       } else {
@@ -53,7 +33,6 @@ jammin.controller('JamminController',
           self.localSettings[user.socketId] = { mute: false };
         }
       })
-      console.log("local mute after update: ", self.localSettings);
       UserFactory.writeToScore();
       self.updateColors();
       self.updateVisData();
@@ -73,7 +52,6 @@ jammin.controller('JamminController',
 
     SocketFactory.on('connect users', function(users) {
       UserFactory.users = users;
-      self.otherUsers = UserFactory.otherUsers(self.mySocketId);
     });
 
     SocketFactory.on('start transport', function() {
@@ -88,6 +66,10 @@ jammin.controller('JamminController',
       self.addColor(color, tone);
     });
 
+    SocketFactory.on('play drum', function(drumName) {
+      DrumFactory.playDrum(drumName);
+    });
+
     SocketFactory.on('user departed', function(socketId) {
       UserFactory.users = UserFactory.otherUsers(socketId);
     });
@@ -98,7 +80,6 @@ jammin.controller('JamminController',
   self.addColor = function(bkgrdcolor, key) {
     var isWhite = (key.indexOf('#') === -1);
     var color = (isWhite ? 'white':'black');
-    console.log('test1',bkgrdcolor, color);
     angular.element(document.getElementById(key)).addClass(bkgrdcolor + color + 'key');
     setTimeout(function() {
       document.getElementById(key).classList.remove(bkgrdcolor + color + 'key');
@@ -106,6 +87,7 @@ jammin.controller('JamminController',
   }
 
   self.checkNickname = function() {
+    if (!self.nickname) { self.nickname = "Marley"; }
     self.validNickname = true;
     self.startJammin();
   }
@@ -114,7 +96,6 @@ jammin.controller('JamminController',
     self.setupSockets(function() {
       self.toggleMetronome();
       var user = UserFactory.createUser(self.nickname);
-      console.log('user',user);
       SocketFactory.emit('new user', user);
     });
   }
@@ -137,16 +118,10 @@ jammin.controller('JamminController',
       TransportFactory.muteUser(user.socketId);
       self.localSettings[user.socketId].mute = true;
     }
-    console.log("local mute: ", self.localSettings);
   }
 
   self.playSound = function(tone) {
     SocketFactory.emit('transmit sound', tone);
-  }
-
-  window.onbeforeunload = function() {
-    SocketFactory.emit('disconnect');
-    alert('disconnected');
   }
 
   self.keypress = function(keyEvent) {
@@ -156,9 +131,35 @@ jammin.controller('JamminController',
   }
 
   self.playDrum = function(drumName) {
+    SocketFactory.emit('transmit drum', drumName);
     SocketFactory.emit('record sound', [drumName, TransportFactory.getPosition()]);
-    console.log([drumName, TransportFactory.getPosition()]);
-    DrumFactory.playDrum(drumName);
   }
 
+  self.updateVisData = function() {
+    var scores = [];
+    UserFactory.users.forEach(function(user) {
+      scores.push(user.scoreMap);
+    });
+    self.visData = scores;
+  };
+
+  self.updateColors = function() {
+    self.colors = UserFactory.userColors();
+  };
+
+  self.transportPosition = function() {
+    var currentPosition = UserFactory.fullBeatToInt(TransportFactory.getPosition());
+    angular.element(document.getElementsByClassName(currentPosition.toString())).addClass("light");
+    if (currentPosition === 0) {
+      angular.element(document.getElementsByClassName("31")).removeClass("light");
+    } else {
+      angular.element(document.getElementsByClassName((currentPosition - 1).toString())).removeClass("light");
+    }
+    return currentPosition;
+  }
+
+  window.onbeforeunload = function() {
+    SocketFactory.emit('disconnect');
+    alert('disconnected');
+  }
 }]);
