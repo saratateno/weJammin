@@ -23,7 +23,6 @@ jammin.controller('JamminController',
     SocketFactory.on('update users', function(users) {
       UserFactory.users = users;
       self.users = UserFactory.users;
-      self.otherUsers = UserFactory.otherUsers(self.mySocketId);
       if (UserFactory.isMaster(self.mySocketId)) {
         TransportFactory.unmutePart(TransportFactory.syncTransport);
       } else {
@@ -53,7 +52,6 @@ jammin.controller('JamminController',
 
     SocketFactory.on('connect users', function(users) {
       UserFactory.users = users;
-      self.otherUsers = UserFactory.otherUsers(self.mySocketId);
     });
 
     SocketFactory.on('start transport', function() {
