@@ -11,29 +11,6 @@ jammin.controller('JamminController',
   self.metronomeStatus = 'off';
   self.messages = [];
 
-  self.updateVisData = function() {
-    var scores = [];
-    UserFactory.users.forEach(function(user) {
-      scores.push(user.scoreMap);
-    });
-    self.visData = scores;
-  };
-
-  self.updateColors = function() {
-    self.colors = UserFactory.userColors();
-  };
-
-  self.transportPosition = function() {
-    var currentPosition = UserFactory.fullBeatToInt(TransportFactory.getPosition());
-    angular.element(document.getElementsByClassName(currentPosition.toString())).addClass("light");
-    if (currentPosition === 0) {
-      angular.element(document.getElementsByClassName("31")).removeClass("light");
-    } else {
-      angular.element(document.getElementsByClassName((currentPosition - 1).toString())).removeClass("light");
-    }
-    return currentPosition;
-  }
-
   SocketFactory.on('connect', function() {
     self.statusLabel = 'connected';
   });
@@ -149,11 +126,6 @@ jammin.controller('JamminController',
     SocketFactory.emit('transmit sound', tone);
   }
 
-  window.onbeforeunload = function() {
-    SocketFactory.emit('disconnect');
-    alert('disconnected');
-  }
-
   self.keypress = function(keyEvent) {
     KeyboardFactory.keypress(keyEvent, function(action) {
       eval(action);
@@ -163,5 +135,33 @@ jammin.controller('JamminController',
   self.playDrum = function(drumName) {
     SocketFactory.emit('transmit drum', drumName);
     SocketFactory.emit('record sound', [drumName, TransportFactory.getPosition()]);
+  }
+
+  self.updateVisData = function() {
+    var scores = [];
+    UserFactory.users.forEach(function(user) {
+      scores.push(user.scoreMap);
+    });
+    self.visData = scores;
+  };
+
+  self.updateColors = function() {
+    self.colors = UserFactory.userColors();
+  };
+
+  self.transportPosition = function() {
+    var currentPosition = UserFactory.fullBeatToInt(TransportFactory.getPosition());
+    angular.element(document.getElementsByClassName(currentPosition.toString())).addClass("light");
+    if (currentPosition === 0) {
+      angular.element(document.getElementsByClassName("31")).removeClass("light");
+    } else {
+      angular.element(document.getElementsByClassName((currentPosition - 1).toString())).removeClass("light");
+    }
+    return currentPosition;
+  }
+
+  window.onbeforeunload = function() {
+    SocketFactory.emit('disconnect');
+    alert('disconnected');
   }
 }]);
