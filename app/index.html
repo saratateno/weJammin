@@ -47,9 +47,10 @@
                 </label>
               </div>
               <div id="user-panel">
-                <p ng-repeat='user in JCtrl.users' class="user-info"><span class="user-name">{{ user.name }}</span>
-                  <i class="fa fa-volume-up fa-2x {{user.color}}-bar volume btn" ng-hide="JCtrl.localSettings[user.socketId].mute" ng-show="!JCtrl.localSettings[user.socketId].mute" ng-click="JCtrl.toggleMute(user)"></i>
-                  <i class="fa fa-volume-off fa-2x {{user.color}}-bar volume btn" ng-hide="!JCtrl.localSettings[user.socketId].mute" ng-show="JCtrl.localSettings[user.socketId].mute" ng-click="JCtrl.toggleMute(user)"></i>
+                <p ng-repeat='user in JCtrl.users' class="user-info">
+                    <i class="fa fa-volume-up fa-2x {{user.color}}-bar volume btn" ng-hide="JCtrl.localSettings[user.socketId].mute" ng-show="!JCtrl.localSettings[user.socketId].mute" ng-click="JCtrl.toggleMute(user)"></i>
+                    <i class="fa fa-volume-off fa-2x {{user.color}}-bar volume btn" ng-hide="!JCtrl.localSettings[user.socketId].mute" ng-show="JCtrl.localSettings[user.socketId].mute" ng-click="JCtrl.toggleMute(user)"></i>
+                    <span class="user-name">{{ user.name }}</span>
                 </p>
               </div>
             </div>

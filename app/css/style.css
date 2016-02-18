@@ -29,26 +29,22 @@ h1 {
 }
 
 .user-name {
-  float: left;
-  position: relative;
   top: 50%;
   transform: translateY(-50%);
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.5vh
+  font-size: 1.5vh;
+  margin-left: 3px;
 }
 
 .user-info {
   width: 55%;
-  margin: auto;
   height: 50px;
+  margin: auto;
+  text-align: left
 }
 
 .volume {
-  float: right;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 2em
+  width: 50px;
 }
 
 .red-bar {
