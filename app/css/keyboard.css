@@ -79,10 +79,10 @@
 
 /*div.white:active,*/
 
-.bluewhitekey {
+.purplewhitekey {
   border: 1px solid #343434;
 	background-image: -webkit-gradient(center bottom , #FFFFFF 90%, #CCCCCC 100%);
-  background-color: blue;
+  background-color: purple;
 
 	-webkit-box-shadow: 0 -5px 20px -3px #272927 inset;
 
@@ -139,10 +139,10 @@
 
 /*div.black:active,*/
 
-.blueblackkey {
+.purpleblackkey {
   border: 1px solid #CECECE;
   border-top: 1px solid #626262;
-  background-color: blue;
+  background-color: purple;
 	-moz-box-shadow: 0 0 6px 7px #303030 inset, 0 -5px #F7F7F7 inset;
 	-webkit-box-shadow: 0 0 6px 7px #303030 inset, 0 -5px #F7F7F7 inset;
 	box-shadow: 0 0 6px 7px #303030 inset, 0 -5px #F7F7F7 inset;
