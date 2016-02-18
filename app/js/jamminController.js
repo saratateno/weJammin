@@ -26,7 +26,11 @@ jammin.controller('JamminController',
   self.transportPosition = function() {
     var currentPosition = UserFactory.fullBeatToInt(TransportFactory.getPosition());
     angular.element(document.getElementsByClassName(currentPosition.toString())).addClass("light");
-    angular.element(document.getElementsByClassName((currentPosition - 1).toString())).removeClass("light");
+    if (currentPosition === 0) {
+      angular.element(document.getElementsByClassName("31")).removeClass("light");
+    } else {
+      angular.element(document.getElementsByClassName((currentPosition - 1).toString())).removeClass("light");
+    }
     return currentPosition;
   }
 
