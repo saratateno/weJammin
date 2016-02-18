@@ -108,6 +108,7 @@ jammin.controller('JamminController',
   }
 
   self.checkNickname = function() {
+    if (!self.nickname) { self.nickname = "Marley"; }
     self.validNickname = true;
     self.startJammin();
   }
