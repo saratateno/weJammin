@@ -80,22 +80,20 @@
           </div>
           <!--  ANGULAR CHAT -->
           <div id="chat-area">
-            <input type="text" required ng-max="50" ng-model="JCtrl.newMessage" focus="" />
-            <button class="btn btn-primary" ng-click="JCtrl.sendMessage(newMessage)">
-              Send
-            </button>
-            <ul class="list-group" id="messages">
-              <li ng-repeat="message in JCtrl.messages">
-                <p>{{message.user}}: {{message.content}}</p>
-              </li>
-            </ul>
-            <form name="messageForm">
+            <form name="messageForm" ng-submit="JCtrl.sendMessage(newMessage)">
               <div class="form-group">
+                <input type="text" required ng-max="50" ng-model="JCtrl.newMessage" focus="" />
+                <input type="submit" class="btn btn-primary" value="Send">
+                <ul class="list-group" id="messages">
+                  <li ng-repeat="message in JCtrl.messages">
+                    <p>{{message.user}}: {{message.content}}</p>
+                  </li>
+                </ul>
               </div>
             </form>
           </div>
         </div>
-      </div>
+        </div>
 
       <div id="startMenuWrapper" ng-hide="JCtrl.validNickname">
         <form class="form-horizontal center-block" name="enter-name">
