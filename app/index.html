@@ -37,13 +37,15 @@
 
       <div class="row" id="content-area">
         <div id="jamminAreaWrapper" ng-show="JCtrl.validNickname">
+
           <div id=hidden hidden>
             <span id="statusLabel">{{ JCtrl.statusLabel }}</span>
             <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span>
             <span ng-bind="JCtrl.transportPosition()"></span>
           </div>
 
-          <div class="col-md-3 sidepanel" id="drumkit">
+          <div class="col-md-3 sidepanel">
+            120bpm
             <div class="onoffswitch center-block" id="metButton">
               <input type="checkbox" name="onoffswitch"
                 class="onoffswitch-checkbox" id="myonoffswitch" checked
@@ -54,19 +56,19 @@
               </label>
             </div>
             <div id="user-panel">
-              <p ng-repeat='user in JCtrl.users'>{{ user.name }}
-                <i class="fa fa-volume-up fa-2x"
+              <p ng-repeat='user in JCtrl.users' class="user-info">
+                <i class="fa fa-volume-up fa-2x {{user.color}}-bar volume btn"
                   ng-hide="JCtrl.localSettings[user.socketId].mute"
                   ng-show="!JCtrl.localSettings[user.socketId].mute"
                   ng-click="JCtrl.toggleMute(user)"></i>
-                <i class="fa fa-volume-off fa-2x"
+                <i class="fa fa-volume-off fa-2x {{user.color}}-bar volume btn"
                   ng-hide="!JCtrl.localSettings[user.socketId].mute"
                   ng-show="JCtrl.localSettings[user.socketId].mute"
                   ng-click="JCtrl.toggleMute(user)"></i>
+                <span class="user-name">{{ user.name }}</span>
               </p>
             </div>
           </div>
-
 
           <div class="col-md-6 container" id="central-area">
             <table>
