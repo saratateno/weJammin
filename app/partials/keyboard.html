@@ -5,7 +5,7 @@
   <title>Piano</title>
   <link rel="stylesheet" type="text/css" href="../css/keyboard.css" />
 </head>
-<body>
+<body ng-controller="KeyboardController as KCtrl" ng-keypress="KCtrl.keypress($event)">
   <div id="piano">
     <div class="button-display">
       <button class="action-button shadow animate blue" ng-click="JCtrl.playDrum('bleep')">Bleep</button>

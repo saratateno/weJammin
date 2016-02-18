@@ -1,7 +1,9 @@
 keyboard.controller('KeyboardController',
-    ['SoundFactory', 'KeyboardFactory', 'DrumFactory',
+  ['SocketFactory', 'SoundFactory', 'UserFactory',
+  'KeyboardFactory', 'DrumFactory', 'TransportFactory',
+  function(SocketFactory, SoundFactory, UserFactory,
+    KeyboardFactory, DrumFactory, TransportFactory) {
 
-    function(SoundFactory, KeyboardFactory, DrumFactory) {
 
   var self = this;
 
