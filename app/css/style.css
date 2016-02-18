@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:700);
 @font-face {
 font-family: KaushanScript-Regular;
 src: url("KaushanScript-Regular.otf") format("opentype");
@@ -20,6 +21,34 @@ h1 {
 
 .false {
   color: rgba(255,255,255,0);
+}
+
+.btn {
+  color: white;
+  background-color: #F38630;
+}
+
+.user-name {
+  float: left;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5vh
+}
+
+.user-info {
+  width: 55%;
+  margin: auto;
+  height: 50px;
+}
+
+.volume {
+  float: right;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2em
 }
 
 .red-bar {
@@ -73,11 +102,6 @@ body, html {
 .onoffswitch {
   margin-bottom: 40px;
   text-align: left;
-}
-
-.btn {
-  color: white;
-  background-color: #F38630;
 }
 
 .page-header {
