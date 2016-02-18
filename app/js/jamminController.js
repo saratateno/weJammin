@@ -131,7 +131,9 @@ jammin.controller('JamminController',
   }
 
   self.playDrum = function(drumName) {
-    SocketFactory.emit('transmit drum', drumName);
+    //SocketFactory.emit('transmit drum', drumName);
+    //^ this produces echo effect so revert to playing locally
+    DrumFactory.playDrum(drumName);
     SocketFactory.emit('record sound', [drumName, TransportFactory.getPosition()]);
   }
 
@@ -160,6 +162,5 @@ jammin.controller('JamminController',
 
   window.onbeforeunload = function() {
     SocketFactory.emit('disconnect');
-    alert('disconnected');
   }
 }]);
