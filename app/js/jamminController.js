@@ -23,7 +23,6 @@ jammin.controller('JamminController',
     SocketFactory.on('update users', function(users) {
       UserFactory.users = users;
       self.users = UserFactory.users;
-      self.otherUsers = UserFactory.otherUsers(self.mySocketId);
       if (UserFactory.isMaster(self.mySocketId)) {
         TransportFactory.unmutePart(TransportFactory.syncTransport);
       } else {
@@ -53,7 +52,6 @@ jammin.controller('JamminController',
 
     SocketFactory.on('connect users', function(users) {
       UserFactory.users = users;
-      self.otherUsers = UserFactory.otherUsers(self.mySocketId);
     });
 
     SocketFactory.on('start transport', function() {
@@ -133,7 +131,9 @@ jammin.controller('JamminController',
   }
 
   self.playDrum = function(drumName) {
-    SocketFactory.emit('transmit drum', drumName);
+    //SocketFactory.emit('transmit drum', drumName);
+    //^ this produces echo effect so revert to playing locally
+    DrumFactory.playDrum(drumName);
     SocketFactory.emit('record sound', [drumName, TransportFactory.getPosition()]);
   }
 
@@ -162,6 +162,5 @@ jammin.controller('JamminController',
 
   window.onbeforeunload = function() {
     SocketFactory.emit('disconnect');
-    alert('disconnected');
   }
 }]);
