@@ -10,15 +10,17 @@ jammin.controller('JamminController',
   self.statusLabel = 'not connected';
   self.metronomeStatus = 'off';
   self.messages = [];
-  self.colors = ['red', 'orange', 'green', 'blue'];
-  self.visData;
-  
+
   self.updateVisData = function() {
     var scores = [];
     UserFactory.users.forEach(function(user) {
       scores.push(user.scoreMap);
     });
     self.visData = scores;
+  };
+
+  self.updateColors = function() {
+    self.colors = UserFactory.userColors();
   };
 
   self.transportPosition = function() {
@@ -53,6 +55,7 @@ jammin.controller('JamminController',
       })
       console.log("local mute after update: ", self.localSettings);
       UserFactory.writeToScore();
+      self.updateColors();
       self.updateVisData();
       console.log('users: ', UserFactory.users);
     });

@@ -97,5 +97,12 @@ jammin.factory('UserFactory', [function() {
     return me[0];
   };
 
+  userFactory.userColors = function() {
+    var result = [];
+    userFactory.users.forEach(function(user) {
+      result.push(user.color);
+    });
+    return result;
+  }
   return userFactory;
 }]);
