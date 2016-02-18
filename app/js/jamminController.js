@@ -26,7 +26,11 @@ jammin.controller('JamminController',
   self.transportPosition = function() {
     var currentPosition = UserFactory.fullBeatToInt(TransportFactory.getPosition());
     angular.element(document.getElementsByClassName(currentPosition.toString())).addClass("light");
-    angular.element(document.getElementsByClassName((currentPosition - 1).toString())).removeClass("light");
+    if (currentPosition === 0) {
+      angular.element(document.getElementsByClassName("31")).removeClass("light");
+    } else {
+      angular.element(document.getElementsByClassName((currentPosition - 1).toString())).removeClass("light");
+    }
     return currentPosition;
   }
 
@@ -53,7 +57,6 @@ jammin.controller('JamminController',
           self.localSettings[user.socketId] = { mute: false };
         }
       })
-      console.log("local mute after update: ", self.localSettings);
       UserFactory.writeToScore();
       self.updateColors();
       self.updateVisData();
@@ -98,7 +101,6 @@ jammin.controller('JamminController',
   self.addColor = function(bkgrdcolor, key) {
     var isWhite = (key.indexOf('#') === -1);
     var color = (isWhite ? 'white':'black');
-    console.log('test1',bkgrdcolor, color);
     angular.element(document.getElementById(key)).addClass(bkgrdcolor + color + 'key');
     setTimeout(function() {
       document.getElementById(key).classList.remove(bkgrdcolor + color + 'key');
@@ -114,7 +116,6 @@ jammin.controller('JamminController',
     self.setupSockets(function() {
       self.toggleMetronome();
       var user = UserFactory.createUser(self.nickname);
-      console.log('user',user);
       SocketFactory.emit('new user', user);
     });
   }
@@ -137,7 +138,6 @@ jammin.controller('JamminController',
       TransportFactory.muteUser(user.socketId);
       self.localSettings[user.socketId].mute = true;
     }
-    console.log("local mute: ", self.localSettings);
   }
 
   self.playSound = function(tone) {
@@ -160,5 +160,4 @@ jammin.controller('JamminController',
     console.log([drumName, TransportFactory.getPosition()]);
     DrumFactory.playDrum(drumName);
   }
-
 }]);
