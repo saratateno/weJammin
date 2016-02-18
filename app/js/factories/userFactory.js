@@ -24,6 +24,25 @@ jammin.factory('UserFactory', [function() {
     }
   };
 
+  userFactory._getUser = function(socketId) {
+    var me = userFactory.users.filter(function(user) {
+      return user.socketId === socketId;
+    });
+    return me[0];
+  };
+
+  userFactory.myIndex = function(socketId) {
+    return userFactory.users.indexOf(userFactory._getUser(socketId));
+  };
+
+  userFactory.userColors = function() {
+    var result = [];
+    userFactory.users.forEach(function(user) {
+      result.push(user.color);
+    });
+    return result;
+  }
+
   userFactory.writeToScore = function() {
     userFactory.users.forEach(function(user) {
       var positions = userFactory._mapRecording(user);
@@ -42,7 +61,7 @@ jammin.factory('UserFactory', [function() {
     }
     return result;
   }
-  //Iteration over recording for a given user
+
   userFactory._mapRecording = function(user){
     var recordingMap = [];
     for (var instrument in user.recording) {
@@ -52,8 +71,8 @@ jammin.factory('UserFactory', [function() {
     }
     if (recordingMap.length > 0) {
       var flattenedArray = recordingMap.reduce(function(a,b) {
-              return a.concat(b);
-          });
+        return a.concat(b);
+      });
 
       return flattenedArray;
     } else {
@@ -90,23 +109,5 @@ jammin.factory('UserFactory', [function() {
     return cleanPosition;
   }
 
-  userFactory._getUser = function(socketId) {
-    var me = userFactory.users.filter(function(user) {
-      return user.socketId === socketId;
-    });
-    return me[0];
-  };
-
-  userFactory.myIndex = function(socketId) {
-    return userFactory.users.indexOf(userFactory._getUser(socketId));
-  };
-
-  userFactory.userColors = function() {
-    var result = [];
-    userFactory.users.forEach(function(user) {
-      result.push(user.color);
-    });
-    return result;
-  }
   return userFactory;
 }]);
