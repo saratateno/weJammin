@@ -10,9 +10,7 @@ jammin.controller('JamminController',
   self.statusLabel = 'not connected';
   self.metronomeStatus = 'off';
   self.messages = [];
-  self.colors = ['red', 'orange', 'green', 'blue'];
-  self.visData;
-  
+
   self.updateVisData = function() {
     var scores = [];
     UserFactory.users.forEach(function(user) {
@@ -21,8 +19,15 @@ jammin.controller('JamminController',
     self.visData = scores;
   };
 
+  self.updateColors = function() {
+    self.colors = UserFactory.userColors();
+  };
+
   self.transportPosition = function() {
-    return TransportFactory.getPosition();
+    var currentPosition = UserFactory.fullBeatToInt(TransportFactory.getPosition());
+    angular.element(document.getElementsByClassName(currentPosition.toString())).addClass("light");
+    angular.element(document.getElementsByClassName((currentPosition - 1).toString())).removeClass("light");
+    return currentPosition;
   }
 
   SocketFactory.on('connect', function() {
@@ -50,6 +55,7 @@ jammin.controller('JamminController',
       })
       console.log("local mute after update: ", self.localSettings);
       UserFactory.writeToScore();
+      self.updateColors();
       self.updateVisData();
       console.log('users: ', UserFactory.users);
     });
@@ -115,6 +121,12 @@ jammin.controller('JamminController',
 
   self.toggleMetronome = function() {
     self.metronomeStatus = TransportFactory.toggleMetronome(self.metronomeStatus);
+  };
+
+  self.removeSound = function(index, userIndex) {
+    if (userIndex == UserFactory.myIndex(self.mySocketId)) {
+      SocketFactory.emit('remove sound', index);
+    }
   };
 
   self.toggleMute = function(user) {
