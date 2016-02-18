@@ -7,7 +7,7 @@ var userHelpers = require('./serverHelpers/userHelpers.js');
 var users = [];
 var messages = [];
 
-app.set('port', (process.env.PORT || 8080));
+app.set('port', (process.env.PORT || 8347));
 app.use(express.static(__dirname + '/app'));
 app.use(express.static(__dirname + '/bower_components'));
 
