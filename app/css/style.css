@@ -44,12 +44,16 @@ table {
   width: 100%;
 }
 
+.table-wrap {
+  max-height: 100%;
+}
+
 td {
   overflow: hidden;
   width: 3.125%;
   border: 1px solid rgba(255,255,255,0);
-  padding-top: 3em;
-  padding-bottom: 3em;
+  padding-top: 1.5%;
+  padding-bottom: 1.5%;
 }
 
 h4 {
@@ -93,8 +97,12 @@ body, html {
   /*margin-top: 100px;*/
 }
 
+.navbar {
+  height: 30%;
+}
+
 .sticky-keyboard {
-  background-color: #272927;
+  height: 100%;
 }
 
 .input-group {
@@ -108,6 +116,16 @@ li {
 
 #jamminAreaWrapper, #content-area, .container-fluid {
   height: 100%;
+}
+
+#messages {
+  height: 100%;
+  overflow: scroll;
+}
+
+#chat-area {
+  height: 100%;
+  text-align: center;
 }
 
 #logo {

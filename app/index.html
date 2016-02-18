@@ -1,4 +1,4 @@
- <!doctype html>
+<!doctype html>
 <html lang="en" ng-app="Jammin">
   <head>
     <meta charset="utf-8">
@@ -56,14 +56,16 @@
 
 
         <div class="col-md-6 container" id="central-area">
-          <table>
-            <tr ng-repeat='user in JCtrl.visData' class='{{JCtrl.colors[$index]}}-bar'>
-              <td ng-repeat='box in user track by $index' class="{{$index}}"
-                ng-click="JCtrl.removeSound($index, $parent.$index)">
-                <div class='{{box}} space'>.</div>
-              </td>
-            </tr>
-          </table>
+          <div class='table-wrap'>
+            <table>
+              <tr ng-repeat='user in JCtrl.visData' class='{{JCtrl.colors[$index]}}-bar'>
+                <td ng-repeat='box in user track by $index' class="{{$index}}"
+                  ng-click="JCtrl.removeSound($index, $parent.$index)">
+                  <div class='{{box}} space'>.</div>
+                </td>
+              </tr>
+            </table>
+          </div>
           <div class="col-md-6 container navbar navbar-fixed-bottom">
             <div class="center-block sticky-keyboard">
               <ng-include src="'partials/keyboard.html'"></ng-include>
@@ -84,16 +86,16 @@
               <div class="form-group">
                 <input type="text" required ng-max="50" ng-model="JCtrl.newMessage" focus="" />
                 <input type="submit" class="btn btn-primary" value="Send">
-                <ul class="list-group" id="messages">
-                  <li ng-repeat="message in JCtrl.messages">
-                    <p>{{message.user}}: {{message.content}}</p>
-                  </li>
-                </ul>
               </div>
             </form>
+            <ul class="list-group" id="messages">
+              <li ng-repeat="message in JCtrl.messages">
+                <p>{{message.user}}: {{message.content}}</p>
+              </li>
+            </ul>
           </div>
         </div>
-        </div>
+      </div>
 
       <div id="startMenuWrapper" ng-hide="JCtrl.validNickname">
         <form class="form-horizontal center-block" name="enter-name" ng-submit="JCtrl.checkNickname()">
