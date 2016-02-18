@@ -91,6 +91,10 @@ jammin.controller('JamminController',
       self.addColor(color, tone);
     });
 
+    SocketFactory.on('play drum', function(drumName) {
+      DrumFactory.playDrum(drumName);
+    });
+
     SocketFactory.on('user departed', function(socketId) {
       UserFactory.users = UserFactory.otherUsers(socketId);
     });
@@ -157,8 +161,7 @@ jammin.controller('JamminController',
   }
 
   self.playDrum = function(drumName) {
+    SocketFactory.emit('transmit drum', drumName);
     SocketFactory.emit('record sound', [drumName, TransportFactory.getPosition()]);
-    console.log([drumName, TransportFactory.getPosition()]);
-    DrumFactory.playDrum(drumName);
   }
 }]);
