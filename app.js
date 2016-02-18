@@ -78,6 +78,18 @@ io.on('connection', function(socket) {
     console.log(users);
   });
 
+  socket.on('remove sound', function(index) {
+    var recording = userHelpers.getUser(users, socket.id).recording;
+    var timeToRemove = '0:0:' + index;
+
+    Object.keys(recording).forEach(function(key) {
+      recording[key] = recording[key].filter(function(time) {
+        return time !== timeToRemove;
+      });
+    });
+    io.emit('update users', users);
+  });
+
   socket.on('sync', function() {
     console.log('syncing transport!')
     io.emit('update users', users);

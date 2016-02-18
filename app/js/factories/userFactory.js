@@ -97,6 +97,10 @@ jammin.factory('UserFactory', [function() {
     return me[0];
   };
 
+  userFactory.myIndex = function(socketId) {
+    return userFactory.users.indexOf(userFactory._getUser(socketId));
+  };
+
   userFactory.userColors = function() {
     var result = [];
     userFactory.users.forEach(function(user) {

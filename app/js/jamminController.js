@@ -123,6 +123,12 @@ jammin.controller('JamminController',
     self.metronomeStatus = TransportFactory.toggleMetronome(self.metronomeStatus);
   };
 
+  self.removeSound = function(index, userIndex) {
+    if (userIndex == UserFactory.myIndex(self.mySocketId)) {
+      SocketFactory.emit('remove sound', index);
+    }
+  };
+
   self.toggleMute = function(user) {
     if (self.localSettings[user.socketId].mute === true) {
       TransportFactory.unmuteUser(user.socketId);

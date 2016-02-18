@@ -59,6 +59,7 @@
           <table>
             <tr ng-repeat='user in JCtrl.visData' class='{{JCtrl.colors[$index]}}-bar'>
               <td ng-repeat='box in user track by $index' class="{{$index}}"
+                ng-click="JCtrl.removeSound($index, $parent.$index)">
                 <div class='{{box}} space'>.</div>
               </td>
             </tr>
