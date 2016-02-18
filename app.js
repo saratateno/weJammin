@@ -61,6 +61,10 @@ io.on('connection', function(socket) {
     io.emit('play sound', tone, userHelpers.userColor(users, socket.id));
   });
 
+  socket.on('transmit drum', function(drumName) {
+    io.emit('play drum', drumName);
+  });
+
   socket.on('record sound', function(soundMap) {
     var userRecording = userHelpers.getUser(users, socket.id).recording;
     var snappedPosition = userHelpers.snapToBeat(soundMap[1]);
