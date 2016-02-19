@@ -39,16 +39,17 @@ jammin.controller('JamminController',
       console.log('users: ', UserFactory.users);
     });
 
-    self.sendMessage = function(newMessage) {
-      newMessage = {user: self.nickname, content: self.newMessage};
+    self.sendMessage = function() {
+      var newMessage = {  user: self.nickname,
+                          content: self.newMessage,
+                          color: UserFactory.getUser(self.mySocketId).color};
       SocketFactory.emit('store message', newMessage);
+      self.newMessage = '';
     }
 
     SocketFactory.on('update messages', function(newMessage) {
       self.messages.push(newMessage);
-      self.newMessage = '';
     });
-
 
     SocketFactory.on('connect users', function(users) {
       UserFactory.users = users;
