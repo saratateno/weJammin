@@ -12,7 +12,6 @@
     <script src="jquery/dist/jquery.js"></script>
     <script src="socket.io-client/socket.io.js"></script>
     <script src="jquery/dist/jquery.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="angular/angular.js"></script>
     <script src="angular-socket-io/socket.js"></script>
     <script src="tone/build/Tone.js"></script>
@@ -31,14 +30,13 @@
   <body ng-controller="JamminController as JCtrl"
     ng-keypress="JCtrl.keypress($event)">
     <div class="container-fluid">
-      <div class="row">
-        <h1 id="logo" class="page-header">We Jammin</h1>
-      </div>
-
       <div class="row" id="content-area">
         <div id="jamminAreaWrapper" ng-show="JCtrl.validNickname">
+          <div class="row">
+            <h1 id="logo" class="page-header">We Jammin</h1>
+          </div>
 
-          <div id=hidden hidden>
+          <div id="hidden" hidden>
             <span id="statusLabel">{{ JCtrl.statusLabel }}</span>
             <span id="metronomeStatus">{{ JCtrl.metronomeStatus }}</span>
             <span ng-bind="JCtrl.transportPosition()"></span>
@@ -89,24 +87,29 @@
 
           <div class="col-md-3 sidepanel pull-right" id="controls">
             <div id="chat-area">
-              <form name="messageForm"
+              <form name="messageForm" class="form-horizontal center-block"
                 ng-submit="JCtrl.sendMessage(newMessage)">
-                <div class="form-group">
-                  <input type="text" required ng-max="50"
-                    ng-model="JCtrl.newMessage" focus="" />
-                  <input type="submit" class="btn btn-primary" value="Send">
+                <div class="input-group">
+                  <input class="form-control" type="text" required ng-max="50"
+                    ng-model="JCtrl.newMessage" focus="" width="" />
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" value="Send">Send</button>
+                  </span>
                 </div>
               </form>
-              <ul class="list-group" id="messages">
+              <ol class="list-group" id="messages">
                 <li ng-repeat="message in JCtrl.messages">
-                  <p>{{message.user}}: {{message.content}}</p>
+                  <p><span class="user {{message.color}}">{{message.user}}</span> {{message.content}}</p>
                 </li>
-              </ul>
+              </ol>
             </div>
           </div>
         </div>
 
         <div id="startMenuWrapper" ng-hide="JCtrl.validNickname">
+          <div class="row">
+            <h1 id="logo" class="page-header">We Jammin</h1>
+          </div>
           <form class="form-horizontal center-block" name="enter-name"
             ng-submit="JCtrl.checkNickname()">
             <div class="input-group" id="startMenu">
