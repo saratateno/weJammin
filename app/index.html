@@ -55,11 +55,11 @@
             </div>
             <div id="user-panel">
               <p ng-repeat='user in JCtrl.users' class="user-info">
-                <i class="fa fa-volume-up fa-2x {{user.color}}-bar volume btn"
+                <i class="fa fa-volume-up fa-2x {{user.color}}-background volume btn"
                   ng-hide="JCtrl.localSettings[user.socketId].mute"
                   ng-show="!JCtrl.localSettings[user.socketId].mute"
                   ng-click="JCtrl.toggleMute(user)"></i>
-                <i class="fa fa-volume-off fa-2x {{user.color}}-bar volume btn"
+                <i class="fa fa-volume-off fa-2x {{user.color}}-background volume btn"
                   ng-hide="!JCtrl.localSettings[user.socketId].mute"
                   ng-show="JCtrl.localSettings[user.socketId].mute"
                   ng-click="JCtrl.toggleMute(user)"></i>
@@ -71,7 +71,7 @@
           <div class="col-md-6 container" id="central-area">
             <table>
               <tr ng-repeat='user in JCtrl.visData'
-                class='{{JCtrl.colors[$index]}}-bar'>
+                class='{{JCtrl.colors[$index]}}-background bar'>
                 <td ng-repeat='box in user track by $index' class="{{$index}}"
                   ng-click="JCtrl.removeSound($index, $parent.$index)">
                   <div class='{{box}} space'>.</div>
@@ -88,7 +88,7 @@
           <div class="col-md-3 sidepanel pull-right" id="controls">
             <div id="chat-area">
               <form name="messageForm" class="form-horizontal center-block"
-                ng-submit="JCtrl.sendMessage(newMessage)">
+                ng-submit="JCtrl.sendMessage(newMessage)" id="messageForm">
                 <div class="input-group">
                   <input class="form-control" type="text" required ng-max="50"
                     ng-model="JCtrl.newMessage" focus="" width="" />
