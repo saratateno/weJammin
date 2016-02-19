@@ -69,22 +69,23 @@ h1 {
   width: 50px;
 }
 
-.red-bar {
-  background-color: rgba(255,0,0,0.75);
+.red-background {
+  background-color: rgba(255,0,0,1);
 }
 
-.purple-bar {
+.purple-background {
   background-color: purple;
-  opacity: 0.75;
 }
 
-.green-bar {
+.green-background {
   background-color: green;
-  opacity: 0.75;
 }
 
-.orange-bar {
+.orange-background {
   background-color: orange;
+}
+
+.bar {
   opacity: 0.75;
 }
 
@@ -179,4 +180,8 @@ ol {
 #drum-buttons {
   padding: 10px;
   display: inline-block;
+}
+
+#messageForm {
+  margin-bottom: 5%;
 }
