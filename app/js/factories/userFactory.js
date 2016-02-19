@@ -17,14 +17,14 @@ jammin.factory('UserFactory', [function() {
   };
 
   userFactory.isMaster = function(socketId) {
-    if (userFactory._getUser(socketId)) {
-      return (userFactory._getUser(socketId).master === true);
+    if (userFactory.getUser(socketId)) {
+      return (userFactory.getUser(socketId).master === true);
     } else {
       return false;
     }
   };
 
-  userFactory._getUser = function(socketId) {
+  userFactory.getUser = function(socketId) {
     var me = userFactory.users.filter(function(user) {
       return user.socketId === socketId;
     });
@@ -32,7 +32,7 @@ jammin.factory('UserFactory', [function() {
   };
 
   userFactory.myIndex = function(socketId) {
-    return userFactory.users.indexOf(userFactory._getUser(socketId));
+    return userFactory.users.indexOf(userFactory.getUser(socketId));
   };
 
   userFactory.userColors = function() {

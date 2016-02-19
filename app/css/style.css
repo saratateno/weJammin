@@ -43,24 +43,49 @@ h1 {
   text-align: left
 }
 
+.red {
+  color:  rgba(255,0,0,1);
+}
+
+.orange {
+  color: orange;
+}
+
+.green {
+  color: green;
+}
+
+.purple {
+  color: purple;
+}
+
+.user {
+  float: left;
+  width: 20%;
+  word-wrap: break-word;
+}
+
 .volume {
   width: 50px;
 }
 
 .red-bar {
-  background-color: rgba(255,0,0,0.65);
+  background-color: rgba(255,0,0,0.75);
 }
 
 .purple-bar {
   background-color: purple;
+  opacity: 0.75;
 }
 
 .green-bar {
   background-color: green;
+  opacity: 0.75;
 }
 
 .orange-bar {
   background-color: orange;
+  opacity: 0.75;
 }
 
 table {
@@ -126,10 +151,32 @@ li {
   text-align: left;
 }
 
+ol {
+  list-style-type: none;
+}
+
 #jamminAreaWrapper, #content-area, .container-fluid {
   height: 100%;
 }
 
 #logo {
   text-align: center
+}
+
+#messages {
+  width: 90%;
+  margin: auto;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5vh;
+}
+
+#startMenuWrapper {
+  top: 20%;
+  position: relative;
+  transform: translateY(-50%);
+}
+
+#drum-buttons {
+  padding: 10px;
+  display: inline-block;
 }
